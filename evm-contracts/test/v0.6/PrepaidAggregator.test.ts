@@ -751,7 +751,7 @@ describe('PrepaidAggregator', () => {
       const tx = await aggregator
         .connect(personas.Carol)
         .addOracle(
-          personas.Neil.address,
+          personas.Ned.address,
           personas.Neil.address,
           minAns,
           maxAns,
@@ -759,8 +759,11 @@ describe('PrepaidAggregator', () => {
         )
       const receipt = await tx.wait()
 
-      const added = h.evmWordToAddress(receipt.logs?.[0].topics[1])
-      matchers.bigNum(added, personas.Neil.address)
+      const oracleAddedEvent = h.eventArgs(receipt.events?.[0])
+      assert.equal(oracleAddedEvent.oracle, personas.Ned.address)
+      const oracleAdminUpdatedEvent = h.eventArgs(receipt.events?.[1])
+      assert.equal(oracleAdminUpdatedEvent.oracle, personas.Ned.address)
+      assert.equal(oracleAdminUpdatedEvent.newAdmin, personas.Neil.address)
     })
 
     describe('when the oracle has already been added', () => {
@@ -1572,13 +1575,18 @@ describe('PrepaidAggregator', () => {
           personas.Neil.address,
           await aggregator.getAdmin(personas.Ned.address),
         )
-        await aggregator
+        const tx = await aggregator
           .connect(personas.Neil)
           .updateAdmin(personas.Ned.address, personas.Nelly.address)
+        const receipt = await tx.wait()
         assert.equal(
           personas.Nelly.address,
           await aggregator.getAdmin(personas.Ned.address),
         )
+
+        const event = h.eventArgs(receipt.events?.[0])
+        assert.equal(event.oracle, personas.Ned.address)
+        assert.equal(event.newAdmin, personas.Nelly.address)
       })
     })
 
