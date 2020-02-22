@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/assets"
-	"chainlink/core/store/migrations/migration1564007745"
+	"nulink/core/assets"
+	"nulink/core/store/migrations/migration1564007745"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/jinzhu/gorm"
@@ -34,7 +34,7 @@ func TestStore_ConfigDefaults(t *testing.T) {
 func TestConfig_sessionSecret(t *testing.T) {
 	t.Parallel()
 	config := NewConfig()
-	config.Set("ROOT", path.Join("/tmp/chainlink_test", "TestConfig_sessionSecret"))
+	config.Set("ROOT", path.Join("/tmp/nulink_test", "TestConfig_sessionSecret"))
 	err := os.MkdirAll(config.RootDir(), os.FileMode(0770))
 	require.NoError(t, err)
 	defer os.RemoveAll(config.RootDir())

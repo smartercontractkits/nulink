@@ -9,12 +9,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"chainlink/core/assets"
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"

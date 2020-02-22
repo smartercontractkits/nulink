@@ -4,7 +4,7 @@ import {
   matchers,
   oracle,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import cbor from 'cbor'
 import { assert } from 'chai'
 import { ethers } from 'ethers'

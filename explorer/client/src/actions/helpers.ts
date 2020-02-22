@@ -1,4 +1,4 @@
-import * as jsonapi from '@chainlink/json-api-client'
+import * as jsonapi from '@nulink/json-api-client'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { AppState } from '../reducers'

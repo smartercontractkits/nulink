@@ -14,7 +14,7 @@ export const AdminLogo: React.FC<Props> = ({ className, width, height }) => {
         src={logo}
         width={width}
         height={height}
-        alt="Chainlink Explorer Admin"
+        alt="NuLink Explorer Admin"
       />
     </a>
   )

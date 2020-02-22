@@ -3,7 +3,7 @@ pragma solidity 0.4.24;
 import "../vendor/CBOR.sol";
 
 
-library MaliciousChainlink {
+library MaliciousNuLink {
   using CBOR for Buffer.buffer;
 
   struct Request {
@@ -27,7 +27,7 @@ library MaliciousChainlink {
     bytes32 _specId,
     address _callbackAddress,
     bytes4 _callbackFunction
-  ) internal pure returns (MaliciousChainlink.WithdrawRequest memory) {
+  ) internal pure returns (MaliciousNuLink.WithdrawRequest memory) {
     Buffer.init(self.buf, 128);
     self.specId = _specId;
     self.callbackAddress = _callbackAddress;

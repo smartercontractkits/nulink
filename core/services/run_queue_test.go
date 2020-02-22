@@ -3,10 +3,10 @@ package services_test
 import (
 	"testing"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/internal/mocks"
-	"chainlink/core/services"
-	"chainlink/core/store/models"
+	"nulink/core/internal/cltest"
+	"nulink/core/internal/mocks"
+	"nulink/core/services"
+	"nulink/core/store/models"
 
 	"github.com/onsi/gomega"
 	"github.com/stretchr/testify/mock"

@@ -6,12 +6,12 @@ import (
 	"reflect"
 	"strconv"
 
-	"chainlink/core/logger"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
-	"chainlink/core/web"
+	"nulink/core/logger"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
+	"nulink/core/web"
 
 	"github.com/olekukonko/tablewriter"
 )

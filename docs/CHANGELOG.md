@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Support for Solidity v0.5 Chainlink Client contracts
+- Support for Solidity v0.5 NuLink Client contracts
 
 ### Changed
 - CLI commands have been grouped into subcommands to map to API resources

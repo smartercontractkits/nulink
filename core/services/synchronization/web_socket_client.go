@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"chainlink/core/logger"
-	"chainlink/core/utils"
+	"nulink/core/logger"
+	"nulink/core/utils"
 
 	"github.com/gorilla/websocket"
 )
@@ -238,8 +238,8 @@ func (w *websocketClient) writeMessage(message []byte) error {
 
 func (w *websocketClient) connect(ctx context.Context) error {
 	authHeader := http.Header{}
-	authHeader.Add("X-Explore-Chainlink-AccessKey", w.accessKey)
-	authHeader.Add("X-Explore-Chainlink-Secret", w.secret)
+	authHeader.Add("X-Explore-NuLink-AccessKey", w.accessKey)
+	authHeader.Add("X-Explore-NuLink-Secret", w.secret)
 
 	conn, _, err := websocket.DefaultDialer.DialContext(ctx, w.url.String(), authHeader)
 	if err != nil {

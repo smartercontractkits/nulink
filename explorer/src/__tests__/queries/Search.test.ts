@@ -1,7 +1,7 @@
 import fixture from '../fixtures/JobRun.fixture.json'
 import { closeDbConnection, getDb } from '../../database'
 import { Connection } from 'typeorm'
-import { createChainlinkNode } from '../../entity/ChainlinkNode'
+import { createNuLinkNode } from '../../entity/NuLinkNode'
 import { fromString } from '../../entity/JobRun'
 import { search, count } from '../../queries/search'
 
@@ -15,13 +15,13 @@ afterAll(async () => closeDbConnection())
 
 describe('search and count', () => {
   beforeEach(async () => {
-    const [chainlinkNode] = await createChainlinkNode(
+    const [nulinkNode] = await createNuLinkNode(
       db,
-      'job-run-search-chainlink-node',
+      'job-run-search-nulink-node',
     )
 
     const jrA = fromString(JSON.stringify(fixture))
-    jrA.chainlinkNodeId = chainlinkNode.id
+    jrA.nulinkNodeId = nulinkNode.id
     jrA.createdAt = new Date('2019-04-08T01:00:00.000Z')
     await db.manager.save(jrA)
 
@@ -30,7 +30,7 @@ describe('search and count', () => {
       runId: 'runB',
     })
     const jrB = fromString(JSON.stringify(fixtureB))
-    jrB.chainlinkNodeId = chainlinkNode.id
+    jrB.nulinkNodeId = nulinkNode.id
     jrB.createdAt = new Date('2019-04-09T01:00:00.000Z')
     jrB.txHash = 'fixtureBTxHash'
     jrB.requester = 'fixtureBRequester'
@@ -42,7 +42,7 @@ describe('search and count', () => {
       runId: 'runC',
     })
     const jrC = fromString(JSON.stringify(fixtureC))
-    jrC.chainlinkNodeId = chainlinkNode.id
+    jrC.nulinkNodeId = nulinkNode.id
     jrC.createdAt = new Date('2019-05-09T01:00:00.000Z')
     jrC.txHash = 'fixtureCTxHash'
     jrC.requester = 'fixtureCRequester'
@@ -54,7 +54,7 @@ describe('search and count', () => {
       runId: 'runD',
     })
     const jrD = fromString(JSON.stringify(fixtureD))
-    jrD.chainlinkNodeId = chainlinkNode.id
+    jrD.nulinkNodeId = nulinkNode.id
     jrD.createdAt = new Date('2019-05-09T01:00:00.000Z')
     jrD.txHash =
       '0x0458b93fc1cc51807089ae2794ea80ce26abee69a4541bdf1181305290514839'

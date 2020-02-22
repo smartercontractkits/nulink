@@ -88,7 +88,7 @@ const fetchRequestTime = options => {
     try {
       // calculate last update time
       const pastBlocks = options.counter ? Math.floor(options.counter / 13) : 40
-      const logs = await contractInstance.chainlinkRequestedLogs(pastBlocks)
+      const logs = await contractInstance.nulinkRequestedLogs(pastBlocks)
       const latestLog = logs.length && logs[logs.length - 1].meta.blockNumber
 
       const block = latestLog

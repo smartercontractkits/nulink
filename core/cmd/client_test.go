@@ -3,10 +3,10 @@ package cmd_test
 import (
 	"testing"
 
-	"chainlink/core/cmd"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/cmd"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

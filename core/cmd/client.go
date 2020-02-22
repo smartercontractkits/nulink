@@ -13,12 +13,12 @@ import (
 	"strings"
 	"time"
 
-	"chainlink/core/logger"
-	"chainlink/core/services"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/web"
+	"nulink/core/logger"
+	"nulink/core/services"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/web"
 
 	"github.com/gin-gonic/gin"
 	clipkg "github.com/urfave/cli"
@@ -60,11 +60,11 @@ type AppFactory interface {
 	NewApplication(*orm.Config, ...func(services.Application)) services.Application
 }
 
-// ChainlinkAppFactory is used to create a new Application.
-type ChainlinkAppFactory struct{}
+// NuLinkAppFactory is used to create a new Application.
+type NuLinkAppFactory struct{}
 
 // NewApplication returns a new instance of the node with the given config.
-func (n ChainlinkAppFactory) NewApplication(config *orm.Config, onConnectCallbacks ...func(services.Application)) services.Application {
+func (n NuLinkAppFactory) NewApplication(config *orm.Config, onConnectCallbacks ...func(services.Application)) services.Application {
 	return services.NewApplication(config, onConnectCallbacks...)
 }
 
@@ -73,14 +73,14 @@ type Runner interface {
 	Run(services.Application) error
 }
 
-// ChainlinkRunner is used to run the node application.
-type ChainlinkRunner struct{}
+// NuLinkRunner is used to run the node application.
+type NuLinkRunner struct{}
 
 // Run sets the log level based on config and starts the web router to listen
 // for input and return data.
-func (n ChainlinkRunner) Run(app services.Application) error {
+func (n NuLinkRunner) Run(app services.Application) error {
 	gin.SetMode(app.GetStore().Config.LogLevel().ForGin())
-	handler := web.Router(app.(*services.ChainlinkApplication))
+	handler := web.Router(app.(*services.NuLinkApplication))
 	config := app.GetStore().Config
 	var g errgroup.Group
 
@@ -134,7 +134,7 @@ func createServer(handler *gin.Engine, port uint16) *http.Server {
 	return s
 }
 
-// HTTPClient encapsulates all methods used to interact with a chainlink node API.
+// HTTPClient encapsulates all methods used to interact with a nulink node API.
 type HTTPClient interface {
 	Get(string, ...map[string]string) (*http.Response, error)
 	Post(string, io.Reader) (*http.Response, error)
@@ -464,7 +464,7 @@ type changePasswordPrompter struct {
 }
 
 func (c changePasswordPrompter) Prompt() (models.ChangePasswordRequest, error) {
-	fmt.Println("Changing your chainlink account password.")
+	fmt.Println("Changing your nulink account password.")
 	fmt.Println("NOTE: This will terminate any other sessions.")
 	oldPassword := c.prompter.PasswordPrompt("Password:")
 

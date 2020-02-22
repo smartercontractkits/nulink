@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"testing"
 
-	"chainlink/core/auth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/web"
+	"nulink/core/auth"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/web"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

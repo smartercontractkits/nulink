@@ -1,4 +1,4 @@
-import { TimeAgo } from '@chainlink/styleguide'
+import { TimeAgo } from '@nulink/styleguide'
 import Card from '@material-ui/core/Card'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'

@@ -1,5 +1,5 @@
 {
-  "name": "@chainlink/redux",
+  "name": "@nulink/redux",
   "private": true,
   "version": "0.0.1",
   "main": "./dist/src",

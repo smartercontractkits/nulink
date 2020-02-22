@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"testing"
 
-	"chainlink/core/internal/cltest"
+	"nulink/core/internal/cltest"
 
 	"github.com/stretchr/testify/require"
 )

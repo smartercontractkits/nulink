@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/services/synchronization"
+	"nulink/core/internal/cltest"
+	"nulink/core/services/synchronization"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -82,8 +82,8 @@ func TestWebSocketClient_Authentication(t *testing.T) {
 
 	cltest.CallbackOrTimeout(t, "receive authentication headers", func() {
 		headers := <-headerChannel
-		assert.Equal(t, []string{"accessKey"}, headers["X-Explore-Chainlink-Accesskey"])
-		assert.Equal(t, []string{"secret"}, headers["X-Explore-Chainlink-Secret"])
+		assert.Equal(t, []string{"accessKey"}, headers["X-Explore-NuLink-Accesskey"])
+		assert.Equal(t, []string{"secret"}, headers["X-Explore-NuLink-Secret"])
 	})
 }
 

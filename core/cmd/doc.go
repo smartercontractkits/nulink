@@ -12,10 +12,10 @@
 // Client
 //
 // Client is how the application is invoked from the command
-// line. When you run the binary, for example `./chainlink n`,
-// client.RunNode is called to start the Chainlink core.
-// Similarly, running `./chainlink j` returns information on
-// all jobs in the node, and `./chainlink s` with another
+// line. When you run the binary, for example `./nulink n`,
+// client.RunNode is called to start the NuLink core.
+// Similarly, running `./nulink j` returns information on
+// all jobs in the node, and `./nulink s` with another
 // argument as a JobID gives information specific to that job.
 //
 // Renderer

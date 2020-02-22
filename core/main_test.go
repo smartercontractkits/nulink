@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"chainlink/core/cmd"
-	"chainlink/core/internal/cltest"
+	"nulink/core/cmd"
+	"nulink/core/internal/cltest"
 )
 
 func ExampleRun() {
@@ -18,10 +18,10 @@ func ExampleRun() {
 	testClient := &cmd.Client{
 		Renderer:               cmd.RendererTable{Writer: ioutil.Discard},
 		Config:                 tc.Config,
-		AppFactory:             cmd.ChainlinkAppFactory{},
+		AppFactory:             cmd.NuLinkAppFactory{},
 		KeyStoreAuthenticator:  cmd.TerminalKeyStoreAuthenticator{Prompter: &cltest.MockCountingPrompter{}},
 		FallbackAPIInitializer: &cltest.MockAPIInitializer{},
-		Runner:                 cmd.ChainlinkRunner{},
+		Runner:                 cmd.NuLinkRunner{},
 		HTTP:                   cltest.NewMockAuthenticatedHTTPClient(tc.Config),
 		ChangePasswordPrompter: cltest.MockChangePasswordPrompter{},
 	}
@@ -29,7 +29,7 @@ func ExampleRun() {
 	Run(testClient, "core.test", "--help")
 	// Output:
 	// NAME:
-	//    core.test - CLI for Chainlink
+	//    core.test - CLI for NuLink
 	//
 	// USAGE:
 	//    core.test [global options] command [command options] [arguments...]
@@ -60,10 +60,10 @@ func ExampleVersion() {
 	testClient := &cmd.Client{
 		Renderer:               cmd.RendererTable{Writer: ioutil.Discard},
 		Config:                 tc.Config,
-		AppFactory:             cmd.ChainlinkAppFactory{},
+		AppFactory:             cmd.NuLinkAppFactory{},
 		KeyStoreAuthenticator:  cmd.TerminalKeyStoreAuthenticator{Prompter: &cltest.MockCountingPrompter{}},
 		FallbackAPIInitializer: &cltest.MockAPIInitializer{},
-		Runner:                 cmd.ChainlinkRunner{},
+		Runner:                 cmd.NuLinkRunner{},
 		HTTP:                   cltest.NewMockAuthenticatedHTTPClient(tc.Config),
 	}
 

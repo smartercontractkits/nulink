@@ -3,7 +3,7 @@ package store
 import (
 	"testing"
 
-	"chainlink/core/store/models"
+	"nulink/core/store/models"
 
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"

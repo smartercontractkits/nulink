@@ -128,8 +128,8 @@ interface Props extends WithStyles<typeof styles> {
 const buildSearchQuery = (id: string) => `/job-runs?search=${id}`
 
 const Details = ({ classes, jobRun, etherscanHost }: Props) => {
-  const nodeHasUrl = jobRun.chainlinkNode.url !== ''
-  const nodeName = jobRun.chainlinkNode.name
+  const nodeHasUrl = jobRun.nulinkNode.url !== ''
+  const nodeName = jobRun.nulinkNode.name
 
   return (
     <div>
@@ -145,7 +145,7 @@ const Details = ({ classes, jobRun, etherscanHost }: Props) => {
         <Value>
           {nodeHasUrl ? (
             <a
-              href={jobRun.chainlinkNode.url}
+              href={jobRun.nulinkNode.url}
               target="_blank"
               rel="noopener noreferrer"
             >

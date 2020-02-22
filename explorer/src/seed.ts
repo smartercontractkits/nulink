@@ -1,4 +1,4 @@
-import { ChainlinkNode } from './entity/ChainlinkNode'
+import { NuLinkNode } from './entity/NuLinkNode'
 import { createJobRun } from './factories'
 import { getDb } from './database'
 
@@ -14,18 +14,18 @@ const CORE_NODE_ACCESS_KEY = 'bL1wMDLp4GVJ5p5n'
 
 export default async () => {
   const db = await getDb()
-  const count = await db.manager.count(ChainlinkNode)
+  const count = await db.manager.count(NuLinkNode)
 
   if (count === 0) {
-    const node = await db.manager.save(buildChainlinkNode())
+    const node = await db.manager.save(buildNuLinkNode())
 
     await createJobRun(db, node)
     await createJobRun(db, node)
   }
 }
 
-function buildChainlinkNode() {
-  const node = new ChainlinkNode()
+function buildNuLinkNode() {
+  const node = new NuLinkNode()
   node.name = 'default'
   node.accessKey = CORE_NODE_ACCESS_KEY
   node.salt = CORE_NODE_SALT

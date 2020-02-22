@@ -4,10 +4,10 @@ import (
 	"sync"
 	"time"
 
-	"chainlink/core/logger"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/logger"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/mrwonko/cron"
 	"github.com/pkg/errors"
@@ -111,7 +111,7 @@ func NewRecurring(runManager RunManager) *Recurring {
 // Start for Recurring types executes tasks with a "cron" initiator
 // based on the configured schedule for the run.
 func (r *Recurring) Start() error {
-	r.Cron = newChainlinkCron()
+	r.Cron = newNuLinkCron()
 	r.Cron.Start()
 	return nil
 }
@@ -211,15 +211,15 @@ type Cron interface {
 	AddFunc(string, func()) error
 }
 
-type chainlinkCron struct {
+type nulinkCron struct {
 	*cron.Cron
 }
 
-func newChainlinkCron() *chainlinkCron {
-	return &chainlinkCron{cron.New()}
+func newNuLinkCron() *nulinkCron {
+	return &nulinkCron{cron.New()}
 }
 
-func (cc *chainlinkCron) Stop() {
+func (cc *nulinkCron) Stop() {
 	cc.Cron.Stop()
 	cc.Cron.Wait()
 }

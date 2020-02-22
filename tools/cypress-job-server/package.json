@@ -1,9 +1,9 @@
 {
-  "name": "@chainlink/cypress-job-server",
+  "name": "@nulink/cypress-job-server",
   "version": "0.0.1",
   "description": "A simple server that has a predefined response for integration tests",
   "main": "dist/src/index.js",
-  "repository": "https://github.com/smartcontractkit/chainlink",
+  "repository": "https://github.com/smartercontractkit/nulink",
   "license": "MIT",
   "engines": {
     "node": "~10.16"

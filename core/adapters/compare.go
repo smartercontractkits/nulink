@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strconv"
 
-	"chainlink/core/store"
-	"chainlink/core/store/models"
+	"nulink/core/store"
+	"nulink/core/store/models"
 )
 
 // Compare adapter type takes an Operator and a Value field to

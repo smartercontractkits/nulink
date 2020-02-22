@@ -2,11 +2,11 @@ import {
   Serializer as JSONAPISerializer,
   SerializerOptions,
 } from 'jsonapi-serializer'
-import { ChainlinkNode } from '../entity/ChainlinkNode'
-import { BASE_ATTRIBUTES } from './chainlinkNodeSerializer'
+import { NuLinkNode } from '../entity/NuLinkNode'
+import { BASE_ATTRIBUTES } from './nulinkNodeSerializer'
 
-const chainlinkNodesSerializer = (
-  chainlinkNodes: ChainlinkNode[],
+const nulinkNodesSerializer = (
+  nulinkNodes: NuLinkNode[],
   count: number,
 ) => {
   const opts = {
@@ -15,9 +15,9 @@ const chainlinkNodesSerializer = (
     meta: { count },
   } as SerializerOptions
 
-  return new JSONAPISerializer('chainlink_nodes', opts).serialize(
-    chainlinkNodes,
+  return new JSONAPISerializer('nulink_nodes', opts).serialize(
+    nulinkNodes,
   )
 }
 
-export default chainlinkNodesSerializer
+export default nulinkNodesSerializer

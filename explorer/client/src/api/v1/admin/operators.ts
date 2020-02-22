@@ -1,4 +1,4 @@
-import * as jsonapi from '@chainlink/json-api-client'
+import * as jsonapi from '@nulink/json-api-client'
 import * as models from 'explorer/models'
 
 /**
@@ -8,7 +8,7 @@ import * as models from 'explorer/models'
  */
 const INDEX_ENDPOINT = '/api/v1/admin/nodes'
 type IndexRequestParams = jsonapi.PaginatedRequestParams
-const index = jsonapi.fetchResource<IndexRequestParams, models.ChainlinkNode[]>(
+const index = jsonapi.fetchResource<IndexRequestParams, models.NuLinkNode[]>(
   INDEX_ENDPOINT,
 )
 
@@ -20,7 +20,7 @@ const index = jsonapi.fetchResource<IndexRequestParams, models.ChainlinkNode[]>(
 export function getOperators(
   page: number,
   size: number,
-): Promise<jsonapi.PaginatedApiResponse<models.ChainlinkNode[]>> {
+): Promise<jsonapi.PaginatedApiResponse<models.NuLinkNode[]>> {
   return index({ page, size })
 }
 
@@ -28,12 +28,12 @@ interface ShowPathParams {
   id: string
 }
 const SHOW_ENDPOINT = '/api/v1/admin/nodes/:id'
-const show = jsonapi.fetchResource<{}, models.ChainlinkNode, ShowPathParams>(
+const show = jsonapi.fetchResource<{}, models.NuLinkNode, ShowPathParams>(
   SHOW_ENDPOINT,
 )
 
 export function getOperator(
   id: string,
-): Promise<jsonapi.ApiResponse<models.ChainlinkNode>> {
+): Promise<jsonapi.ApiResponse<models.NuLinkNode>> {
   return show({}, { id })
 }

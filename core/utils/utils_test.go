@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/utils"
+	"nulink/core/internal/cltest"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"

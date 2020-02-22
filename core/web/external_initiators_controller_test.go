@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

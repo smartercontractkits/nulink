@@ -1,7 +1,7 @@
 declare module 'explorer' {}
 
 declare module 'explorer/models' {
-  interface ChainlinkNode {
+  interface NuLinkNode {
     id: number
     name: string
     url?: string
@@ -20,7 +20,7 @@ declare module 'explorer/models' {
     error?: string
     createdAt: string
     finishedAt?: string
-    chainlinkNode: ChainlinkNode
+    nulinkNode: NuLinkNode
     etherscanHost: string
     taskRuns: TaskRun[]
   }

@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"chainlink/core/services"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
+	"nulink/core/services"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gin-gonic/gin"
@@ -20,7 +20,7 @@ type TransfersController struct {
 	App services.Application
 }
 
-// Create sends ETH from the Chainlink's account to a specified address.
+// Create sends ETH from the NuLink's account to a specified address.
 //
 // Example: "<application>/withdrawals"
 func (tc *TransfersController) Create(c *gin.Context) {

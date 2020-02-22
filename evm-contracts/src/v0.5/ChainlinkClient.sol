@@ -1,21 +1,21 @@
 pragma solidity ^0.5.0;
 
-import "./Chainlink.sol";
+import "./NuLink.sol";
 import "./interfaces/ENSInterface.sol";
 import "./interfaces/LinkTokenInterface.sol";
-import "./interfaces/ChainlinkRequestInterface.sol";
+import "./interfaces/NuLinkRequestInterface.sol";
 import "./interfaces/PointerInterface.sol";
-import { ENSResolver as ENSResolver_Chainlink } from "./vendor/ENSResolver.sol";
-import { SafeMath as SafeMath_Chainlink } from "./vendor/SafeMath.sol";
+import { ENSResolver as ENSResolver_NuLink } from "./vendor/ENSResolver.sol";
+import { SafeMath as SafeMath_NuLink } from "./vendor/SafeMath.sol";
 
 /**
- * @title The ChainlinkClient contract
+ * @title The NuLinkClient contract
  * @notice Contract writers can inherit this contract in order to create requests for the
- * Chainlink network
+ * NuLink network
  */
-contract ChainlinkClient {
-  using Chainlink for Chainlink.Request;
-  using SafeMath_Chainlink for uint256;
+contract NuLinkClient {
+  using NuLink for NuLink.Request;
+  using SafeMath_NuLink for uint256;
 
   uint256 constant internal LINK = 10**18;
   uint256 constant private AMOUNT_OVERRIDE = 0;
@@ -28,62 +28,62 @@ contract ChainlinkClient {
   ENSInterface private ens;
   bytes32 private ensNode;
   LinkTokenInterface private link;
-  ChainlinkRequestInterface private oracle;
+  NuLinkRequestInterface private oracle;
   uint256 private requestCount = 1;
   mapping(bytes32 => address) private pendingRequests;
 
-  event ChainlinkRequested(bytes32 indexed id);
-  event ChainlinkFulfilled(bytes32 indexed id);
-  event ChainlinkCancelled(bytes32 indexed id);
+  event NuLinkRequested(bytes32 indexed id);
+  event NuLinkFulfilled(bytes32 indexed id);
+  event NuLinkCancelled(bytes32 indexed id);
 
   /**
    * @notice Creates a request that can hold additional parameters
    * @param _specId The Job Specification ID that the request will be created for
    * @param _callbackAddress The callback address that the response will be sent to
    * @param _callbackFunctionSignature The callback function signature to use for the callback address
-   * @return A Chainlink Request struct in memory
+   * @return A NuLink Request struct in memory
    */
-  function buildChainlinkRequest(
+  function buildNuLinkRequest(
     bytes32 _specId,
     address _callbackAddress,
     bytes4 _callbackFunctionSignature
-  ) internal pure returns (Chainlink.Request memory) {
-    Chainlink.Request memory req;
+  ) internal pure returns (NuLink.Request memory) {
+    NuLink.Request memory req;
     return req.initialize(_specId, _callbackAddress, _callbackFunctionSignature);
   }
 
   /**
-   * @notice Creates a Chainlink request to the stored oracle address
-   * @dev Calls `chainlinkRequestTo` with the stored oracle address
-   * @param _req The initialized Chainlink Request
+   * @notice Creates a NuLink request to the stored oracle address
+   * @dev Calls `nulinkRequestTo` with the stored oracle address
+   * @param _req The initialized NuLink Request
    * @param _payment The amount of LINK to send for the request
    * @return The request ID
    */
-  function sendChainlinkRequest(Chainlink.Request memory _req, uint256 _payment)
+  function sendNuLinkRequest(NuLink.Request memory _req, uint256 _payment)
     internal
     returns (bytes32)
   {
-    return sendChainlinkRequestTo(address(oracle), _req, _payment);
+    return sendNuLinkRequestTo(address(oracle), _req, _payment);
   }
 
   /**
-   * @notice Creates a Chainlink request to the specified oracle address
+   * @notice Creates a NuLink request to the specified oracle address
    * @dev Generates and stores a request ID, increments the local nonce, and uses `transferAndCall` to
    * send LINK which creates a request on the target oracle contract.
-   * Emits ChainlinkRequested event.
+   * Emits NuLinkRequested event.
    * @param _oracle The address of the oracle for the request
-   * @param _req The initialized Chainlink Request
+   * @param _req The initialized NuLink Request
    * @param _payment The amount of LINK to send for the request
    * @return The request ID
    */
-  function sendChainlinkRequestTo(address _oracle, Chainlink.Request memory _req, uint256 _payment)
+  function sendNuLinkRequestTo(address _oracle, NuLink.Request memory _req, uint256 _payment)
     internal
     returns (bytes32 requestId)
   {
     requestId = keccak256(abi.encodePacked(this, requestCount));
     _req.nonce = requestCount;
     pendingRequests[requestId] = _oracle;
-    emit ChainlinkRequested(requestId);
+    emit NuLinkRequested(requestId);
     require(link.transferAndCall(_oracle, _payment, encodeRequest(_req)), "unable to transferAndCall to oracle");
     requestCount += 1;
 
@@ -94,13 +94,13 @@ contract ChainlinkClient {
    * @notice Allows a request to be cancelled if it has not been fulfilled
    * @dev Requires keeping track of the expiration value emitted from the oracle contract.
    * Deletes the request from the `pendingRequests` mapping.
-   * Emits ChainlinkCancelled event.
+   * Emits NuLinkCancelled event.
    * @param _requestId The request ID
    * @param _payment The amount of LINK sent for the request
    * @param _callbackFunc The callback function specified for the request
    * @param _expiration The time of the expiration for the request
    */
-  function cancelChainlinkRequest(
+  function cancelNuLinkRequest(
     bytes32 _requestId,
     uint256 _payment,
     bytes4 _callbackFunc,
@@ -108,9 +108,9 @@ contract ChainlinkClient {
   )
     internal
   {
-    ChainlinkRequestInterface requested = ChainlinkRequestInterface(pendingRequests[_requestId]);
+    NuLinkRequestInterface requested = NuLinkRequestInterface(pendingRequests[_requestId]);
     delete pendingRequests[_requestId];
-    emit ChainlinkCancelled(_requestId);
+    emit NuLinkCancelled(_requestId);
     requested.cancelOracleRequest(_requestId, _payment, _callbackFunc, _expiration);
   }
 
@@ -118,31 +118,31 @@ contract ChainlinkClient {
    * @notice Sets the stored oracle address
    * @param _oracle The address of the oracle contract
    */
-  function setChainlinkOracle(address _oracle) internal {
-    oracle = ChainlinkRequestInterface(_oracle);
+  function setNuLinkOracle(address _oracle) internal {
+    oracle = NuLinkRequestInterface(_oracle);
   }
 
   /**
    * @notice Sets the LINK token address
    * @param _link The address of the LINK token contract
    */
-  function setChainlinkToken(address _link) internal {
+  function setNuLinkToken(address _link) internal {
     link = LinkTokenInterface(_link);
   }
 
   /**
-   * @notice Sets the Chainlink token address for the public
+   * @notice Sets the NuLink token address for the public
    * network as given by the Pointer contract
    */
-  function setPublicChainlinkToken() internal {
-    setChainlinkToken(PointerInterface(LINK_TOKEN_POINTER).getAddress());
+  function setPublicNuLinkToken() internal {
+    setNuLinkToken(PointerInterface(LINK_TOKEN_POINTER).getAddress());
   }
 
   /**
    * @notice Retrieves the stored address of the LINK token
    * @return The address of the LINK token
    */
-  function chainlinkTokenAddress()
+  function nulinkTokenAddress()
     internal
     view
     returns (address)
@@ -154,7 +154,7 @@ contract ChainlinkClient {
    * @notice Retrieves the stored address of the oracle contract
    * @return The address of the oracle contract
    */
-  function chainlinkOracleAddress()
+  function nulinkOracleAddress()
     internal
     view
     returns (address)
@@ -168,7 +168,7 @@ contract ChainlinkClient {
    * @param _oracle The address of the oracle contract that will fulfill the request
    * @param _requestId The request ID used for the response
    */
-  function addChainlinkExternalRequest(address _oracle, bytes32 _requestId)
+  function addNuLinkExternalRequest(address _oracle, bytes32 _requestId)
     internal
     notPendingRequest(_requestId)
   {
@@ -181,37 +181,37 @@ contract ChainlinkClient {
    * @param _ens The address of the ENS contract
    * @param _node The ENS node hash
    */
-  function useChainlinkWithENS(address _ens, bytes32 _node)
+  function useNuLinkWithENS(address _ens, bytes32 _node)
     internal
   {
     ens = ENSInterface(_ens);
     ensNode = _node;
     bytes32 linkSubnode = keccak256(abi.encodePacked(ensNode, ENS_TOKEN_SUBNAME));
-    ENSResolver_Chainlink resolver = ENSResolver_Chainlink(ens.resolver(linkSubnode));
-    setChainlinkToken(resolver.addr(linkSubnode));
-    updateChainlinkOracleWithENS();
+    ENSResolver_NuLink resolver = ENSResolver_NuLink(ens.resolver(linkSubnode));
+    setNuLinkToken(resolver.addr(linkSubnode));
+    updateNuLinkOracleWithENS();
   }
 
   /**
    * @notice Sets the stored oracle contract with the address resolved by ENS
-   * @dev This may be called on its own as long as `useChainlinkWithENS` has been called previously
+   * @dev This may be called on its own as long as `useNuLinkWithENS` has been called previously
    */
-  function updateChainlinkOracleWithENS()
+  function updateNuLinkOracleWithENS()
     internal
   {
     bytes32 oracleSubnode = keccak256(abi.encodePacked(ensNode, ENS_ORACLE_SUBNAME));
-    ENSResolver_Chainlink resolver = ENSResolver_Chainlink(ens.resolver(oracleSubnode));
-    setChainlinkOracle(resolver.addr(oracleSubnode));
+    ENSResolver_NuLink resolver = ENSResolver_NuLink(ens.resolver(oracleSubnode));
+    setNuLinkOracle(resolver.addr(oracleSubnode));
   }
 
   /**
    * @notice Encodes the request to be sent to the oracle contract
-   * @dev The Chainlink node expects values to be in order for the request to be picked up. Order of types
+   * @dev The NuLink node expects values to be in order for the request to be picked up. Order of types
    * will be validated in the oracle contract.
-   * @param _req The initialized Chainlink Request
+   * @param _req The initialized NuLink Request
    * @return The bytes payload for the `transferAndCall` method
    */
-  function encodeRequest(Chainlink.Request memory _req)
+  function encodeRequest(NuLink.Request memory _req)
     private
     view
     returns (bytes memory)
@@ -233,22 +233,22 @@ contract ChainlinkClient {
    * @dev Use if the contract developer prefers methods instead of modifiers for validation
    * @param _requestId The request ID for fulfillment
    */
-  function validateChainlinkCallback(bytes32 _requestId)
+  function validateNuLinkCallback(bytes32 _requestId)
     internal
-    recordChainlinkFulfillment(_requestId)
+    recordNuLinkFulfillment(_requestId)
     // solhint-disable-next-line no-empty-blocks
   {}
 
   /**
    * @dev Reverts if the sender is not the oracle of the request.
-   * Emits ChainlinkFulfilled event.
+   * Emits NuLinkFulfilled event.
    * @param _requestId The request ID for fulfillment
    */
-  modifier recordChainlinkFulfillment(bytes32 _requestId) {
+  modifier recordNuLinkFulfillment(bytes32 _requestId) {
     require(msg.sender == pendingRequests[_requestId],
             "Source must be the oracle of the request");
     delete pendingRequests[_requestId];
-    emit ChainlinkFulfilled(_requestId);
+    emit NuLinkFulfilled(_requestId);
     _;
   }
 

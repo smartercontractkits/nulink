@@ -17,17 +17,17 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/assets"
-	"chainlink/core/auth"
-	"chainlink/core/cmd"
-	"chainlink/core/logger"
-	"chainlink/core/services"
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
-	"chainlink/core/web"
+	"nulink/core/assets"
+	"nulink/core/auth"
+	"nulink/core/cmd"
+	"nulink/core/logger"
+	"nulink/core/services"
+	strpkg "nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
+	"nulink/core/web"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gin-gonic/gin"
@@ -47,7 +47,7 @@ import (
 
 const (
 	// RootDir the root directory for cltest
-	RootDir = "/tmp/chainlink_test"
+	RootDir = "/tmp/nulink_test"
 	// APIEmail of the API user
 	APIEmail = "email@test.net"
 	// APIKey of the API user
@@ -142,7 +142,7 @@ func (tc *TestConfig) SetEthereumServer(wss *httptest.Server) {
 // TestApplication holds the test application and test servers
 type TestApplication struct {
 	t testing.TB
-	*services.ChainlinkApplication
+	*services.NuLinkApplication
 	Config           *TestConfig
 	Server           *httptest.Server
 	wsServer         *httptest.Server
@@ -225,8 +225,8 @@ func NewApplicationWithConfig(t testing.TB, tc *TestConfig, flags ...string) (*T
 	ta := &TestApplication{t: t, connectedChannel: make(chan struct{}, 1)}
 	app := services.NewApplication(tc.Config, func(app services.Application) {
 		ta.connectedChannel <- struct{}{}
-	}).(*services.ChainlinkApplication)
-	ta.ChainlinkApplication = app
+	}).(*services.NuLinkApplication)
+	ta.NuLinkApplication = app
 	ta.EthMock = MockEthOnStore(t, app.Store, flags...)
 
 	server := newServer(ta)
@@ -258,7 +258,7 @@ func (ta *TestApplication) Start() error {
 	ta.t.Helper()
 	ta.Started = true
 
-	return ta.ChainlinkApplication.Start()
+	return ta.NuLinkApplication.Start()
 }
 
 func (ta *TestApplication) StartAndConnect() error {
@@ -309,7 +309,7 @@ func (ta *TestApplication) Stop() error {
 	// TODO: Here we double close, which is less than ideal.
 	// We would prefer to invoke a method on an interface that
 	// cleans up only in test.
-	require.NoError(ta.t, ta.ChainlinkApplication.Stop())
+	require.NoError(ta.t, ta.NuLinkApplication.Stop())
 	cleanUpStore(ta.t, ta.Store)
 	if ta.Server != nil {
 		ta.Server.Close()
@@ -368,7 +368,7 @@ func (ta *TestApplication) NewClientAndRenderer() (*cmd.Client, *RendererMock) {
 	client := &cmd.Client{
 		Renderer:                       r,
 		Config:                         ta.Config.Config,
-		AppFactory:                     seededAppFactory{ta.ChainlinkApplication},
+		AppFactory:                     seededAppFactory{ta.NuLinkApplication},
 		KeyStoreAuthenticator:          CallbackAuthenticator{func(*strpkg.Store, string) (string, error) { return Password, nil }},
 		FallbackAPIInitializer:         &MockAPIInitializer{},
 		Runner:                         EmptyRunner{},
@@ -387,7 +387,7 @@ func (ta *TestApplication) NewAuthenticatingClient(prompter cmd.Prompter) *cmd.C
 	client := &cmd.Client{
 		Renderer:                       &RendererMock{},
 		Config:                         ta.Config.Config,
-		AppFactory:                     seededAppFactory{ta.ChainlinkApplication},
+		AppFactory:                     seededAppFactory{ta.NuLinkApplication},
 		KeyStoreAuthenticator:          CallbackAuthenticator{func(*strpkg.Store, string) (string, error) { return Password, nil }},
 		FallbackAPIInitializer:         &MockAPIInitializer{},
 		Runner:                         EmptyRunner{},

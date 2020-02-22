@@ -1,15 +1,15 @@
 import { Connection } from 'typeorm'
 import { v4 as uuid } from 'uuid'
-import { ChainlinkNode } from './entity/ChainlinkNode'
+import { NuLinkNode } from './entity/NuLinkNode'
 import { JobRun } from './entity/JobRun'
 import { TaskRun } from './entity/TaskRun'
 
 export const createJobRun = async (
   db: Connection,
-  chainlinkNode: ChainlinkNode,
+  nulinkNode: NuLinkNode,
 ): Promise<JobRun> => {
   const jobRun = new JobRun()
-  jobRun.chainlinkNodeId = chainlinkNode.id
+  jobRun.nulinkNodeId = nulinkNode.id
   jobRun.runId = uuid()
   jobRun.jobId = uuid()
   jobRun.status = 'in_progress'

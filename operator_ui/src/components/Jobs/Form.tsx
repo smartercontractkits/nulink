@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core/styles'
 import { TextField, Grid } from '@material-ui/core'
 import { withFormik, FormikProps, Form as FormikForm } from 'formik'
-import * as storage from '@chainlink/local-storage'
+import * as storage from '@nulink/local-storage'
 import { Prompt } from 'react-router-dom'
 import isEqual from 'lodash/isEqual'
 import Button from 'components/Button'

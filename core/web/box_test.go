@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"chainlink/core/web"
+	"nulink/core/web"
 
 	"github.com/stretchr/testify/assert"
 )

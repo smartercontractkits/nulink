@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"chainlink/core/services"
-	"chainlink/core/store/models"
+	"nulink/core/services"
+	"nulink/core/store/models"
 
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"

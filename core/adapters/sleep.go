@@ -3,10 +3,10 @@ package adapters
 import (
 	"time"
 
-	"chainlink/core/logger"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/logger"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 )
 
 // Sleep adapter allows a job to do nothing for some amount of wall time.

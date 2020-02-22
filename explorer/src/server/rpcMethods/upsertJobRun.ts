@@ -16,7 +16,7 @@ export default async (
   try {
     const db = await getDb()
     const jobRun = fromJSONObject(payload)
-    jobRun.chainlinkNodeId = context.chainlinkNodeId
+    jobRun.nulinkNodeId = context.nulinkNodeId
     await saveJobRunTree(db, jobRun)
     callback(null, 'success')
   } catch (e) {

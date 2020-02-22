@@ -17,7 +17,7 @@ import {
 import * as http from './http'
 
 /**
- * The parameters required for making a paginated request to the chainlink endpoints
+ * The parameters required for making a paginated request to the nulink endpoints
  */
 export interface PaginatedRequestParams {
   size: number

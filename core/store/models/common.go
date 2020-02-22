@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"chainlink/core/assets"
+	"nulink/core/assets"
 
 	"github.com/araddon/dateparse"
 	"github.com/jinzhu/gorm"

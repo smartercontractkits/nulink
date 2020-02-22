@@ -5,7 +5,7 @@ contract EthLog {
   event Fulfillment(bytes32 data);
 
   function logEvent() public {
-    emit LogEvent("hello_chainlink");
+    emit LogEvent("hello_nulink");
   }
 
   function fulfill(bytes32 _externalId, bytes32 _data) public {

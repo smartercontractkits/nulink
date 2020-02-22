@@ -1,6 +1,6 @@
-# Chainlink Truffle Box
+# NuLink Truffle Box
 
-Implementation of a [Chainlink requesting contract](https://docs.chain.link/docs/create-a-chainlinked-project).
+Implementation of a [NuLink requesting contract](https://docs.chain.link/docs/create-a-nulinked-project).
 
 ## Requirements
 
@@ -82,7 +82,7 @@ Truffle v5.0.25 (core: 5.0.25)
 Node v10.16.3
 ```
 
-After creating a request on a live network, you will want to wait 3 blocks for the Chainlink node to respond. Then call the `read-contract.js` script to read the contract's state.
+After creating a request on a live network, you will want to wait 3 blocks for the NuLink node to respond. Then call the `read-contract.js` script to read the contract's state.
 
 ```bash
 npx truffle exec scripts/read-contract.js --network live

@@ -3,10 +3,10 @@ package web
 import (
 	"net/http"
 
-	"chainlink/core/services"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/store/presenters"
+	"nulink/core/services"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/store/presenters"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"

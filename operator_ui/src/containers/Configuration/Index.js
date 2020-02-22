@@ -1,4 +1,4 @@
-import { KeyValueList, PaddedCard } from '@chainlink/styleguide'
+import { KeyValueList, PaddedCard } from '@nulink/styleguide'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { fetchConfiguration } from 'actions'

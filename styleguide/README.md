@@ -1,5 +1,5 @@
-# Chainlink Styleguide
+# NuLink Styleguide
 
 ```bash
-yarn workspace @chainlink/styleguide run start
+yarn workspace @nulink/styleguide run start
 ```

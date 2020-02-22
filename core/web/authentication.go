@@ -1,10 +1,10 @@
 package web
 
 import (
-	"chainlink/core/auth"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/auth"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 	"net/http"
 
 	"github.com/gin-gonic/contrib/sessions"
@@ -19,10 +19,10 @@ const (
 	APISecret = "X-API-SECRET"
 	// ExternalInitiatorAccessKeyHeader is the header name for the access key
 	// used by external initiators to authenticate
-	ExternalInitiatorAccessKeyHeader = "X-Chainlink-EA-AccessKey"
+	ExternalInitiatorAccessKeyHeader = "X-NuLink-EA-AccessKey"
 	// ExternalInitiatorSecretHeader is the header name for the secret used by
 	// external initiators to authenticate
-	ExternalInitiatorSecretHeader = "X-Chainlink-EA-Secret"
+	ExternalInitiatorSecretHeader = "X-NuLink-EA-Secret"
 )
 
 type authType func(store *store.Store, ctx *gin.Context) error

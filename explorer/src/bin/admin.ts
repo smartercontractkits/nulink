@@ -10,11 +10,11 @@ yargs
     builder: (yargs): any => {
       yargs
         .positional('username', {
-          describe: 'The username of the Chainlink admin to create',
+          describe: 'The username of the NuLink admin to create',
           type: 'string',
         })
         .positional('password', {
-          describe: 'The password of the Chainlink admin to create',
+          describe: 'The password of the NuLink admin to create',
           type: 'string',
         })
     },

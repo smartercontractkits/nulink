@@ -1,5 +1,5 @@
 {
-  "name": "@chainlink/styleguide",
+  "name": "@nulink/styleguide",
   "private": true,
   "version": "0.0.1",
   "main": "./dist/src",
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "start-storybook -p 9001",
     "build-storybook": "build-storybook",
-    "depcheck": "echo '@chainlink/styleguide' && depcheck --ignore-dirs=dist || true",
+    "depcheck": "echo '@nulink/styleguide' && depcheck --ignore-dirs=dist || true",
     "setup": "tsc -b",
     "clean": "tsc -b --clean",
     "test": "jest",

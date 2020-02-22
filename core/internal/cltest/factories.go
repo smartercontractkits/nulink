@@ -14,14 +14,14 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/adapters"
-	"chainlink/core/assets"
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	"chainlink/core/store"
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/adapters"
+	"nulink/core/assets"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	"nulink/core/store"
+	strpkg "nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -611,7 +611,7 @@ func CreateServiceAgreementViaWeb(
 	client := app.NewHTTPClient()
 
 	agreementWithoutOracle := MustJSONSet(t, string(MustReadFile(t, path)), "endAt", utils.ISO8601UTC(endAt))
-	from := GetAccountAddress(t, app.ChainlinkApplication.GetStore())
+	from := GetAccountAddress(t, app.NuLinkApplication.GetStore())
 	agreementWithOracle := MustJSONSet(t, agreementWithoutOracle, "oracles", []string{from.Hex()})
 
 	resp, cleanup := client.Post("/v2/service_agreements", bytes.NewBufferString(agreementWithOracle))

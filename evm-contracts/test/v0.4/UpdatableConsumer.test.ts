@@ -4,7 +4,7 @@ import {
   matchers,
   oracle,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
 import { ENSRegistryFactory } from '../../ethers/v0.4/ENSRegistryFactory'
@@ -33,7 +33,7 @@ describe('UpdatableConsumer', () => {
   const ensRoot = ethers.utils.namehash('')
   const tld = 'cltest'
   const tldSubnode = ethers.utils.namehash(tld)
-  const domain = 'chainlink'
+  const domain = 'nulink'
   const domainNode = ethers.utils.namehash(`${domain}.${tld}`)
   const tokenSubdomain = 'link'
   const tokenSubnode = ethers.utils.namehash(
@@ -108,7 +108,7 @@ describe('UpdatableConsumer', () => {
 
   describe('constructor', () => {
     it('pulls the token contract address from the resolver', async () => {
-      assert.equal(link.address, await uc.getChainlinkToken())
+      assert.equal(link.address, await uc.getNuLinkToken())
     })
 
     it('pulls the oracle contract address from the resolver', async () => {

@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"chainlink/core/assets"
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	"nulink/core/utils"
 
 	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -55,8 +55,8 @@ var (
 	// after renaming Solidity variables, moving data version, and removing the cast of requestId to uint256
 	RunLogTopic20190207withoutIndexes = utils.MustHash("OracleRequest(bytes32,address,bytes32,uint256,address,bytes4,uint256,uint256,bytes)")
 	// ServiceAgreementExecutionLogTopic is the signature for the
-	// Coordinator.RunRequest(...) events which Chainlink nodes watch for. See
-	// https://chainlink/blob/master/evm/contracts/Coordinator.sol#RunRequest
+	// Coordinator.RunRequest(...) events which NuLink nodes watch for. See
+	// https://nulink/blob/master/evm/contracts/Coordinator.sol#RunRequest
 	ServiceAgreementExecutionLogTopic = utils.MustHash("ServiceAgreementExecution(bytes32,address,uint256,uint256,uint256,bytes)")
 	// OracleFullfillmentFunctionID0original is the original function selector for fulfilling Ethereum requests.
 	OracleFullfillmentFunctionID0original = utils.MustHash("fulfillData(uint256,bytes32)").Hex()[:10]

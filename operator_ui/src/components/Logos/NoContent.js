@@ -1,4 +1,4 @@
-import { Logo } from '@chainlink/styleguide'
+import { Logo } from '@nulink/styleguide'
 import PropTypes from 'prop-types'
 import React from 'react'
 import src from '../../images/no-activity-icon.svg'

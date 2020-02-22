@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	simplejson "github.com/bitly/go-simplejson"
 	gjson "github.com/tidwall/gjson"

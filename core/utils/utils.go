@@ -3,7 +3,7 @@
 package utils
 
 import (
-	"chainlink/core/logger"
+	"nulink/core/logger"
 	"crypto/rand"
 	"encoding/base64"
 	"encoding/hex"

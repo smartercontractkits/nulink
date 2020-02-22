@@ -1,11 +1,11 @@
-# @chainlink/belt
+# @nulink/belt
 
-A toolbelt for performing various commands on chainlink smart contracts.
-This cli tool is currently used within `@chainlink/contracts` for the usage of running
+A toolbelt for performing various commands on nulink smart contracts.
+This cli tool is currently used within `@nulink/contracts` for the usage of running
 build and development tools across multiple solidity contract verisions.
 
 <!-- toc -->
-* [@chainlink/belt](#chainlinkbelt)
+* [@nulink/belt](#nulinkbelt)
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
@@ -14,11 +14,11 @@ build and development tools across multiple solidity contract verisions.
 
 <!-- usage -->
 ```sh-session
-$ npm install -g @chainlink/belt
+$ npm install -g @nulink/belt
 $ belt COMMAND
 running command...
 $ belt (-v|--version|version)
-@chainlink/belt/0.0.1 linux-x64 node-v10.16.3
+@nulink/belt/0.0.1 linux-x64 node-v10.16.3
 $ belt --help [COMMAND]
 USAGE
   $ belt COMMAND
@@ -59,7 +59,7 @@ EXAMPLES
   belt box -l
 ```
 
-_See code: [src/src/commands/box.ts](https://github.com/smartcontractkit/chainlink/blob/v0.0.1/src/src/commands/box.ts)_
+_See code: [src/src/commands/box.ts](https://github.com/smartercontractkit/nulink/blob/v0.0.1/src/src/commands/box.ts)_
 
 ## `belt compile [COMPILER]`
 
@@ -87,11 +87,11 @@ EXAMPLE
   ...
   Aggregator artifact saved!
   AggregatorProxy artifact saved!
-  Chainlink artifact saved!
+  NuLink artifact saved!
   ...
 ```
 
-_See code: [src/src/commands/compile.ts](https://github.com/smartcontractkit/chainlink/blob/v0.0.1/src/src/commands/compile.ts)_
+_See code: [src/src/commands/compile.ts](https://github.com/smartercontractkit/nulink/blob/v0.0.1/src/src/commands/compile.ts)_
 
 ## `belt help [COMMAND]`
 

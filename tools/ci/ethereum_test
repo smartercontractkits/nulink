@@ -10,13 +10,13 @@ heading 'Setup...'
 
 echo 'logging in..'
 # we do this at run-time instead of build time
-# to eliminate the risk of copying over a stale chainlink binary
-# if we had instead copied over the binary from the built chainlink
+# to eliminate the risk of copying over a stale nulink binary
+# if we had instead copied over the binary from the built nulink
 # base image
 # we could also try mounting a volume instead, or using docker-exec
-docker cp chainlink-node:/usr/local/bin/chainlink /usr/local/bin/chainlink
-chainlink admin login --file /run/secrets/apicredentials
-launch_chainlink
+docker cp nulink-node:/usr/local/bin/nulink /usr/local/bin/nulink
+nulink admin login --file /run/secrets/apicredentials
+launch_nulink
 deploy_contracts
 
 heading 'Running tests...'
@@ -32,5 +32,5 @@ deploy_v06_contracts
 
 title 'End to end tests.'
 
-yarn workspace @chainlink/integration test:cypress
+yarn workspace @nulink/integration test:cypress
 title 'All tests passed.'

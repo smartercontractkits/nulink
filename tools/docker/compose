@@ -31,7 +31,7 @@ Commands:
     clean                 Remove any containers and volumes related to compose files
     logs                  Display the logs of any service(s) by name
 
-    cld                   Runs the chainlink node container in dev mode
+    cld                   Runs the nulink node container in dev mode
     cldo                  cld in addition to operator-ui in dev mode
 
     acceptance            Run the services required to perform an acceptance test
@@ -44,7 +44,7 @@ Commands:
     dev                   Run docker-compose with dev config for the core node and operator-ui
 
     eth:clean             Reset blockchain data to genesis state
-    cl:clean              Reset chainlink database
+    cl:clean              Reset nulink database
 
     *                     Run docker-compose with base config"
 
@@ -66,13 +66,13 @@ case "$1" in
   cld)
     $dev build
     $dev up -d node
-    docker exec -it chainlink-node bash
+    docker exec -it nulink-node bash
     $dev down -v
     ;;
   cldo)
     $dev build
     $dev up -d operator-ui
-    docker exec -it chainlink-node bash
+    docker exec -it nulink-node bash
     $dev down -v
     ;;
 

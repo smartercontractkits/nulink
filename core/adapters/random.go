@@ -4,8 +4,8 @@ import (
 	"crypto/rand"
 	"math/big"
 
-	"chainlink/core/store"
-	"chainlink/core/store/models"
+	"nulink/core/store"
+	"nulink/core/store/models"
 )
 
 // Random adapter type holds no fields

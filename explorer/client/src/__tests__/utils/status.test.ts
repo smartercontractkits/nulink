@@ -1,4 +1,4 @@
-import { partialAsFull } from '@chainlink/ts-test-helpers'
+import { partialAsFull } from '@nulink/ts-test-helpers'
 import status from '../../utils/status'
 import { JobRun, TaskRun } from 'explorer/models'
 

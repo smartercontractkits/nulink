@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"math/big"
 
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 )
 
 // Quotient holds the Dividend.

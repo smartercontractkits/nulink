@@ -1,5 +1,5 @@
 {
-  "name": "@chainlink/example-testnet",
+  "name": "@nulink/example-testnet",
   "private": true,
   "version": "0.6.0",
   "license": "MIT",
@@ -7,7 +7,7 @@
     "node": "~10.16"
   },
   "scripts": {
-    "depcheck": "echo \"@chainlink/example-testnet\" && depcheck --ignore-dirs=contracts || true",
+    "depcheck": "echo \"@nulink/example-testnet\" && depcheck --ignore-dirs=contracts || true",
     "solhint": "solhint ./contracts/**/*.sol",
     "lint": "yarn solhint"
   },

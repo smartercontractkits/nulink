@@ -27,7 +27,7 @@ const LangingPage = () => (
       <section>
         <h3>Decentralized Oracle Networks for Price Reference Data</h3>
         <p>
-          The Chainlink Network provides the largest collection of secure and
+          The NuLink Network provides the largest collection of secure and
           decentralized on-chain price reference data available. Composed of
           security reviewed, sybil resistant and fully independent nodes which
           are run by leading blockchain devops and security teams. Creating a
@@ -53,15 +53,15 @@ const LangingPage = () => (
             ReactGA.event({
               category: 'Form Conversion',
               action: 'Click on Button',
-              label: 'Integrate with Chainlink',
+              label: 'Integrate with NuLink',
             })
           }
-          href="https://chainlinkcommunity.typeform.com/to/XcgLVP"
+          href="https://nulinkcommunity.typeform.com/to/XcgLVP"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Button type="primary" shape="round" size="large">
-            Integrate with Chainlink
+            Integrate with NuLink
           </Button>
         </a>
       </div>

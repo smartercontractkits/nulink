@@ -1,7 +1,7 @@
-# Chainlink SGX
+# NuLink SGX
 
 NOTE: This is an **EXPERIMENTAL** optional module that can be loaded into
-chainlink to do some processing within an attached SGX enclave.
+nulink to do some processing within an attached SGX enclave.
 
 Included is a private key for generating simulated enclaves.
 

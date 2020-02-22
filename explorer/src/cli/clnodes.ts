@@ -10,12 +10,12 @@ const EXPLORER_BASE_URL =
 const EXPLORER_ADMIN_USERNAME = process.env.EXPLORER_ADMIN_USERNAME
 const EXPLORER_ADMIN_PASSWORD = process.env.EXPLORER_ADMIN_PASSWORD
 
-interface CreateChainlinkNode {
+interface CreateNuLinkNode {
   name: string
   url?: string
 }
 
-interface CreateChainlinkNodeOk {
+interface CreateNuLinkNodeOk {
   id: string
   accessKey: string
   secret: string
@@ -33,13 +33,13 @@ function logUnauthorized() {
 
 function logNotFound() {
   logError(
-    `Error creating chainlink node. API endpoint not found. Have you set the correct EXPLORER_BASE_URL?`,
+    `Error creating nulink node. API endpoint not found. Have you set the correct EXPLORER_BASE_URL?`,
   )
 }
 
 export const add = async (name: string, url?: string) => {
   const createNodeUrl = `${EXPLORER_BASE_URL}/api/v1/admin/nodes`
-  const data: CreateChainlinkNode = { name, url }
+  const data: CreateNuLinkNode = { name, url }
   const response = await fetch(createNodeUrl, {
     method: 'POST',
     headers: {
@@ -52,10 +52,10 @@ export const add = async (name: string, url?: string) => {
 
   switch (response.status) {
     case httpStatus.CREATED: {
-      const chainlinkNode: CreateChainlinkNodeOk = await response.json()
-      console.log('Created new chainlink node with id %s', chainlinkNode.id)
-      console.log('AccessKey', chainlinkNode.accessKey)
-      console.log('Secret', chainlinkNode.secret)
+      const nulinkNode: CreateNuLinkNodeOk = await response.json()
+      console.log('Created new nulink node with id %s', nulinkNode.id)
+      console.log('AccessKey', nulinkNode.accessKey)
+      console.log('Secret', nulinkNode.secret)
       break
     }
     case httpStatus.NOT_FOUND:
@@ -66,7 +66,7 @@ export const add = async (name: string, url?: string) => {
       break
     case httpStatus.CONFLICT:
       console.error(
-        `Error creating chainlink node. A node with the name: "${name}" already exists.`,
+        `Error creating nulink node. A node with the name: "${name}" already exists.`,
       )
       break
     default:
@@ -88,7 +88,7 @@ export const remove = async (name: string) => {
 
   switch (response.status) {
     case httpStatus.OK:
-      console.log('Successfully deleted chainlink node with name %s', name)
+      console.log('Successfully deleted nulink node with name %s', name)
       break
     case httpStatus.NOT_FOUND:
       logNotFound()

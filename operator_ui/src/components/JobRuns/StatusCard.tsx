@@ -1,4 +1,4 @@
-import { PaddedCard } from '@chainlink/styleguide'
+import { PaddedCard } from '@nulink/styleguide'
 import { Grid } from '@material-ui/core'
 import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -7,7 +7,7 @@ import { noCase } from 'change-case'
 import classNames from 'classnames'
 import { JobRun } from 'operator_ui'
 import React, { useState, useEffect } from 'react'
-import { ElapsedDuration } from '@chainlink/styleguide'
+import { ElapsedDuration } from '@nulink/styleguide'
 import StatusIcon from '../JobRuns/StatusIcon'
 
 const styles = (theme: any) =>

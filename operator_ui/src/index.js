@@ -1,4 +1,4 @@
-import { theme } from '@chainlink/styleguide'
+import { theme } from '@nulink/styleguide'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import JavascriptTimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'

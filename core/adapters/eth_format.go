@@ -1,9 +1,9 @@
 package adapters
 
 import (
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"

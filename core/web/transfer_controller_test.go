@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"testing"
 
-	"chainlink/core/assets"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
+	"nulink/core/assets"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/assert"

@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/internal/mocks"
-	"chainlink/core/utils"
+	"nulink/core/internal/cltest"
+	"nulink/core/internal/mocks"
+	"nulink/core/utils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

@@ -6,7 +6,7 @@ ADD . .
 ARG REACT_APP_INFURA_KEY
 ARG REACT_APP_GA_ID
 RUN yarn install
-RUN yarn workspace @chainlink/feeds run build
+RUN yarn workspace @nulink/feeds run build
 
 FROM node:10.16.3-alpine
 
@@ -25,4 +25,4 @@ COPY --from=builder /app/feeds/public feeds/public
 COPY --from=builder /app/feeds/build feeds/build
 
 ENV NODE_ENV production
-ENTRYPOINT [ "yarn", "workspace", "@chainlink/feeds", "run", "start" ]
+ENTRYPOINT [ "yarn", "workspace", "@nulink/feeds", "run", "start" ]

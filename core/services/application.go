@@ -6,13 +6,13 @@ import (
 	"sync"
 	"syscall"
 
-	"chainlink/core/gracefulpanic"
-	"chainlink/core/logger"
-	"chainlink/core/services/synchronization"
-	"chainlink/core/store"
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/gracefulpanic"
+	"nulink/core/logger"
+	"nulink/core/services/synchronization"
+	"nulink/core/store"
+	strpkg "nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/gobuffalo/packr"
 	"go.uber.org/multierr"
@@ -34,10 +34,10 @@ type Application interface {
 	RunManager
 }
 
-// ChainlinkApplication contains fields for the JobSubscriber, Scheduler,
+// NuLinkApplication contains fields for the JobSubscriber, Scheduler,
 // and Store. The JobSubscriber and Scheduler are also available
 // in the services package, but the Store has its own package.
-type ChainlinkApplication struct {
+type NuLinkApplication struct {
 	Exiter      func(int)
 	HeadTracker *HeadTracker
 	StatsPusher synchronization.StatsPusher
@@ -53,7 +53,7 @@ type ChainlinkApplication struct {
 }
 
 // NewApplication initializes a new store if one is not already
-// present at the configured root directory (default: ~/.chainlink),
+// present at the configured root directory (default: ~/.nulink),
 // the logger at the same directory and returns the Application to
 // be used by the node.
 func NewApplication(config *orm.Config, onConnectCallbacks ...func(Application)) Application {
@@ -71,7 +71,7 @@ func NewApplication(config *orm.Config, onConnectCallbacks ...func(Application))
 
 	pendingConnectionResumer := newPendingConnectionResumer(runManager)
 
-	app := &ChainlinkApplication{
+	app := &NuLinkApplication{
 		JobSubscriber:            jobSubscriber,
 		FluxMonitor:              fluxMonitor,
 		StatsPusher:              statsPusher,
@@ -106,7 +106,7 @@ func NewApplication(config *orm.Config, onConnectCallbacks ...func(Application))
 // Also listens for interrupt signals from the operating system so
 // that the application can be properly closed before the application
 // exits.
-func (app *ChainlinkApplication) Start() error {
+func (app *NuLinkApplication) Start() error {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
@@ -138,7 +138,7 @@ func (app *ChainlinkApplication) Start() error {
 
 // Stop allows the application to exit by halting schedules, closing
 // logs, and closing the DB connection.
-func (app *ChainlinkApplication) Stop() error {
+func (app *NuLinkApplication) Stop() error {
 	var merr error
 	app.shutdownOnce.Do(func() {
 		defer logger.Sync()
@@ -156,24 +156,24 @@ func (app *ChainlinkApplication) Stop() error {
 	return merr
 }
 
-// GetStore returns the pointer to the store for the ChainlinkApplication.
-func (app *ChainlinkApplication) GetStore() *store.Store {
+// GetStore returns the pointer to the store for the NuLinkApplication.
+func (app *NuLinkApplication) GetStore() *store.Store {
 	return app.Store
 }
 
-func (app *ChainlinkApplication) GetStatsPusher() synchronization.StatsPusher {
+func (app *NuLinkApplication) GetStatsPusher() synchronization.StatsPusher {
 	return app.StatsPusher
 }
 
 // WakeSessionReaper wakes up the reaper to do its reaping.
-func (app *ChainlinkApplication) WakeSessionReaper() {
+func (app *NuLinkApplication) WakeSessionReaper() {
 	app.SessionReaper.WakeUp()
 }
 
 // AddJob adds a job to the store and the scheduler. If there was
 // an error from adding the job to the store, the job will not be
 // added to the scheduler.
-func (app *ChainlinkApplication) AddJob(job models.JobSpec) error {
+func (app *NuLinkApplication) AddJob(job models.JobSpec) error {
 	err := app.Store.CreateJob(&job)
 	if err != nil {
 		return err
@@ -190,7 +190,7 @@ func (app *ChainlinkApplication) AddJob(job models.JobSpec) error {
 }
 
 // ArchiveJob silences the job from the system, preventing future job runs.
-func (app *ChainlinkApplication) ArchiveJob(ID *models.ID) error {
+func (app *NuLinkApplication) ArchiveJob(ID *models.ID) error {
 	_ = app.JobSubscriber.RemoveJob(ID)
 	app.FluxMonitor.RemoveJob(ID)
 	return app.Store.ArchiveJob(ID)
@@ -198,7 +198,7 @@ func (app *ChainlinkApplication) ArchiveJob(ID *models.ID) error {
 
 // AddServiceAgreement adds a Service Agreement which includes a job that needs
 // to be scheduled.
-func (app *ChainlinkApplication) AddServiceAgreement(sa *models.ServiceAgreement) error {
+func (app *NuLinkApplication) AddServiceAgreement(sa *models.ServiceAgreement) error {
 	err := app.Store.CreateServiceAgreement(sa)
 	if err != nil {
 		return err
@@ -216,7 +216,7 @@ func (app *ChainlinkApplication) AddServiceAgreement(sa *models.ServiceAgreement
 
 // NewBox returns the packr.Box instance that holds the static assets to
 // be delivered by the router.
-func (app *ChainlinkApplication) NewBox() packr.Box {
+func (app *NuLinkApplication) NewBox() packr.Box {
 	return packr.NewBox("../../operator_ui/dist")
 }
 

@@ -1,9 +1,9 @@
 {
-  "name": "@chainlink/contracts",
+  "name": "@nulink/contracts",
   "version": "0.0.2",
-  "description": "Smart contracts and their language abstractions for chainlink",
-  "repository": "https://github.com/smartcontractkit/chainlink",
-  "author": "Chainlink devs",
+  "description": "Smart contracts and their language abstractions for nulink",
+  "repository": "https://github.com/smartercontractkit/nulink",
+  "author": "NuLink devs",
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -15,8 +15,8 @@
     "prepublishOnly": "yarn clean && yarn setup && yarn test && yarn setup"
   },
   "devDependencies": {
-    "@chainlink/belt": "0.0.1",
-    "@chainlink/test-helpers": "0.0.2",
+    "@nulink/belt": "0.0.1",
+    "@nulink/test-helpers": "0.0.2",
     "@types/jest": "^25.1.1",
     "@types/node": "^13.7.0",
     "ethers": "^4.0.44",

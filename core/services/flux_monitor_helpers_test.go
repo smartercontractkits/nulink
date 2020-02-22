@@ -1,7 +1,7 @@
 package services
 
 import (
-	"chainlink/core/eth"
+	"nulink/core/eth"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"

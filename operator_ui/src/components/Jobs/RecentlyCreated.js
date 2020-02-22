@@ -2,7 +2,7 @@ import {
   SimpleListCard,
   SimpleListCardItem,
   TimeAgo,
-} from '@chainlink/styleguide'
+} from '@nulink/styleguide'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'

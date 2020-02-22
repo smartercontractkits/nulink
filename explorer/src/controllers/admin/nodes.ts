@@ -4,14 +4,14 @@ import httpStatus from 'http-status-codes'
 import { Connection, getCustomRepository } from 'typeorm'
 import { getDb } from '../../database'
 import {
-  buildChainlinkNode,
-  ChainlinkNode,
+  buildNuLinkNode,
+  NuLinkNode,
   jobCountReport,
   uptime as nodeUptime,
-} from '../../entity/ChainlinkNode'
-import { ChainlinkNodeRepository } from '../../repositories/ChainlinkNodeRepository'
-import chainlinkNodeShowSerializer from '../../serializers/chainlinkNodeShowSerializer'
-import chainlinkNodesSerializer from '../../serializers/chainlinkNodesSerializer'
+} from '../../entity/NuLinkNode'
+import { NuLinkNodeRepository } from '../../repositories/NuLinkNodeRepository'
+import nulinkNodeShowSerializer from '../../serializers/nulinkNodeShowSerializer'
+import nulinkNodesSerializer from '../../serializers/nulinkNodesSerializer'
 import { PostgresErrorCode } from '../../utils/constants'
 import { isPostgresError } from '../../utils/errors'
 import { parseParams } from '../../utils/pagination'
@@ -21,13 +21,13 @@ const router = Router()
 router.get('/nodes', async (req, res) => {
   const params = parseParams(req.query)
   const db = await getDb()
-  const chainlinkNodeRepository = getCustomRepository(
-    ChainlinkNodeRepository,
+  const nulinkNodeRepository = getCustomRepository(
+    NuLinkNodeRepository,
     db.name,
   )
-  const chainlinkNodes = await chainlinkNodeRepository.all(params)
-  const nodeCount = await chainlinkNodeRepository.count()
-  const json = chainlinkNodesSerializer(chainlinkNodes, nodeCount)
+  const nulinkNodes = await nulinkNodeRepository.all(params)
+  const nodeCount = await nulinkNodeRepository.count()
+  const json = nulinkNodesSerializer(nulinkNodes, nodeCount)
 
   return res.send(json)
 })
@@ -36,7 +36,7 @@ router.post('/nodes', async (req, res) => {
   const name = req.body.name
   const url = req.body.url
   const db = await getDb()
-  const [node, secret] = buildChainlinkNode(name, url)
+  const [node, secret] = buildNuLinkNode(name, url)
   const errors = await validate(node)
 
   if (errors.length === 0) {
@@ -74,7 +74,7 @@ router.post('/nodes', async (req, res) => {
 router.get('/nodes/:id', async (req, res) => {
   const { id } = req.params
   const db = await getDb()
-  const node = await db.getRepository(ChainlinkNode).findOne(id)
+  const node = await db.getRepository(NuLinkNode).findOne(id)
   const uptime = await nodeUptime(db, node)
   const jobCounts = await jobCountReport(db, node)
 
@@ -87,14 +87,14 @@ router.get('/nodes/:id', async (req, res) => {
     uptime,
   }
 
-  const json = chainlinkNodeShowSerializer(data)
+  const json = nulinkNodeShowSerializer(data)
   return res.send(json)
 })
 
 router.delete('/nodes/:name', async (req, res) => {
   const db: Connection = await getDb()
 
-  await db.getRepository(ChainlinkNode).delete({ name: req.params.name })
+  await db.getRepository(NuLinkNode).delete({ name: req.params.name })
 
   return res.sendStatus(httpStatus.OK)
 })

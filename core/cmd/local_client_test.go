@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/cmd"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/internal/mocks"
-	"chainlink/core/logger"
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/orm"
+	"nulink/core/cmd"
+	"nulink/core/internal/cltest"
+	"nulink/core/internal/mocks"
+	"nulink/core/logger"
+	strpkg "nulink/core/store"
+	"nulink/core/store/orm"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -68,7 +68,7 @@ func TestClient_RunNodeShowsEnv(t *testing.T) {
 	assert.Contains(t, logs, "LOG_LEVEL: debug\\n")
 	assert.Contains(t, logs, "LOG_TO_DISK: true")
 	assert.Contains(t, logs, "JSON_CONSOLE: false")
-	assert.Contains(t, logs, "ROOT: /tmp/chainlink_test/")
+	assert.Contains(t, logs, "ROOT: /tmp/nulink_test/")
 	assert.Contains(t, logs, "CHAINLINK_PORT: 6688\\n")
 	assert.Contains(t, logs, "ETH_URL: ws://")
 	assert.Contains(t, logs, "ETH_CHAIN_ID: 3\\n")

@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm'
 import { closeDbConnection, getDb } from '../../database'
-import { createChainlinkNode } from '../../entity/ChainlinkNode'
+import { createNuLinkNode } from '../../entity/NuLinkNode'
 import { fromString, JobRun, saveJobRunTree } from '../../entity/JobRun'
 import ethtxFixture from '../fixtures/JobRun.ethtx.fixture.json'
 import fixture from '../fixtures/JobRun.fixture.json'
@@ -39,11 +39,11 @@ describe('entity/jobRun/fromString', () => {
     expect(jr.taskRuns[0].minimumConfirmations).toEqual('3')
     expect(jr.taskRuns[0].error).toEqual(null)
 
-    const [chainlinkNode] = await createChainlinkNode(
+    const [nulinkNode] = await createNuLinkNode(
       db,
-      'job-run-fromString-chainlink-node',
+      'job-run-fromString-nulink-node',
     )
-    jr.chainlinkNodeId = chainlinkNode.id
+    jr.nulinkNodeId = nulinkNode.id
     const r = await db.manager.save(jr)
     expect(r.id).toBeDefined()
     expect(r.type).toEqual('runlog')
@@ -86,13 +86,13 @@ describe('entity/jobRun/fromString', () => {
 
 describe('entity/jobRun/saveJobRunTree', () => {
   it('updates jobRun error', async () => {
-    const [chainlinkNode] = await createChainlinkNode(
+    const [nulinkNode] = await createNuLinkNode(
       db,
       'testOverwriteJobRunsErrorOnConflict',
     )
 
     const jr = fromString(JSON.stringify(fixture))
-    jr.chainlinkNodeId = chainlinkNode.id
+    jr.nulinkNodeId = nulinkNode.id
     await saveJobRunTree(db, jr)
 
     const initial = await db.manager.findOne(JobRun)
@@ -111,13 +111,13 @@ describe('entity/jobRun/saveJobRunTree', () => {
   })
 
   it('overwrites taskRun values on conflict', async () => {
-    const [chainlinkNode] = await createChainlinkNode(
+    const [nulinkNode] = await createNuLinkNode(
       db,
       'testOverwriteTaskRunsOnConflict',
     )
 
     const jr = fromString(JSON.stringify(fixture))
-    jr.chainlinkNodeId = chainlinkNode.id
+    jr.nulinkNodeId = nulinkNode.id
     await saveJobRunTree(db, jr)
 
     const modifications = {

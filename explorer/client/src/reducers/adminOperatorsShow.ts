@@ -29,7 +29,7 @@ export const adminOperatorsShow: Reducer<State, Actions> = (
 ) => {
   switch (action.type) {
     case 'FETCH_ADMIN_OPERATOR_SUCCEEDED': {
-      return action.data.chainlinkNodes
+      return action.data.nulinkNodes
     }
     default: {
       return state

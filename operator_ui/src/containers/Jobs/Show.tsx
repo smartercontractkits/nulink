@@ -1,4 +1,4 @@
-import { CardTitle, KeyValueList } from '@chainlink/styleguide'
+import { CardTitle, KeyValueList } from '@nulink/styleguide'
 import {
   createStyles,
   Theme,

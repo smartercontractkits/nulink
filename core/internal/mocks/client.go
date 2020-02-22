@@ -3,14 +3,14 @@
 package mocks
 
 import (
-	assets "chainlink/core/assets"
+	assets "nulink/core/assets"
 	big "math/big"
 
 	common "github.com/ethereum/go-ethereum/common"
 
 	decimal "github.com/shopspring/decimal"
 
-	eth "chainlink/core/eth"
+	eth "nulink/core/eth"
 
 	ethereum "github.com/ethereum/go-ethereum"
 

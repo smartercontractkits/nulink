@@ -25,11 +25,11 @@ const Footnote = ({ classes }) => {
   return (
     <Card className={classes.style}>
       <Typography>
-        Chainlink Node {version} at commit{' '}
+        NuLink Node {version} at commit{' '}
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href={`https://github.com/smartcontractkit/chainlink/commit/${sha}`}
+          href={`https://github.com/smartercontractkit/nulink/commit/${sha}`}
           className={classes.bareAnchor}
         >
           {sha}

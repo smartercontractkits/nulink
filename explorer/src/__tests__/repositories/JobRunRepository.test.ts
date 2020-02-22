@@ -4,7 +4,7 @@ import ethtxFixture from '../fixtures/JobRun.ethtx.fixture.json'
 import fixture from '../fixtures/JobRun.fixture.json'
 import { Connection, getCustomRepository } from 'typeorm'
 import { getDb, closeDbConnection } from '../../database'
-import { createChainlinkNode } from '../../entity/ChainlinkNode'
+import { createNuLinkNode } from '../../entity/NuLinkNode'
 
 let db: Connection
 
@@ -17,13 +17,13 @@ afterAll(async () => closeDbConnection())
 describe('JobRunRepository tests', () => {
   describe('getFirst', () => {
     it('should return a job run with its task runs sorted', async () => {
-      const [chainlinkNode] = await createChainlinkNode(
+      const [nulinkNode] = await createNuLinkNode(
         db,
-        'job-run-fromString-chainlink-node',
+        'job-run-fromString-nulink-node',
       )
 
       const jr1 = JobRun.fromString(JSON.stringify(ethtxFixture))
-      jr1.chainlinkNodeId = chainlinkNode.id
+      jr1.nulinkNodeId = nulinkNode.id
 
       await JobRun.saveJobRunTree(db, jr1)
 
@@ -36,16 +36,16 @@ describe('JobRunRepository tests', () => {
 
   describe('findById', () => {
     it('should find a task run by its id with its task runs sorted', async () => {
-      const [chainlinkNode] = await createChainlinkNode(
+      const [nulinkNode] = await createNuLinkNode(
         db,
-        'job-run-fromString-chainlink-node',
+        'job-run-fromString-nulink-node',
       )
 
       const jr1 = JobRun.fromString(JSON.stringify(ethtxFixture))
-      jr1.chainlinkNodeId = chainlinkNode.id
+      jr1.nulinkNodeId = nulinkNode.id
 
       const jr2 = JobRun.fromString(JSON.stringify(fixture))
-      jr2.chainlinkNodeId = chainlinkNode.id
+      jr2.nulinkNodeId = nulinkNode.id
 
       await JobRun.saveJobRunTree(db, jr1)
       await JobRun.saveJobRunTree(db, jr2)

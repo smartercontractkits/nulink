@@ -1,7 +1,7 @@
 import { authenticate } from '../sessions'
 import { Connection } from 'typeorm'
 import { closeDbConnection, getDb } from '../database'
-import { createChainlinkNode } from '../entity/ChainlinkNode'
+import { createNuLinkNode } from '../entity/NuLinkNode'
 import { Session } from '../entity/Session'
 
 describe('sessions', () => {
@@ -15,36 +15,36 @@ describe('sessions', () => {
 
   describe('authenticate', () => {
     it('creates a session record', async () => {
-      const [chainlinkNode, secret] = await createChainlinkNode(
+      const [nulinkNode, secret] = await createNuLinkNode(
         db,
-        'valid-chainlink-node',
+        'valid-nulink-node',
       )
-      const session = await authenticate(db, chainlinkNode.accessKey, secret)
+      const session = await authenticate(db, nulinkNode.accessKey, secret)
       expect(session).toBeDefined()
-      expect(session.chainlinkNodeId).toEqual(chainlinkNode.id)
+      expect(session.nulinkNodeId).toEqual(nulinkNode.id)
 
       let foundSession = await db.manager.findOne(Session)
-      expect(foundSession.chainlinkNodeId).toEqual(chainlinkNode.id)
+      expect(foundSession.nulinkNodeId).toEqual(nulinkNode.id)
       expect(foundSession.finishedAt).toBeNull()
 
-      await authenticate(db, chainlinkNode.accessKey, secret)
+      await authenticate(db, nulinkNode.accessKey, secret)
       foundSession = await db.manager.findOne(Session, foundSession.id)
       expect(foundSession.finishedAt).toBeDefined()
     })
 
-    it('returns null if no chainlink node exists', async () => {
+    it('returns null if no nulink node exists', async () => {
       const result = await authenticate(db, '', '')
       expect(result).toBeNull()
     })
 
     it('returns null if the secret is incorrect', async () => {
-      const [chainlinkNode] = await createChainlinkNode(
+      const [nulinkNode] = await createNuLinkNode(
         db,
-        'invalid-chainlink-node',
+        'invalid-nulink-node',
       )
       const result = await authenticate(
         db,
-        chainlinkNode.accessKey,
+        nulinkNode.accessKey,
         'wrong-secret',
       )
       expect(result).toBeNull()

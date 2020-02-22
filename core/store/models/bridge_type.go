@@ -4,8 +4,8 @@ import (
 	"crypto/subtle"
 	"fmt"
 
-	"chainlink/core/assets"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/utils"
 )
 
 // BridgeTypeRequest is the incoming record used to create a BridgeType

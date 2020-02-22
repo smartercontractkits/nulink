@@ -5,12 +5,12 @@ import (
 	"sync"
 	"time"
 
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	strpkg "nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
 
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
@@ -295,8 +295,8 @@ func (e errBlockNotLater) Error() string {
 	return e.message
 }
 
-// chainIDVerify checks whether or not the ChainID from the Chainlink config
-// matches the ChainID reported by the ETH node connected to this Chainlink node.
+// chainIDVerify checks whether or not the ChainID from the NuLink config
+// matches the ChainID reported by the ETH node connected to this NuLink node.
 func verifyEthereumChainID(ht *HeadTracker) error {
 	ethereumChainID, err := ht.store.TxManager.GetChainID()
 	if err != nil {
@@ -305,7 +305,7 @@ func verifyEthereumChainID(ht *HeadTracker) error {
 
 	if ethereumChainID.Cmp(ht.store.Config.ChainID()) != 0 {
 		return fmt.Errorf(
-			"Ethereum ChainID doesn't match chainlink config.ChainID: config ID=%d, eth RPC ID=%d",
+			"Ethereum ChainID doesn't match nulink config.ChainID: config ID=%d, eth RPC ID=%d",
 			ht.store.Config.ChainID(),
 			ethereumChainID,
 		)

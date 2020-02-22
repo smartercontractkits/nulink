@@ -17,7 +17,7 @@ Compiling 35 contracts...
 ...
 Aggregator artifact saved!
 AggregatorProxy artifact saved!
-Chainlink artifact saved!
+NuLink artifact saved!
 ...`,
   ]
 

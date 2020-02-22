@@ -18,7 +18,7 @@ const DEFAULT_HEADERS = ['Node', 'Run ID', 'Job ID', 'Created At']
 const MOBILE_HEADERS = ['Run ID', 'Job ID', 'Created At', 'Node']
 
 const buildNodeCol = (jobRun: JobRun): TextColumn => {
-  return { type: 'text', text: jobRun.chainlinkNode.name }
+  return { type: 'text', text: jobRun.nulinkNode.name }
 }
 
 const buildIdCol = (jobRun: JobRun): LinkColumn => {

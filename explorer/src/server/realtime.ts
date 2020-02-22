@@ -49,7 +49,7 @@ export const bootstrapRealtime = async (server: http.Server) => {
         }
 
         logger.debug(
-          `websocket client successfully authenticated, new session for node ${session.chainlinkNodeId}`,
+          `websocket client successfully authenticated, new session for node ${session.nulinkNodeId}`,
         )
         sessions.set(accessKey, session)
         const existingConnection = connections.get(accessKey)
@@ -68,7 +68,7 @@ export const bootstrapRealtime = async (server: http.Server) => {
     clnodeCount = clnodeCount + 1
 
     logger.info(
-      `websocket connected, total chainlink nodes connected: ${clnodeCount}`,
+      `websocket connected, total nulink nodes connected: ${clnodeCount}`,
     )
 
     ws.on('message', async (message: WebSocket.Data) => {
@@ -79,7 +79,7 @@ export const bootstrapRealtime = async (server: http.Server) => {
       }
 
       const result = await handleMessage(message as string, {
-        chainlinkNodeId: session.chainlinkNodeId,
+        nulinkNodeId: session.nulinkNodeId,
       })
 
       ws.send(JSON.stringify(result))
@@ -98,7 +98,7 @@ export const bootstrapRealtime = async (server: http.Server) => {
       }
       clnodeCount = clnodeCount - 1
       logger.info(
-        `websocket disconnected, total chainlink nodes connected: ${clnodeCount}`,
+        `websocket disconnected, total nulink nodes connected: ${clnodeCount}`,
       )
     })
   })

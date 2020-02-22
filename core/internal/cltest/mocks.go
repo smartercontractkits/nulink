@@ -18,13 +18,13 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/cmd"
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	"chainlink/core/services"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/cmd"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	"nulink/core/services"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/onsi/gomega"
@@ -41,7 +41,7 @@ const EthMockRegisterChainID = "eth_mock_register_chain_id"
 
 // MockCallerSubscriberClient create new EthMock Client
 func (ta *TestApplication) MockCallerSubscriberClient(flags ...string) *EthMock {
-	if ta.ChainlinkApplication.HeadTracker.Connected() {
+	if ta.NuLinkApplication.HeadTracker.Connected() {
 		logger.Panic("Cannot mock eth client after being connected")
 	}
 	return MockEthOnStore(ta.t, ta.Store, flags...)

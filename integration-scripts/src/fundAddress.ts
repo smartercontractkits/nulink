@@ -2,7 +2,7 @@ import { utils } from 'ethers'
 import { registerPromiseHandler, createProvider, getArgs } from './common'
 
 /**
- * This script is used to fund a chainlink node address given a developer account.
+ * This script is used to fund a nulink node address given a developer account.
  * This is used in our integration test to fund our devnet account from a geth developer account.
  * It isnt used in our parity version of the integration test since the parity account is already funded for us.
  */

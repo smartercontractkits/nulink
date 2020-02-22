@@ -5,7 +5,7 @@ import {
   matchers,
   oracle,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import cbor from 'cbor'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
@@ -133,7 +133,7 @@ describe('BasicConsumer', () => {
 
       beforeEach(async () => {
         // Create a request directly via the oracle, rather than through the
-        // chainlink client (consumer). The client should not respond to
+        // nulink client (consumer). The client should not respond to
         // fulfillment of this request, even though the oracle will faithfully
         // forward the fulfillment to it.
         const args = oracle.encodeOracleRequest(

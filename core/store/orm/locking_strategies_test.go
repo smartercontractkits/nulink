@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/gracefulpanic"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/gracefulpanic"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/jinzhu/gorm"
 	"github.com/onsi/gomega"

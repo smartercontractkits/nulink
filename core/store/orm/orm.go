@@ -11,13 +11,13 @@ import (
 	"sync"
 	"time"
 
-	"chainlink/core/assets"
-	"chainlink/core/auth"
-	"chainlink/core/gracefulpanic"
-	"chainlink/core/logger"
-	"chainlink/core/store/dbutil"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/auth"
+	"nulink/core/gracefulpanic"
+	"nulink/core/logger"
+	"nulink/core/store/dbutil"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/jinzhu/gorm"
@@ -50,7 +50,7 @@ const (
 	DialectSqlite = "sqlite3"
 )
 
-// ORM contains the database object used by Chainlink.
+// ORM contains the database object used by NuLink.
 type ORM struct {
 	db                  *gorm.DB
 	lockingStrategy     LockingStrategy

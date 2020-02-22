@@ -163,21 +163,21 @@ export default class AggregationContract {
     return logs
   }
 
-  async chainlinkRequestedLogs(pastBlocks = 40) {
+  async nulinkRequestedLogs(pastBlocks = 40) {
     const fromBlock = await this.provider
       .getBlockNumber()
       .then(b => b - pastBlocks)
 
-    const chainlinkRequestedFilter = {
-      ...this.contract.filters.ChainlinkRequested(null),
+    const nulinkRequestedFilter = {
+      ...this.contract.filters.NuLinkRequested(null),
       fromBlock,
       toBlock: 'latest',
     }
 
     const logs = await getLogs({
       provider: this.provider,
-      filter: chainlinkRequestedFilter,
-      eventInterface: this.contract.interface.events.ChainlinkRequested,
+      filter: nulinkRequestedFilter,
+      eventInterface: this.contract.interface.events.NuLinkRequested,
     })
 
     return logs

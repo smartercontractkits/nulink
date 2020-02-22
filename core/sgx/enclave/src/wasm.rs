@@ -41,7 +41,7 @@ pub fn perform(adapter: &serde_json::Value, input: &RunResult) -> WasmResult {
 
 fn wasm_as_json(input: &wasmi::RuntimeValue) -> Result<serde_json::Value, WasmError> {
     match input {
-        // RunResult in chainlink only supports string values
+        // RunResult in nulink only supports string values
         wasmi::RuntimeValue::I32(v) => Ok(serde_json::Value::String(format!("{}", v))),
         _ => Err(WasmError::ArgumentTypeNotImplementedYet),
     }

@@ -19,7 +19,7 @@ export function createInfuraProvider(networkId = MAINNET_ID) {
 /**
  * @dev Format an aggregator answer
  * @param value The Big Number to format
- * @param multiply The number to divide the result by. See Multiply adapter in Chainlink Job Specification -  https://docs.chain.link/docs/job-specifications
+ * @param multiply The number to divide the result by. See Multiply adapter in NuLink Job Specification -  https://docs.chain.link/docs/job-specifications
  * @param decimalPlaces The number to show decimal places
  */
 

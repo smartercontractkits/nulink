@@ -1,5 +1,5 @@
 // Package models contain the key job components used by the
-// Chainlink application.
+// NuLink application.
 //
 // Common
 //
@@ -14,7 +14,7 @@
 //
 // JobSpec
 //
-// A JobSpec is the largest unit of work that a Chainlink node can take
+// A JobSpec is the largest unit of work that a NuLink node can take
 // on. It will have Initiators, which is how a JobRun is started from
 // the job definition, and Tasks, which are the specific instructions
 // for what work needs to be performed.

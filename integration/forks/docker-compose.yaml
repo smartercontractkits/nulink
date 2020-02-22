@@ -1,4 +1,4 @@
-# This sets up a system for testing chainlink against block re-orgs and ommers.
+# This sets up a system for testing nulink against block re-orgs and ommers.
 #
 # If you modify this, make sure to make corresponding modifications to the scripts in forks/scripts.
 # Geth is bad about letting you know when it's getting inconsistent inputs, so be careful.
@@ -27,8 +27,8 @@ services:
       - "0x9CA9d2D5E04012C9Ed24C0e513C9bfAa4A2dD77f"
 
   # imports the 0x9CA9d2D5E04012C9Ed24C0e513C9bfAa4A2dD77f key into the CL db
-  chainlink_key_import:
-    image: smartcontract/chainlink
+  nulink_key_import:
+    image: smartercontractkits/nulink
     command: local import /run/secrets/0x9CA9d2D5E04012C9Ed24C0e513C9bfAa4A2dD77f
     volumes:
       - ./tmp/clroot/:/clroot/
@@ -37,9 +37,9 @@ services:
     secrets:
       - "0x9CA9d2D5E04012C9Ed24C0e513C9bfAa4A2dD77f"
 
-  chainlink:
-    image: smartcontract/chainlink
-    container_name: forks_chainlink
+  nulink:
+    image: smartercontractkits/nulink
+    container_name: forks_nulink
     command: local node -d -p /run/secrets/password -a /run/secrets/apicredentials
     restart: always
     volumes:
@@ -57,7 +57,7 @@ services:
       gethnet:
         ipv4_address: 172.16.1.102
     depends_on:
-      - chainlink_key_import
+      - nulink_key_import
     expose:
       - 6688
     secrets:

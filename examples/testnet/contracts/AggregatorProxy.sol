@@ -1,3 +1,3 @@
 pragma solidity 0.4.24;
 
-import "https://github.com/smartcontractkit/chainlink/evm/contracts/AggregatorProxy.sol";
+import "https://github.com/smartercontractkit/nulink/evm/contracts/AggregatorProxy.sol";

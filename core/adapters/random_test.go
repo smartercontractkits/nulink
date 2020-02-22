@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"testing"
 
-	"chainlink/core/adapters"
-	"chainlink/core/store/models"
+	"nulink/core/adapters"
+	"nulink/core/store/models"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -3,7 +3,7 @@ import adminAuth from './reducers/adminAuth'
 import adminOperators from './reducers/adminOperators'
 import adminOperatorsIndex from './reducers/adminOperatorsIndex'
 import adminOperatorsShow from './reducers/adminOperatorsShow'
-import chainlinkNodes from './reducers/chainlinkNodes'
+import nulinkNodes from './reducers/nulinkNodes'
 import config from './reducers/config'
 import jobRuns from './reducers/jobRuns'
 import jobRunsIndex from './reducers/jobRunsIndex'
@@ -16,7 +16,7 @@ const reducer = combineReducers({
   adminOperators,
   adminOperatorsIndex,
   adminOperatorsShow,
-  chainlinkNodes,
+  nulinkNodes,
   config,
   jobRuns,
   jobRunsIndex,

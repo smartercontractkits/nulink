@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"time"
 
-	"chainlink/core/adapters"
-	"chainlink/core/logger"
-	"chainlink/core/services/synchronization"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/adapters"
+	"nulink/core/logger"
+	"nulink/core/services/synchronization"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/pkg/errors"
 )

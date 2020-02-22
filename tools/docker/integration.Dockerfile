@@ -21,10 +21,10 @@ RUN apt-get update \
 RUN wget -O ./chrome79.deb https://www.slimjet.com/chrome/download-chrome.php?file=files%2F79.0.3945.88%2Fgoogle-chrome-stable_current_amd64.deb
 RUN dpkg -i chrome79.deb
 
-ENV PATH=/chainlink/tools/bin:./node_modules/.bin:$PATH
+ENV PATH=/nulink/tools/bin:./node_modules/.bin:$PATH
 
 # Copy only what we neeed
-ARG SRCROOT=/usr/local/src/chainlink
+ARG SRCROOT=/usr/local/src/nulink
 WORKDIR ${SRCROOT}
 
 COPY yarn.lock package.json ./

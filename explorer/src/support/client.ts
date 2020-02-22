@@ -3,7 +3,7 @@ import WebSocket from 'ws'
 import { ACCESS_KEY_HEADER, SECRET_HEADER } from '../utils/constants'
 import { DEFAULT_TEST_PORT } from './server'
 
-export const newChainlinkNode = (
+export const newNuLinkNode = (
   accessKey: string,
   secret: string,
 ): Promise<WebSocket> => {

@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
 
 	"github.com/stretchr/testify/assert"
 )

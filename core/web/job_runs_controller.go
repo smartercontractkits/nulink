@@ -5,11 +5,11 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"chainlink/core/services"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
+	"nulink/core/services"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"

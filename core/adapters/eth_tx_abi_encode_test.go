@@ -15,10 +15,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 
-	"chainlink/core/adapters"
-	ethpkg "chainlink/core/eth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/utils"
+	"nulink/core/adapters"
+	ethpkg "nulink/core/eth"
+	"nulink/core/internal/cltest"
+	"nulink/core/utils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

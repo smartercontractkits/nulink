@@ -7,12 +7,12 @@ import {
   UpdateDateColumn,
   UpdateResult,
 } from 'typeorm'
-import { ChainlinkNode } from './ChainlinkNode'
+import { NuLinkNode } from './NuLinkNode'
 
 @Entity()
 export class Session {
   @Column()
-  public chainlinkNodeId: number
+  public nulinkNodeId: number
 
   @Column({ nullable: true })
   public finishedAt: Date
@@ -31,17 +31,17 @@ export class Session {
 
 export async function createSession(
   db: Connection,
-  node: ChainlinkNode,
+  node: NuLinkNode,
 ): Promise<Session> {
   const now = new Date()
   await db.manager
     .createQueryBuilder()
     .update(Session)
     .set({ finishedAt: now })
-    .where({ chainlinkNodeId: node.id, finishedAt: null })
+    .where({ nulinkNodeId: node.id, finishedAt: null })
     .execute()
   const session = new Session()
-  session.chainlinkNodeId = node.id
+  session.nulinkNodeId = node.id
   return db.manager.save(session)
 }
 

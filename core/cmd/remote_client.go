@@ -11,11 +11,11 @@ import (
 	"os"
 	"strconv"
 
-	"chainlink/core/assets"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
-	"chainlink/core/web"
+	"nulink/core/assets"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
+	"nulink/core/web"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/manyminds/api2go/jsonapi"
@@ -219,7 +219,7 @@ func (cli *Client) CreateJobRun(c *clipkg.Context) error {
 	return cli.renderAPIResponse(resp, &run)
 }
 
-// CreateBridge adds a new bridge to the chainlink node
+// CreateBridge adds a new bridge to the nulink node
 func (cli *Client) CreateBridge(c *clipkg.Context) error {
 	if !c.Args().Present() {
 		return cli.errorOut(errors.New("Must pass in the bridge's parameters [JSON blob | JSON filepath]"))
@@ -418,7 +418,7 @@ func (cli *Client) SendEther(c *clipkg.Context) error {
 }
 
 // ChangePassword prompts the user for the old password and a new one, then
-// posts it to Chainlink to change the password.
+// posts it to NuLink to change the password.
 func (cli *Client) ChangePassword(c *clipkg.Context) error {
 	req, err := cli.ChangePasswordPrompter.Prompt()
 	if err != nil {

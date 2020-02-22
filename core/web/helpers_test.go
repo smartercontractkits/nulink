@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	"chainlink/core/store/models"
-	"chainlink/core/web"
+	"nulink/core/store/models"
+	"nulink/core/web"
 
 	"github.com/stretchr/testify/assert"
 )

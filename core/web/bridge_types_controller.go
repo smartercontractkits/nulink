@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"chainlink/core/services"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/services"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"

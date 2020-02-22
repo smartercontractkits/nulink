@@ -1,4 +1,4 @@
-import { extensions } from '@chainlink/test-helpers'
+import { extensions } from '@nulink/test-helpers'
 import { ethers } from 'ethers'
 extensions.ethers.BigNumber.extend(ethers.utils.BigNumber)
 

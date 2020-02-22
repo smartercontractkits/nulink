@@ -1,25 +1,25 @@
 import { Actions } from './actions'
 import { Reducer } from 'redux'
-import { ChainlinkNode } from 'explorer/models'
+import { NuLinkNode } from 'explorer/models'
 
 export interface State {
-  items?: Record<number, ChainlinkNode>
+  items?: Record<number, NuLinkNode>
 }
 
 const INITIAL_STATE: State = { items: undefined }
 
-export const chainlinkNodesReducer: Reducer<State, Actions> = (
+export const nulinkNodesReducer: Reducer<State, Actions> = (
   state = INITIAL_STATE,
   action,
 ) => {
   switch (action.type) {
     case 'FETCH_JOB_RUNS_SUCCEEDED':
-      return { items: { ...action.data.chainlinkNodes } }
+      return { items: { ...action.data.nulinkNodes } }
     case 'FETCH_JOB_RUN_SUCCEEDED':
-      return { items: { ...action.data.chainlinkNodes } }
+      return { items: { ...action.data.nulinkNodes } }
     default:
       return state
   }
 }
 
-export default chainlinkNodesReducer
+export default nulinkNodesReducer

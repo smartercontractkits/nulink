@@ -1,4 +1,4 @@
-import { KeyValueList } from '@chainlink/styleguide'
+import { KeyValueList } from '@nulink/styleguide'
 import { render } from 'enzyme'
 import React from 'react'
 

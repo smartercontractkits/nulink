@@ -1,6 +1,6 @@
 # Using docker-compose for local development
 
-The docker-compose configuration present in this directory allows for a user to quickly setup all of chainlink's services to perform actions like integration tests, acceptance tests, and development across multiple services.
+The docker-compose configuration present in this directory allows for a user to quickly setup all of nulink's services to perform actions like integration tests, acceptance tests, and development across multiple services.
 
 Docker specific scripts can be found in [bin](./bin).
 
@@ -8,7 +8,7 @@ Docker specific scripts can be found in [bin](./bin).
 - [docker-compose](https://docs.docker.com/compose/install/)
 
 # Using the compose script
-Inside the `chainlink/tools/docker` directory, there is a helper script that is included which should cover all cases of integration / acceptance / development needs acroos multiple services. To see a list of available commands, perform the following:
+Inside the `nulink/tools/docker` directory, there is a helper script that is included which should cover all cases of integration / acceptance / development needs acroos multiple services. To see a list of available commands, perform the following:
 
 ```sh
 $ cd tools/docker
@@ -22,25 +22,25 @@ Acceptance can be accomplished by using the `acceptance` command.
 ./compose acceptance
 ```
 - The explorer can be reached at `http://localhost:3001`
-- The chainlink node can be reached at `http://localhost:6688`
+- The nulink node can be reached at `http://localhost:6688`
 
 Credentials for logging into the operator-ui can be found [here](../secrets/apicredentals)
 
 ###
 ### Doing local development on the core node
 Doing quick, iterative changes on the core codebase can still be achieved within the compose setup with the `cld` or `cldo` commands.
-The `cld` command will bring up the services that a chainlink node needs to connect to (explorer, parity/geth, postgres), and then attach the users terminal to a docker container containing the host's chainlink repostiory bind-mounted inside the container at `/usr/local/src/chainlink`. What this means is that any changes made within the host's repository will be synchronized to the container, and vice versa for changes made within the container at `/usr/local/src/chainlink`.
+The `cld` command will bring up the services that a nulink node needs to connect to (explorer, parity/geth, postgres), and then attach the users terminal to a docker container containing the host's nulink repostiory bind-mounted inside the container at `/usr/local/src/nulink`. What this means is that any changes made within the host's repository will be synchronized to the container, and vice versa for changes made within the container at `/usr/local/src/nulink`.
 
 This enables a user to make quick changes on either the container or the host, run `cldev` within the attached container, check the new behaviour of the re-built node, and repeat this process until the desired results are achieved.
 
 ```sh
 $ ./compose cld
 #
-# $$ denotes that we're now in the chainlink container
+# $$ denotes that we're now in the nulink container
 $$ cldev # cldev without the "core" postfix simply calls the core node cli
 #
 # NAME:
-#    main - CLI for Chainlink
+#    main - CLI for NuLink
 #
 # USAGE:
 #    main [global options] command [command options] [arguments...]
@@ -72,9 +72,9 @@ $$ cldev core # import our testing key and api credentials, then start the node
 # 2019-12-11T20:31:18Z [INFO]  Locking postgres for exclusive access with 500ms timeout orm/orm.go:74        #
 # 2019-12-11T20:31:18Z [WARN]  pq: relation "migrations" does not exist           migrations/migrate.go:149
 # ** Running node
-# 2019-12-11T20:31:20Z [INFO]  Starting Chainlink Node 0.7.0 at commit 7324e9c476ed6b5c0a08d5a38779d4a6bfbb3880 cmd/local_client.go:27
+# 2019-12-11T20:31:20Z [INFO]  Starting NuLink Node 0.7.0 at commit 7324e9c476ed6b5c0a08d5a38779d4a6bfbb3880 cmd/local_client.go:27
 # 2019-12-11T20:31:20Z [INFO]  SGX enclave *NOT* loaded                           cmd/enclave.go:11
-# 2019-12-11T20:31:20Z [INFO]  This version of chainlink was not built with support for SGX tasks cmd/enclave.go:12
+# 2019-12-11T20:31:20Z [INFO]  This version of nulink was not built with support for SGX tasks cmd/enclave.go:12
 # ...
 # ...
 ```
@@ -85,11 +85,11 @@ In the first terminal:
 ```sh
 $ ./compose cldo
 #
-# $$ denotes that we're now in the chainlink container
+# $$ denotes that we're now in the nulink container
 $$ cldev # cldev without the "core" postfix simply calls the core node cli
 #
 # NAME:
-#    main - CLI for Chainlink
+#    main - CLI for NuLink
 #
 # USAGE:
 #    main [global options] command [command options] [arguments...]
@@ -121,9 +121,9 @@ $$ cldev core # import our testing key and api credentials, then start the node
 # 2019-12-11T20:31:18Z [INFO]  Locking postgres for exclusive access with 500ms timeout orm/orm.go:74        #
 # 2019-12-11T20:31:18Z [WARN]  pq: relation "migrations" does not exist           migrations/migrate.go:149
 # ** Running node
-# 2019-12-11T20:31:20Z [INFO]  Starting Chainlink Node 0.7.0 at commit 7324e9c476ed6b5c0a08d5a38779d4a6bfbb3880 cmd/local_client.go:27
+# 2019-12-11T20:31:20Z [INFO]  Starting NuLink Node 0.7.0 at commit 7324e9c476ed6b5c0a08d5a38779d4a6bfbb3880 cmd/local_client.go:27
 # 2019-12-11T20:31:20Z [INFO]  SGX enclave *NOT* loaded                           cmd/enclave.go:11
-# 2019-12-11T20:31:20Z [INFO]  This version of chainlink was not built with support for SGX tasks cmd/enclave.go:12
+# 2019-12-11T20:31:20Z [INFO]  This version of nulink was not built with support for SGX tasks cmd/enclave.go:12
 # ...
 # ...
 ```
@@ -180,7 +180,7 @@ $ GETH_MODE=true ./compose up devnet # start a geth devnet node
 
 # Environment Variables
 For more information regarding environment variables, the docker [documentation](https://docs.docker.com/compose/environment-variables/) explains it in great detail.
-All of the environment variables listed under the `environment` key in each service contains a default entry under the `.env` file of this directory. Additional environment variables can be added by using the `chainlink-variables.env` file. Both files are further expanded upon below.
+All of the environment variables listed under the `environment` key in each service contains a default entry under the `.env` file of this directory. Additional environment variables can be added by using the `nulink-variables.env` file. Both files are further expanded upon below.
 
 ## Overriding existing variables
 The existing variables listed under the `environment` key in each service can be overridden by setting a shell environment variable of the same key. For example, referring to `ETH_CHAIN_ID` variable under the `node` service, the default value of `ETH_CHAIN_ID` in `.env` is `34055`. If we wanted to change this to `1337`, we could set a shell variable to override this value.
@@ -191,14 +191,14 @@ export ETH_CHAIN_ID=1337
 ```
 
 ## Adding new environment variables
-What if we want to add new environment variables that are not listed under the `environment` key of a service? `docker-compose` provides us with a way to pass our own variables that are not defined under the `environment` key by using an [env_file](https://docs.docker.com/compose/compose-file/#env_file). We can see from our `docker-compose.yaml` file that there is an env file under the name of `chainlink-variables.env`. In this file, you can specify any extra environment variables that you'd like to pass to the associated container.
+What if we want to add new environment variables that are not listed under the `environment` key of a service? `docker-compose` provides us with a way to pass our own variables that are not defined under the `environment` key by using an [env_file](https://docs.docker.com/compose/compose-file/#env_file). We can see from our `docker-compose.yaml` file that there is an env file under the name of `nulink-variables.env`. In this file, you can specify any extra environment variables that you'd like to pass to the associated container.
 
-For example, lets say we want to pass the variable `ALLOW_ORIGINS` defined in `store/orm/schema.go`, so that we can serve our api from a different port without getting CORS errors. We can't pass this in as a shell variable, as the variable is not defined under the `environment` key under the `node` service. What we can do though, is specify `ALLOW_ORIGINS` in `chainlink-variables.env`, which will get passed to the container.
+For example, lets say we want to pass the variable `ALLOW_ORIGINS` defined in `store/orm/schema.go`, so that we can serve our api from a different port without getting CORS errors. We can't pass this in as a shell variable, as the variable is not defined under the `environment` key under the `node` service. What we can do though, is specify `ALLOW_ORIGINS` in `nulink-variables.env`, which will get passed to the container.
 ```sh
 # assuming that we're in the tools/docker directory
 
 # Add our custom environment variable
-echo "ALLOW_ORIGINS=http://localhost:1337" > chainlink-variables.env
+echo "ALLOW_ORIGINS=http://localhost:1337" > nulink-variables.env
 
 # now the node will allow requests from the origin of http://localhost:1337 rather than the default value of http://localhost:3000,http://localhost:6688
 ./compose acceptance
@@ -240,11 +240,11 @@ Sometimes docker-compose does not show logging from some docker containers.  Thi
 # List docker instances
 docker ps
 # CONTAINER ID        IMAGE                     COMMAND                  CREATED             STATUS              PORTS                                                                                                 NAMES
-# 41410c9d79d8        smartcontract/chainlink   "chainlink node star…"   2 minutes ago       Up 2 minutes        0.0.0.0:6688->6688/tcp                                                                                chainlink-node
+# 41410c9d79d8        smartercontractkits/nulink   "nulink node star…"   2 minutes ago       Up 2 minutes        0.0.0.0:6688->6688/tcp                                                                                nulink-node
 # f7e657e101d8        smartcontract/devnet      "/bin/parity --confi…"   47 hours ago        Up 2 minutes        5001/tcp, 8080/tcp, 8082-8083/tcp, 8180/tcp, 8546/tcp, 30303/tcp, 0.0.0.0:8545->8545/tcp, 30303/udp   parity
 
 # Follow logs using name of container
-docker logs -f chainlink-node
+docker logs -f nulink-node
 ```
 
 ## Logging into via the frontend results in HTTP Status Forbidden (403)
@@ -253,5 +253,5 @@ This is most likely due to the (Allow Origins access policy](https://docs.chain.
 
 ```
 # Disable ALLOW_ORIGINS for testing
-echo "ALLOW_ORIGINS=*" >> chainlink-variables.env
+echo "ALLOW_ORIGINS=*" >> nulink-variables.env
 ```

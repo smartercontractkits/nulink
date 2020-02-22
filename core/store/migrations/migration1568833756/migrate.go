@@ -3,7 +3,7 @@ package migration1568833756
 import (
 	"time"
 
-	"chainlink/core/store/models"
+	"nulink/core/store/models"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/jinzhu/gorm"

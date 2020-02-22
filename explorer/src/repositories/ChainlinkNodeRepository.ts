@@ -1,18 +1,18 @@
 import { EntityRepository, EntityManager } from 'typeorm'
-import { ChainlinkNode } from '../entity/ChainlinkNode'
+import { NuLinkNode } from '../entity/NuLinkNode'
 import { PaginationParams } from '../utils/pagination'
 
 @EntityRepository()
-export class ChainlinkNodeRepository {
+export class NuLinkNodeRepository {
   constructor(private manager: EntityManager) {}
 
   /**
-   * Get a page of ChainlinkNode's sorted by their index in ascending order
+   * Get a page of NuLinkNode's sorted by their index in ascending order
    */
-  public all(params: PaginationParams): Promise<ChainlinkNode[]> {
+  public all(params: PaginationParams): Promise<NuLinkNode[]> {
     let query = this.manager
-      .createQueryBuilder(ChainlinkNode, 'chainlinkNode')
-      .orderBy('chainlinkNode.createdAt', 'ASC')
+      .createQueryBuilder(NuLinkNode, 'nulinkNode')
+      .orderBy('nulinkNode.createdAt', 'ASC')
 
     if (params.limit != null) {
       query = query.limit(params.limit)
@@ -28,11 +28,11 @@ export class ChainlinkNodeRepository {
 
   /**
    *
-   * Return the total count of ChainlinkNode's
+   * Return the total count of NuLinkNode's
    */
   public count(): Promise<number> {
     return this.manager
-      .createQueryBuilder(ChainlinkNode, 'chainlinkNode')
+      .createQueryBuilder(NuLinkNode, 'nulinkNode')
       .getCount()
   }
 }

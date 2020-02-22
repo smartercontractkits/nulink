@@ -1,7 +1,7 @@
 package migration1560791143
 
 import (
-	"chainlink/core/store/dbutil"
+	"nulink/core/store/dbutil"
 
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"

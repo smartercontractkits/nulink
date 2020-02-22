@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"time"
 
-	"chainlink/core/assets"
+	"nulink/core/assets"
 
 	"github.com/ethereum/go-ethereum/common"
 )
@@ -48,7 +48,7 @@ type ConfigSchema struct {
 	Port                      uint16         `env:"CHAINLINK_PORT" default:"6688"`
 	ReaperExpiration          time.Duration  `env:"REAPER_EXPIRATION" default:"240h"`
 	ReplayFromBlock           int64          `env:"REPLAY_FROM_BLOCK" default:"-1"`
-	RootDir                   string         `env:"ROOT" default:"~/.chainlink"`
+	RootDir                   string         `env:"ROOT" default:"~/.nulink"`
 	SecureCookies             bool           `env:"SECURE_COOKIES" default:"true"`
 	SessionTimeout            time.Duration  `env:"SESSION_TIMEOUT" default:"15m"`
 	TLSCertPath               string         `env:"TLS_CERT_PATH" `

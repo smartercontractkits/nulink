@@ -15,7 +15,7 @@ const Logo = ({
   className,
   width,
   height,
-  alt = 'Chainlink Explorer',
+  alt = 'NuLink Explorer',
 }: Props) => {
   return (
     <a href={href} className={className}>

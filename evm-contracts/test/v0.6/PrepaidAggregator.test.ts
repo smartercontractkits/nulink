@@ -3,7 +3,7 @@ import {
   helpers as h,
   matchers,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { randomBytes } from 'crypto'
 import { ethers } from 'ethers'

@@ -6,10 +6,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"chainlink/core/auth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/web"
+	"nulink/core/auth"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/web"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -69,8 +69,8 @@ func TestTokenAuthRequired_TokenCredentials(t *testing.T) {
 	request, err := http.NewRequest("GET", ts.URL+"/v2/ping/", bytes.NewBufferString("{}"))
 	require.NoError(t, err)
 	request.Header.Set("Content-Type", web.MediaType)
-	request.Header.Set("X-Chainlink-EA-AccessKey", eia.AccessKey)
-	request.Header.Set("X-Chainlink-EA-Secret", eia.Secret)
+	request.Header.Set("X-NuLink-EA-AccessKey", eia.AccessKey)
+	request.Header.Set("X-NuLink-EA-Secret", eia.Secret)
 
 	client := http.Client{}
 	resp, err := client.Do(request)
@@ -102,8 +102,8 @@ func TestTokenAuthRequired_BadTokenCredentials(t *testing.T) {
 	request, err := http.NewRequest("GET", ts.URL+"/v2/ping/", bytes.NewBufferString("{}"))
 	require.NoError(t, err)
 	request.Header.Set("Content-Type", web.MediaType)
-	request.Header.Set("X-Chainlink-EA-AccessKey", eia.AccessKey)
-	request.Header.Set("X-Chainlink-EA-Secret", "every unpleasant commercial color from aquamarine to beige")
+	request.Header.Set("X-NuLink-EA-AccessKey", eia.AccessKey)
+	request.Header.Set("X-NuLink-EA-Secret", "every unpleasant commercial color from aquamarine to beige")
 
 	client := http.Client{}
 	resp, err := client.Do(request)

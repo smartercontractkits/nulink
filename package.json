@@ -29,10 +29,10 @@
   "scripts": {
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "setup": "wsrun -me -t setup",
-    "setup:chainlink": "yarn wsrun -mre -p @chainlink/contracts -p @chainlink/operator-ui -t setup",
-    "setup:contracts": "yarn wsrun -mre -p @chainlink/contracts -t setup",
-    "setup:integration": "yarn wsrun -mre -p @chainlink/integration* -t setup",
-    "setup:explorer": "yarn wsrun -mre -p '@chainlink/explorer*' -t setup",
+    "setup:nulink": "yarn wsrun -mre -p @nulink/contracts -p @nulink/operator-ui -t setup",
+    "setup:contracts": "yarn wsrun -mre -p @nulink/contracts -t setup",
+    "setup:integration": "yarn wsrun -mre -p @nulink/integration* -t setup",
+    "setup:explorer": "yarn wsrun -mre -p '@nulink/explorer*' -t setup",
     "clean": "wsrun -me clean"
   },
   "devDependencies": {

@@ -6,8 +6,8 @@ import (
 	"math/big"
 	"strings"
 
-	"chainlink/core/assets"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/utils"
 
 	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	// PrepaidAggregatorName is the name of Chainlink's Ethereum contract for
+	// PrepaidAggregatorName is the name of NuLink's Ethereum contract for
 	// aggregating numerical data such as prices.
 	PrepaidAggregatorName = "PrepaidAggregator"
 )

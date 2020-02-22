@@ -3,8 +3,8 @@ package adapters_test
 import (
 	"testing"
 
-	"chainlink/core/adapters"
-	"chainlink/core/internal/cltest"
+	"nulink/core/adapters"
+	"nulink/core/internal/cltest"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

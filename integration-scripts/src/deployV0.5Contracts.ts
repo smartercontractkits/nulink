@@ -1,5 +1,5 @@
-import { CoordinatorFactory } from '@chainlink/contracts/ethers/v0.5/CoordinatorFactory'
-import { MeanAggregatorFactory } from '@chainlink/contracts/ethers/v0.5/MeanAggregatorFactory'
+import { CoordinatorFactory } from '@nulink/contracts/ethers/v0.5/CoordinatorFactory'
+import { MeanAggregatorFactory } from '@nulink/contracts/ethers/v0.5/MeanAggregatorFactory'
 import {
   createProvider,
   deployContract,

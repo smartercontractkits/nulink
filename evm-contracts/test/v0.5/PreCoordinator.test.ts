@@ -4,7 +4,7 @@ import {
   matchers,
   oracle,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import cbor from 'cbor'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
@@ -299,7 +299,7 @@ describe('PreCoordinator', () => {
         await link.transfer(rc.address, totalPayment)
       })
 
-      it('creates Chainlink requests', async () => {
+      it('creates NuLink requests', async () => {
         const tx = await rc
           .connect(roles.consumer)
           .requestEthereumPrice(currency, totalPayment)
@@ -379,7 +379,7 @@ describe('PreCoordinator', () => {
     })
   })
 
-  describe('#chainlinkCallback', () => {
+  describe('#nulinkCallback', () => {
     let saId: string
     let request1: oracle.RunRequest
     let request2: oracle.RunRequest
@@ -430,7 +430,7 @@ describe('PreCoordinator', () => {
       describe('when called by a stranger', () => {
         it('reverts', () =>
           matchers.evmRevert(
-            pc.chainlinkCallback(saId, response1),
+            pc.nulinkCallback(saId, response1),
             'Source must be the oracle of the request',
           ))
       })
@@ -451,7 +451,7 @@ describe('PreCoordinator', () => {
 
           expect(
             receipt.events?.[0].topics.find(
-              t => t === pc.interface.events.ChainlinkFulfilled.topic,
+              t => t === pc.interface.events.NuLinkFulfilled.topic,
             ),
           ).toBeDefined()
         })

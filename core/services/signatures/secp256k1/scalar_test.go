@@ -12,7 +12,7 @@ import (
 	"go.dedis.ch/kyber/v3"
 	"go.dedis.ch/kyber/v3/group/curve25519"
 
-	"chainlink/core/services/signatures/cryptotest"
+	"nulink/core/services/signatures/cryptotest"
 )
 
 var numScalarSamples = 10

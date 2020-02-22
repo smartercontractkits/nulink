@@ -8,7 +8,7 @@ services:
       args:
         - SRCROOT
     command: ''
-    image: smartcontract/chainlink-dev
+    image: smartercontractkits/nulink-dev
     volumes:
       - ../..:$SRCROOT
   operator-ui:
@@ -19,7 +19,7 @@ services:
       dockerfile: tools/docker/operatorui.Dockerfile
       args:
         - SRCROOT
-    entrypoint: /bin/sh -c 'yarn && yarn workspace @chainlink/operator-ui start'
+    entrypoint: /bin/sh -c 'yarn && yarn workspace @nulink/operator-ui start'
     environment:
       - CHAINLINK_PORT
     ports:

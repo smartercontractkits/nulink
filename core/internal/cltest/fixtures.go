@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"chainlink/core/eth"
-	"chainlink/core/store/models"
+	"nulink/core/eth"
+	"nulink/core/store/models"
 
 	"github.com/stretchr/testify/require"
 	"github.com/tidwall/gjson"

@@ -6,15 +6,15 @@ import (
 	"syscall"
 	"testing"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
 
 	"github.com/onsi/gomega"
 	"github.com/stretchr/testify/require"
 	"github.com/tevino/abool"
 )
 
-func TestChainlinkApplication_SignalShutdown(t *testing.T) {
+func TestNuLinkApplication_SignalShutdown(t *testing.T) {
 	config, cleanup := cltest.NewConfig(t)
 	defer cleanup()
 	app, appCleanUp := cltest.NewApplicationWithConfig(t, config, cltest.EthMockRegisterChainID)
@@ -33,7 +33,7 @@ func TestChainlinkApplication_SignalShutdown(t *testing.T) {
 	}).Should(gomega.BeTrue())
 }
 
-func TestChainlinkApplication_resumesPendingConnection_Happy(t *testing.T) {
+func TestNuLinkApplication_resumesPendingConnection_Happy(t *testing.T) {
 	app, cleanup := cltest.NewApplication(t)
 	defer cleanup()
 	app.EthMock.Context("app.Start()", func(meth *cltest.EthMock) {
@@ -50,7 +50,7 @@ func TestChainlinkApplication_resumesPendingConnection_Happy(t *testing.T) {
 	_ = cltest.WaitForJobRunToComplete(t, store, jr)
 }
 
-func TestChainlinkApplication_resumesPendingConnection_Archived(t *testing.T) {
+func TestNuLinkApplication_resumesPendingConnection_Archived(t *testing.T) {
 	app, cleanup := cltest.NewApplication(t)
 	defer cleanup()
 	app.EthMock.Context("app.Start()", func(meth *cltest.EthMock) {

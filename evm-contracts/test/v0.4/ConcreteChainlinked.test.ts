@@ -4,15 +4,15 @@ import {
   matchers,
   oracle,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
-import { ConcreteChainlinkedFactory } from '../../ethers/v0.4/ConcreteChainlinkedFactory'
+import { ConcreteNuLinkedFactory } from '../../ethers/v0.4/ConcreteNuLinkedFactory'
 import { EmptyOracleFactory } from '../../ethers/v0.4/EmptyOracleFactory'
 import { GetterSetterFactory } from '../../ethers/v0.4/GetterSetterFactory'
 import { OracleFactory } from '../../ethers/v0.4/OracleFactory'
 
-const concreteChainlinkedFactory = new ConcreteChainlinkedFactory()
+const concreteNuLinkedFactory = new ConcreteNuLinkedFactory()
 const emptyOracleFactory = new EmptyOracleFactory()
 const getterSetterFactory = new GetterSetterFactory()
 const oracleFactory = new OracleFactory()
@@ -28,10 +28,10 @@ beforeAll(async () => {
   roles = users.roles
 })
 
-describe('ConcreteChainlinked', () => {
+describe('ConcreteNuLinked', () => {
   const specId =
     '0x4c7b7ffb66b344fbaa64995af81e355a00000000000000000000000000000000'
-  let cc: contract.Instance<ConcreteChainlinkedFactory>
+  let cc: contract.Instance<ConcreteNuLinkedFactory>
   let gs: contract.Instance<GetterSetterFactory>
   let oc: contract.Instance<OracleFactory | EmptyOracleFactory>
   let newoc: contract.Instance<OracleFactory>
@@ -43,7 +43,7 @@ describe('ConcreteChainlinked', () => {
       .connect(roles.defaultAccount)
       .deploy(link.address)
     gs = await getterSetterFactory.connect(roles.defaultAccount).deploy()
-    cc = await concreteChainlinkedFactory
+    cc = await concreteNuLinkedFactory
       .connect(roles.defaultAccount)
       .deploy(link.address, oc.address)
   })
@@ -74,7 +74,7 @@ describe('ConcreteChainlinked', () => {
     })
   })
 
-  describe('#chainlinkRequest(Request)', () => {
+  describe('#nulinkRequest(Request)', () => {
     it('emits an event from the contract showing the run ID', async () => {
       const tx = await cc.publicRequest(
         specId,
@@ -88,11 +88,11 @@ describe('ConcreteChainlinked', () => {
       assert.equal(4, events?.length)
 
       assert.equal(logs?.[0].address, cc.address)
-      assert.equal(events?.[0].event, 'ChainlinkRequested')
+      assert.equal(events?.[0].event, 'NuLinkRequested')
     })
   })
 
-  describe('#chainlinkRequestTo(Request)', () => {
+  describe('#nulinkRequestTo(Request)', () => {
     it('emits an event from the contract showing the run ID', async () => {
       const tx = await cc.publicRequestRunTo(
         newoc.address,
@@ -104,7 +104,7 @@ describe('ConcreteChainlinked', () => {
       const { events } = await tx.wait()
 
       assert.equal(4, events?.length)
-      assert.equal(events?.[0].event, 'ChainlinkRequested')
+      assert.equal(events?.[0].event, 'NuLinkRequested')
     })
 
     it('emits an event on the target oracle contract', async () => {
@@ -136,16 +136,16 @@ describe('ConcreteChainlinked', () => {
     })
   })
 
-  describe('#cancelChainlinkRequest', () => {
+  describe('#cancelNuLinkRequest', () => {
     let requestId: string
-    // a concrete chainlink attached to an empty oracle
-    let ecc: contract.Instance<ConcreteChainlinkedFactory>
+    // a concrete nulink attached to an empty oracle
+    let ecc: contract.Instance<ConcreteNuLinkedFactory>
 
     beforeEach(async () => {
       const emptyOracle = await emptyOracleFactory
         .connect(roles.defaultAccount)
         .deploy()
-      ecc = await concreteChainlinkedFactory
+      ecc = await concreteNuLinkedFactory
         .connect(roles.defaultAccount)
         .deploy(link.address, emptyOracle.address)
 
@@ -169,7 +169,7 @@ describe('ConcreteChainlinked', () => {
       const { events } = await tx.wait()
 
       assert.equal(1, events?.length)
-      assert.equal(events?.[0].event, 'ChainlinkCancelled')
+      assert.equal(events?.[0].event, 'NuLinkCancelled')
       assert.equal(requestId, (events?.[0].args as any).id)
     })
 
@@ -185,7 +185,7 @@ describe('ConcreteChainlinked', () => {
     })
   })
 
-  describe('#recordChainlinkFulfillment(modifier)', () => {
+  describe('#recordNuLinkFulfillment(modifier)', () => {
     let request: oracle.RunRequest
 
     beforeEach(async () => {
@@ -212,12 +212,12 @@ describe('ConcreteChainlinked', () => {
       const event = logs && cc.interface.parseLog(logs[0])
 
       assert.equal(1, logs?.length)
-      assert.equal(event?.name, 'ChainlinkFulfilled')
+      assert.equal(event?.name, 'NuLinkFulfilled')
       assert.equal(request.requestId, event?.values.id)
     })
   })
 
-  describe('#fulfillChainlinkRequest(function)', () => {
+  describe('#fulfillNuLinkRequest(function)', () => {
     let request: oracle.RunRequest
 
     beforeEach(async () => {
@@ -225,7 +225,7 @@ describe('ConcreteChainlinked', () => {
         specId,
         cc.address,
         ethers.utils.toUtf8Bytes(
-          'publicFulfillChainlinkRequest(bytes32,bytes32)',
+          'publicFulfillNuLinkRequest(bytes32,bytes32)',
         ),
         0,
       )
@@ -245,24 +245,24 @@ describe('ConcreteChainlinked', () => {
       const event = logs && cc.interface.parseLog(logs[0])
 
       assert.equal(1, logs?.length)
-      assert.equal(event?.name, 'ChainlinkFulfilled')
+      assert.equal(event?.name, 'NuLinkFulfilled')
       assert.equal(request.requestId, event?.values?.id)
     })
   })
 
-  describe('#chainlinkToken', () => {
+  describe('#nulinkToken', () => {
     it('returns the Link Token address', async () => {
-      const addr = await cc.publicChainlinkToken()
+      const addr = await cc.publicNuLinkToken()
       assert.equal(addr, link.address)
     })
   })
 
   describe('#addExternalRequest', () => {
-    let mock: contract.Instance<ConcreteChainlinkedFactory>
+    let mock: contract.Instance<ConcreteNuLinkedFactory>
     let request: oracle.RunRequest
 
     beforeEach(async () => {
-      mock = await concreteChainlinkedFactory
+      mock = await concreteNuLinkedFactory
         .connect(roles.defaultAccount)
         .deploy(link.address, oc.address)
 

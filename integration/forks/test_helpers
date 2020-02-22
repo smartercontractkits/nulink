@@ -4,7 +4,7 @@ source ../common
 
 build_images() {
   docker build -t geth ./geth
-  docker build -t smartcontract/chainlink ../../
+  docker build -t smartercontractkits/nulink ../../
 }
 
 start_network() {
@@ -19,13 +19,13 @@ tear_down() {
 }
 
 login() {
-  docker exec -it forks_chainlink chainlink admin login -f /run/secrets/apicredentials
+  docker exec -it forks_nulink nulink admin login -f /run/secrets/apicredentials
 }
 
 create_job() {
   login
   ETH_LOG_JOB=`cat fixtures/eth_log_job.json`
-  docker exec -it forks_chainlink chainlink jobs create "$ETH_LOG_JOB"
+  docker exec -it forks_nulink nulink jobs create "$ETH_LOG_JOB"
 }
 
 create_contract() {
@@ -46,12 +46,12 @@ initial_setup() {
   create_job
 }
 
-assert_not_in_chainlink_logs() {
+assert_not_in_nulink_logs() {
   echo "asserting \"$1\" not present ..."
-  num_found=`docker-compose logs chainlink | grep -c "$1"`
+  num_found=`docker-compose logs nulink | grep -c "$1"`
   if [ $num_found != "0" ]; then
     printf "\n"
-    echo "TEST FAILED - Found $1 in chainlink logs and shouldn't have"
+    echo "TEST FAILED - Found $1 in nulink logs and shouldn't have"
     exit 1
   fi;
 }
@@ -59,17 +59,17 @@ assert_not_in_chainlink_logs() {
 assert_testing_correct_artifact() {
   version="`cat ../../VERSION`"
   sha="`git rev-parse HEAD`"
-  search_chainlink_logs "Starting Chainlink Node ${version} at commit ${sha}"
+  search_nulink_logs "Starting NuLink Node ${version} at commit ${sha}"
 }
 
-search_chainlink_logs() {
+search_nulink_logs() {
 	echo "searching for \"$1\" ... "
 	check_count=0;
 	TIMEOUT=60
-	until ( docker-compose logs chainlink | grep "$1" > /dev/null) ; do
+	until ( docker-compose logs nulink | grep "$1" > /dev/null) ; do
     if [ $check_count -gt $TIMEOUT ]; then
       printf "\n"
-      echo "TEST FAILED - Timed out searching chainlink logs for \"$1\""
+      echo "TEST FAILED - Timed out searching nulink logs for \"$1\""
       exit 1
     fi;
     check_count=$((check_count + 1))
@@ -79,6 +79,6 @@ search_chainlink_logs() {
 
 save_logs() {
   echo "saving logs for chain $1"
-  docker-compose logs chainlink > "logs/chain_$1.log"
+  docker-compose logs nulink > "logs/chain_$1.log"
   docker-compose logs geth >> "logs/geth_$1.log"
 }

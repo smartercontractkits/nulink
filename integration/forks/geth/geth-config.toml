@@ -61,7 +61,7 @@ HTTPHost = "172.16.1.100"
 HTTPPort = 8545
 HTTPModules = ["net", "web3", "eth", "shh"]
 GraphQLPort = 8547
-# Chainlink relies on geth for ethereum data, so expose its websocket service
+# NuLink relies on geth for ethereum data, so expose its websocket service
 WSHost = "172.16.1.100" # Fill this in with the IP address assigned to the node in docker-compose.yaml
 WSPort = 8546
 WSOrigins = ["*"]

@@ -1,5 +1,5 @@
-import { partialAsFull } from '@chainlink/ts-test-helpers'
-import { ChainlinkNode } from 'explorer/models'
+import { partialAsFull } from '@nulink/ts-test-helpers'
+import { NuLinkNode } from 'explorer/models'
 import reducer, {
   INITIAL_STATE as initialRootState,
   AppState,
@@ -7,7 +7,7 @@ import reducer, {
 import { FetchAdminOperatorsSucceededAction } from '../../reducers/actions'
 
 const ADMIN_OPERATOR_ID = 5555555
-const INITIAL_ADMIN_OPERATOR = partialAsFull<ChainlinkNode>({
+const INITIAL_ADMIN_OPERATOR = partialAsFull<NuLinkNode>({
   id: ADMIN_OPERATOR_ID,
 })
 
@@ -24,7 +24,7 @@ describe('reducers/adminOperators', () => {
       const action: FetchAdminOperatorsSucceededAction = {
         type: 'FETCH_ADMIN_OPERATORS_SUCCEEDED',
         data: {
-          chainlinkNodes: {
+          nulinkNodes: {
             '9b7d791a-9a1f-4c55-a6be-b4231cf9fd4e': {
               id: '9b7d791a-9a1f-4c55-a6be-b4231cf9fd4e',
             },

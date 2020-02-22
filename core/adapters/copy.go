@@ -1,8 +1,8 @@
 package adapters
 
 import (
-	"chainlink/core/store"
-	"chainlink/core/store/models"
+	"nulink/core/store"
+	"nulink/core/store/models"
 )
 
 // Copy obj keys refers to which value to copy inside `data`,

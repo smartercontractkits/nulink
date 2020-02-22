@@ -33,7 +33,7 @@ func Test_ParseCBOR(t *testing.T) {
 		{
 			"nested maps",
 			`0xbf657461736b739f6868747470706f7374ff66706172616d73bf636d73676f68656c6c6f5f636861696e6c696e6b6375726c75687474703a2f2f6c6f63616c686f73743a36363930ffff`,
-			jsonMustUnmarshal(`{"params":{"msg":"hello_chainlink","url":"http://localhost:6690"},"tasks":["httppost"]}`),
+			jsonMustUnmarshal(`{"params":{"msg":"hello_nulink","url":"http://localhost:6690"},"tasks":["httppost"]}`),
 			false,
 		},
 		{

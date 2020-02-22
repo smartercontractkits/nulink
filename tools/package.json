@@ -1,9 +1,9 @@
 {
-  "name": "@chainlink/tools",
+  "name": "@nulink/tools",
   "version": "0.6.5",
   "license": "MIT",
   "scripts": {
-    "depcheck": "echo '@chainlink/tools' && depcheck || true"
+    "depcheck": "echo '@nulink/tools' && depcheck || true"
   },
   "engines": {
     "node": "~10.16"

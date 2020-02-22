@@ -8,12 +8,12 @@ import (
 	"regexp"
 	"testing"
 
-	"chainlink/core/cmd"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
-	"chainlink/core/web"
+	"nulink/core/cmd"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
+	"nulink/core/web"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

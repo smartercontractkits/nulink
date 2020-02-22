@@ -3,10 +3,10 @@ package synchronization_test
 import (
 	"testing"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/services/synchronization"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/internal/cltest"
+	"nulink/core/services/synchronization"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/jinzhu/gorm"
 	"github.com/stretchr/testify/assert"

@@ -1,17 +1,17 @@
 pragma solidity 0.4.24;
 
-import "./ChainlinkClient.sol";
+import "./NuLinkClient.sol";
 import "./interfaces/AggregatorInterface.sol";
 import "./vendor/SignedSafeMath.sol";
 import "./vendor/Ownable.sol";
 
 /**
- * @title An example Chainlink contract with aggregation
+ * @title An example NuLink contract with aggregation
  * @notice Requesters can use this contract as a framework for creating
- * requests to multiple Chainlink nodes and running aggregation
+ * requests to multiple NuLink nodes and running aggregation
  * as the contract receives answers.
  */
-contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
+contract Aggregator is AggregatorInterface, NuLinkClient, Ownable {
   using SignedSafeMath for int256;
 
   struct Answer {
@@ -59,12 +59,12 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     address[] _oracles,
     bytes32[] _jobIds
   ) public Ownable() {
-    setChainlinkToken(_link);
+    setNuLinkToken(_link);
     updateRequestDetails(_paymentAmount, _minimumResponses, _oracles, _jobIds);
   }
 
   /**
-   * @notice Creates a Chainlink request for each oracle in the oracles array.
+   * @notice Creates a NuLink request for each oracle in the oracles array.
    * @dev This example does not include request parameters. Reference any documentation
    * associated with the Job IDs used to determine the required parameters per-request.
    */
@@ -72,13 +72,13 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     external
     ensureAuthorizedRequester()
   {
-    Chainlink.Request memory request;
+    NuLink.Request memory request;
     bytes32 requestId;
     uint256 oraclePayment = paymentAmount;
 
     for (uint i = 0; i < oracles.length; i++) {
-      request = buildChainlinkRequest(jobIds[i], this, this.chainlinkCallback.selector);
-      requestId = sendChainlinkRequestTo(oracles[i], request, oraclePayment);
+      request = buildNuLinkRequest(jobIds[i], this, this.nulinkCallback.selector);
+      requestId = sendNuLinkRequestTo(oracles[i], request, oraclePayment);
       requestAnswers[requestId] = answerCounter;
     }
     answers[answerCounter].minimumResponses = minimumResponses;
@@ -90,15 +90,15 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
   }
 
   /**
-   * @notice Receives the answer from the Chainlink node.
+   * @notice Receives the answer from the NuLink node.
    * @dev This function can only be called by the oracle that received the request.
-   * @param _clRequestId The Chainlink request ID associated with the answer
-   * @param _response The answer provided by the Chainlink node
+   * @param _clRequestId The NuLink request ID associated with the answer
+   * @param _response The answer provided by the NuLink node
    */
-  function chainlinkCallback(bytes32 _clRequestId, int256 _response)
+  function nulinkCallback(bytes32 _clRequestId, int256 _response)
     external
   {
-    validateChainlinkCallback(_clRequestId);
+    validateNuLinkCallback(_clRequestId);
 
     uint256 answerId = requestAnswers[_clRequestId];
     delete requestAnswers[_clRequestId];
@@ -146,7 +146,7 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     public
     onlyOwner()
   {
-    LinkTokenInterface linkToken = LinkTokenInterface(chainlinkTokenAddress());
+    LinkTokenInterface linkToken = LinkTokenInterface(nulinkTokenAddress());
     require(linkToken.transfer(_recipient, _amount), "LINK transfer failed");
   }
 
@@ -165,10 +165,10 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
   }
 
   /**
-   * @notice Cancels an outstanding Chainlink request.
+   * @notice Cancels an outstanding NuLink request.
    * The oracle contract requires the request ID and additional metadata to
    * validate the cancellation. Only old answers can be cancelled.
-   * @param _requestId is the identifier for the chainlink request being cancelled
+   * @param _requestId is the identifier for the nulink request being cancelled
    * @param _payment is the amount of LINK paid to the oracle for the request
    * @param _expiration is the time when the request expires
    */
@@ -187,10 +187,10 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     answers[answerId].responses.push(0);
     deleteAnswer(answerId);
 
-    cancelChainlinkRequest(
+    cancelNuLinkRequest(
       _requestId,
       _payment,
-      this.chainlinkCallback.selector,
+      this.nulinkCallback.selector,
       _expiration
     );
   }
@@ -203,13 +203,13 @@ contract Aggregator is AggregatorInterface, ChainlinkClient, Ownable {
     external
     onlyOwner()
   {
-    LinkTokenInterface linkToken = LinkTokenInterface(chainlinkTokenAddress());
+    LinkTokenInterface linkToken = LinkTokenInterface(nulinkTokenAddress());
     transferLINK(owner, linkToken.balanceOf(address(this)));
     selfdestruct(owner);
   }
 
   /**
-   * @dev Performs aggregation of the answers received from the Chainlink nodes.
+   * @dev Performs aggregation of the answers received from the NuLink nodes.
    * Assumes that at least half the oracles are honest and so can't contol the
    * middle of the ordered responses.
    * @param _answerId The answer ID associated with the group of requests

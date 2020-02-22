@@ -12,7 +12,7 @@ current_spec_path=$fixtures_path/agreement.json
 # Read in the spec template, and point it to the mean aggregator contract.
 jq ".aggregator=\"$MEAN_AGGREGATOR_ADDRESS\" | .oracles=[\"$CHAINLINK_NODE_ADDRESS\"]" < $template_path > $current_spec_path
 
-create_sa="chainlink -j agreements create $current_spec_path"
+create_sa="nulink -j agreements create $current_spec_path"
 agreement_response=$($create_sa)
 
 function query_agreement() {
@@ -46,4 +46,4 @@ echo "ORACLE_SIGNATURE" $ORACLE_SIGNATURE
 echo "NORMALIZED_REQUEST" $NORMALIZED_REQUEST
 echo "SERVICE_AGREEMENT" $SERVICE_AGREEMENT
 
-yarn workspace @chainlink/integration-scripts initiate-service-agreement
+yarn workspace @nulink/integration-scripts initiate-service-agreement

@@ -4,23 +4,23 @@ import {
   helpers as h,
   matchers,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
-import { ConcreteChainlinkFactory } from '../../ethers/v0.4/ConcreteChainlinkFactory'
+import { ConcreteNuLinkFactory } from '../../ethers/v0.4/ConcreteNuLinkFactory'
 
 const provider = setup.provider()
-const concreteChainlinkFactory = new ConcreteChainlinkFactory()
-const debug = d.makeDebug('ConcreteChainlink')
+const concreteNuLinkFactory = new ConcreteNuLinkFactory()
+const debug = d.makeDebug('ConcreteNuLink')
 
-describe('ConcreteChainlink', () => {
-  let ccl: contract.Instance<ConcreteChainlinkFactory>
+describe('ConcreteNuLink', () => {
+  let ccl: contract.Instance<ConcreteNuLinkFactory>
   let defaultAccount: ethers.Wallet
   const deployment = setup.snapshot(provider, async () => {
     defaultAccount = await setup
       .users(provider)
       .then(r => r.roles.defaultAccount)
-    ccl = await concreteChainlinkFactory.connect(defaultAccount).deploy()
+    ccl = await concreteNuLinkFactory.connect(defaultAccount).deploy()
   })
 
   beforeEach(async () => {
@@ -28,7 +28,7 @@ describe('ConcreteChainlink', () => {
   })
 
   it('has a limited public interface', () => {
-    matchers.publicAbi(concreteChainlinkFactory, [
+    matchers.publicAbi(concreteNuLinkFactory, [
       'add',
       'addBytes',
       'addInt',

@@ -2,7 +2,7 @@ import {
   Serializer as JSONAPISerializer,
   SerializerOptions,
 } from 'jsonapi-serializer'
-import { JobCountReport } from '../entity/ChainlinkNode'
+import { JobCountReport } from '../entity/NuLinkNode'
 
 export const ATTRIBUTES: Array<string> = [
   'id',
@@ -13,7 +13,7 @@ export const ATTRIBUTES: Array<string> = [
   'uptime',
 ]
 
-interface ChainlinkNodeShowData {
+interface NuLinkNodeShowData {
   id: number
   name: string
   url?: string
@@ -22,14 +22,14 @@ interface ChainlinkNodeShowData {
   uptime: number
 }
 
-const chainlinkNodeShowSerializer = (data: ChainlinkNodeShowData) => {
+const nulinkNodeShowSerializer = (data: NuLinkNodeShowData) => {
   const opts = {
     attributes: ATTRIBUTES,
     keyForAttribute: 'camelCase',
     meta: {},
   } as SerializerOptions
 
-  return new JSONAPISerializer('chainlink_nodes', opts).serialize(data)
+  return new JSONAPISerializer('nulink_nodes', opts).serialize(data)
 }
 
-export default chainlinkNodeShowSerializer
+export default nulinkNodeShowSerializer

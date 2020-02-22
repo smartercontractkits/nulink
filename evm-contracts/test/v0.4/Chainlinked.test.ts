@@ -1,10 +1,10 @@
-import { matchers } from '@chainlink/test-helpers'
-import { ChainlinkedFactory } from '../../ethers/v0.4/ChainlinkedFactory'
+import { matchers } from '@nulink/test-helpers'
+import { NuLinkedFactory } from '../../ethers/v0.4/NuLinkedFactory'
 
-const chainlinkedFactory = new ChainlinkedFactory()
+const nulinkedFactory = new NuLinkedFactory()
 
-describe('Chainlinked', () => {
+describe('NuLinked', () => {
   it('has a limited public interface', async () => {
-    matchers.publicAbi(chainlinkedFactory, [])
+    matchers.publicAbi(nulinkedFactory, [])
   })
 })

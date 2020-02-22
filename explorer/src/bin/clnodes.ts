@@ -6,14 +6,14 @@ yargs
   .command({
     command: 'add <name> [url]',
     aliases: 'create',
-    describe: 'Add a chainlink node',
+    describe: 'Add a nulink node',
     builder: (yargs): any => {
       yargs
         .positional('name', {
-          describe: 'The name of the Chainlink Node to create',
+          describe: 'The name of the NuLink Node to create',
           type: 'string',
         })
-        .describe('u', 'The URL of the Chainlink Node to create')
+        .describe('u', 'The URL of the NuLink Node to create')
         .alias('u', 'url')
         .nargs('u', 1)
     },
@@ -22,10 +22,10 @@ yargs
   .command({
     command: 'delete <name>',
     aliases: 'rm',
-    describe: 'Remove a chainlink node',
+    describe: 'Remove a nulink node',
     builder: (yargs): any => {
       yargs.positional('name', {
-        describe: 'The name of the Chainlink Node to remove',
+        describe: 'The name of the NuLink Node to remove',
         type: 'string',
       })
     },

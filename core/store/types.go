@@ -1,7 +1,7 @@
 package store
 
 import (
-	"chainlink/core/store/models"
+	"nulink/core/store/models"
 )
 
 // HeadTrackable represents any object that wishes to respond to ethereum events,

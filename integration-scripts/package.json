@@ -1,8 +1,8 @@
 {
-  "name": "@chainlink/integration-scripts",
+  "name": "@nulink/integration-scripts",
   "version": "0.0.1",
   "description": "Scripts for helping perform integration tests",
-  "repository": "https://github.com/smartcontractkit/chainlink",
+  "repository": "https://github.com/smartercontractkit/nulink",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -26,8 +26,8 @@
   "dependencies": {
     "@0x/sol-compiler": "^4.0.3",
     "@0x/sol-trace": "^3.0.7",
-    "@chainlink/test-helpers": "0.0.2",
-    "@chainlink/contracts": "0.0.2",
+    "@nulink/test-helpers": "0.0.2",
+    "@nulink/contracts": "0.0.2",
     "chalk": "^2.4.2",
     "ethers": "^4.0.44",
     "link_token": "^1.0.6",

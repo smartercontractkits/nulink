@@ -1,13 +1,13 @@
 import { mount } from 'enzyme'
 import React from 'react'
-import { partialAsFull } from '@chainlink/ts-test-helpers'
-import { JobRun, ChainlinkNode } from 'explorer/models'
+import { partialAsFull } from '@nulink/ts-test-helpers'
+import { JobRun, NuLinkNode } from 'explorer/models'
 import Details from '../../../components/JobRuns/Details'
 
 describe('components/JobRuns/Details', () => {
   it('hides error when not present', () => {
-    const chainlinkNode = partialAsFull<ChainlinkNode>({})
-    const jobRun = partialAsFull<JobRun>({ chainlinkNode })
+    const nulinkNode = partialAsFull<NuLinkNode>({})
+    const jobRun = partialAsFull<JobRun>({ nulinkNode })
 
     const wrapper = mount(<Details jobRun={jobRun} etherscanHost="" />)
 
@@ -15,8 +15,8 @@ describe('components/JobRuns/Details', () => {
   })
 
   it('displays error when present', () => {
-    const chainlinkNode = partialAsFull<ChainlinkNode>({})
-    const jobRun = partialAsFull<JobRun>({ error: 'Failure!', chainlinkNode })
+    const nulinkNode = partialAsFull<NuLinkNode>({})
+    const jobRun = partialAsFull<JobRun>({ error: 'Failure!', nulinkNode })
 
     const wrapper = mount(<Details jobRun={jobRun} etherscanHost="" />)
 

@@ -5,12 +5,12 @@ import (
 	"math/big"
 	"time"
 
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	strpkg "nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
 
 	ethereum "github.com/ethereum/go-ethereum"
 	"github.com/pkg/errors"
@@ -72,7 +72,7 @@ func (js JobSubscription) Unsubscribe() {
 }
 
 // InitiatorSubscription encapsulates all functionality needed to wrap an ethereum subscription
-// for use with a Chainlink Initiator. Initiator specific functionality is delegated
+// for use with a NuLink Initiator. Initiator specific functionality is delegated
 // to the callback.
 type InitiatorSubscription struct {
 	*ManagedSubscription
@@ -216,7 +216,7 @@ func (sub ManagedSubscription) Unsubscribe() {
 // timedUnsubscribe attempts to unsubscribe but aborts abruptly after a time delay
 // unblocking the application. This is an effort to mitigate the occasional
 // indefinite block described here from go-ethereum:
-// https://chainlink/pull/600#issuecomment-426320971
+// https://nulink/pull/600#issuecomment-426320971
 func timedUnsubscribe(unsubscriber Unsubscriber) {
 	unsubscribed := make(chan struct{})
 	go func() {

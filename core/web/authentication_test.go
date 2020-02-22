@@ -1,10 +1,10 @@
 package web_test
 
 import (
-	"chainlink/core/auth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store"
-	"chainlink/core/web"
+	"nulink/core/auth"
+	"nulink/core/internal/cltest"
+	"nulink/core/store"
+	"nulink/core/web"
 	"net/http"
 	"net/http/httptest"
 	"testing"

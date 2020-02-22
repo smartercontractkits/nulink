@@ -61,7 +61,7 @@ export const search = async (
   params: SearchParams,
 ): Promise<JobRun[]> => {
   return searchBuilder(db, params)
-    .leftJoinAndSelect('job_run.chainlinkNode', 'chainlink_node')
+    .leftJoinAndSelect('job_run.nulinkNode', 'nulink_node')
     .orderBy('job_run.createdAt', 'DESC')
     .getMany()
 }

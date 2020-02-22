@@ -1,13 +1,13 @@
 pragma solidity 0.4.24;
 
-import "./MaliciousChainlink.sol";
-import "../Chainlinked.sol";
+import "./MaliciousNuLink.sol";
+import "../NuLinked.sol";
 import "../vendor/SafeMath.sol";
 
-contract MaliciousChainlinked is Chainlinked {
-  using MaliciousChainlink for MaliciousChainlink.Request;
-  using MaliciousChainlink for MaliciousChainlink.WithdrawRequest;
-  using Chainlink for Chainlink.Request;
+contract MaliciousNuLinked is NuLinked {
+  using MaliciousNuLink for MaliciousNuLink.Request;
+  using MaliciousNuLink for MaliciousNuLink.WithdrawRequest;
+  using NuLink for NuLink.Request;
   using SafeMath for uint256;
 
   uint256 private maliciousRequests = 1;
@@ -17,56 +17,56 @@ contract MaliciousChainlinked is Chainlinked {
     bytes32 _specId,
     address _callbackAddress,
     bytes4 _callbackFunction
-  ) internal pure returns (MaliciousChainlink.WithdrawRequest memory) {
-    MaliciousChainlink.WithdrawRequest memory req;
+  ) internal pure returns (MaliciousNuLink.WithdrawRequest memory) {
+    MaliciousNuLink.WithdrawRequest memory req;
     return req.initializeWithdraw(_specId, _callbackAddress, _callbackFunction);
   }
 
-  function chainlinkTargetRequest(address _target, Chainlink.Request memory _req, uint256 _amount)
+  function nulinkTargetRequest(address _target, NuLink.Request memory _req, uint256 _amount)
     internal
     returns(bytes32 requestId)
   {
     requestId = keccak256(abi.encodePacked(_target, maliciousRequests));
     _req.nonce = maliciousRequests;
     maliciousPendingRequests[requestId] = oracleAddress();
-    emit ChainlinkRequested(requestId);
-    LinkTokenInterface link = LinkTokenInterface(chainlinkToken());
+    emit NuLinkRequested(requestId);
+    LinkTokenInterface link = LinkTokenInterface(nulinkToken());
     require(link.transferAndCall(oracleAddress(), _amount, encodeTargetRequest(_req)), "Unable to transferAndCall to oracle");
     maliciousRequests += 1;
 
     return requestId;
   }
 
-  function chainlinkPriceRequest(Chainlink.Request memory _req, uint256 _amount)
+  function nulinkPriceRequest(NuLink.Request memory _req, uint256 _amount)
     internal
     returns(bytes32 requestId)
   {
     requestId = keccak256(abi.encodePacked(this, maliciousRequests));
     _req.nonce = maliciousRequests;
     maliciousPendingRequests[requestId] = oracleAddress();
-    emit ChainlinkRequested(requestId);
-    LinkTokenInterface link = LinkTokenInterface(chainlinkToken());
+    emit NuLinkRequested(requestId);
+    LinkTokenInterface link = LinkTokenInterface(nulinkToken());
     require(link.transferAndCall(oracleAddress(), _amount, encodePriceRequest(_req)), "Unable to transferAndCall to oracle");
     maliciousRequests += 1;
 
     return requestId;
   }
 
-  function chainlinkWithdrawRequest(MaliciousChainlink.WithdrawRequest memory _req, uint256 _wei)
+  function nulinkWithdrawRequest(MaliciousNuLink.WithdrawRequest memory _req, uint256 _wei)
     internal
     returns(bytes32 requestId)
   {
     requestId = keccak256(abi.encodePacked(this, maliciousRequests));
     _req.nonce = maliciousRequests;
     maliciousPendingRequests[requestId] = oracleAddress();
-    emit ChainlinkRequested(requestId);
-    LinkTokenInterface link = LinkTokenInterface(chainlinkToken());
+    emit NuLinkRequested(requestId);
+    LinkTokenInterface link = LinkTokenInterface(nulinkToken());
     require(link.transferAndCall(oracleAddress(), _wei, encodeWithdrawRequest(_req)), "Unable to transferAndCall to oracle");
     maliciousRequests += 1;
     return requestId;
   }
 
-  function encodeWithdrawRequest(MaliciousChainlink.WithdrawRequest memory _req)
+  function encodeWithdrawRequest(MaliciousNuLink.WithdrawRequest memory _req)
     internal pure returns (bytes memory)
   {
     return abi.encodeWithSelector(
@@ -77,7 +77,7 @@ contract MaliciousChainlinked is Chainlinked {
       _req.buf.buf);
   }
 
-  function encodeTargetRequest(Chainlink.Request memory _req)
+  function encodeTargetRequest(NuLink.Request memory _req)
     internal pure returns (bytes memory)
   {
     return abi.encodeWithSelector(
@@ -92,7 +92,7 @@ contract MaliciousChainlinked is Chainlinked {
       _req.buf.buf);
   }
 
-  function encodePriceRequest(Chainlink.Request memory _req)
+  function encodePriceRequest(NuLink.Request memory _req)
     internal pure returns (bytes memory)
   {
     return abi.encodeWithSelector(

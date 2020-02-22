@@ -1,6 +1,6 @@
 FROM node:10.16.3-alpine
 
-ARG SRCROOT=/usr/local/src/chainlink
+ARG SRCROOT=/usr/local/src/nulink
 WORKDIR ${SRCROOT}
 COPY yarn.lock package.json tsconfig.cjs.json ./
 COPY tools/external-adapter/package.json tools/external-adapter/
@@ -12,9 +12,9 @@ RUN yarn
 COPY tools/external-adapter tools/external-adapter
 
 # setup project
-RUN yarn workspace @chainlink/external-adapter setup
+RUN yarn workspace @nulink/external-adapter setup
 
 ENV EXTERNAL_ADAPTER_PORT 6644
 EXPOSE 6644
 
-ENTRYPOINT [ "yarn", "workspace", "@chainlink/external-adapter", "start" ]
+ENTRYPOINT [ "yarn", "workspace", "@nulink/external-adapter", "start" ]

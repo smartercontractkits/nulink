@@ -5,9 +5,9 @@ import { getDb } from '../../../database'
 import { clearDb } from '../../testdatabase'
 import { createAdmin } from '../../../support/admin'
 import {
-  createChainlinkNode,
+  createNuLinkNode,
   find as findNode,
-} from '../../../entity/ChainlinkNode'
+} from '../../../entity/NuLinkNode'
 import { start, stop } from '../../../support/server'
 import { requestBuilder, RequestBuilder } from '../../../support/requestBuilder'
 
@@ -62,7 +62,7 @@ describe('POST /api/v1/admin/nodes', () => {
   })
 
   it('returns an error when the node already exists', async done => {
-    const [node] = await createChainlinkNode(db, 'nodeA')
+    const [node] = await createNuLinkNode(db, 'nodeA')
     const data = { name: node.name }
 
     rb.sendPost(adminNodesPath, USERNAME, PASSWORD, data)
@@ -83,7 +83,7 @@ describe('DELETE /api/v1/admin/nodes/:name', () => {
   }
 
   it('can delete a node', async done => {
-    const [node] = await createChainlinkNode(db, 'nodeA')
+    const [node] = await createNuLinkNode(db, 'nodeA')
 
     rb.sendDelete(path(node.name), USERNAME, PASSWORD)
       .expect(httpStatus.OK)
@@ -107,7 +107,7 @@ describe('GET /api/v1/admin/nodes/:id', () => {
   }
 
   it('can get a node', async done => {
-    const [node] = await createChainlinkNode(db, 'nodeA')
+    const [node] = await createNuLinkNode(db, 'nodeA')
 
     rb.sendGet(path(node.id), USERNAME, PASSWORD)
       .expect(httpStatus.OK)
@@ -119,7 +119,7 @@ describe('GET /api/v1/admin/nodes/:id', () => {
   })
 
   it('returns a 401 unauthorized with invalid admin credentials', async done => {
-    const [node] = await createChainlinkNode(db, 'nodeA')
+    const [node] = await createNuLinkNode(db, 'nodeA')
     const _nodePath = path(node.id)
     rb.sendGet(_nodePath, USERNAME, 'invalidpassword')
       .expect(httpStatus.UNAUTHORIZED)

@@ -3,7 +3,7 @@ import request from 'supertest'
 import { Connection } from 'typeorm'
 import { getDb } from '../../database'
 import { start, stop } from '../../support/server'
-import { ChainlinkNode, createChainlinkNode } from '../../entity/ChainlinkNode'
+import { NuLinkNode, createNuLinkNode } from '../../entity/NuLinkNode'
 import { JobRun } from '../../entity/JobRun'
 import { TaskRun } from '../../entity/TaskRun'
 import { createJobRun } from '../../factories'
@@ -29,33 +29,33 @@ describe('#index', () => {
     let jobRun: JobRun
 
     beforeEach(async () => {
-      const [node] = await createChainlinkNode(
+      const [node] = await createNuLinkNode(
         db,
-        'jobRunsIndexTestChainlinkNode',
+        'jobRunsIndexTestNuLinkNode',
       )
       jobRun = await createJobRun(db, node)
     })
 
-    it('returns runs with chainlink node names', async () => {
+    it('returns runs with nulink node names', async () => {
       const response = await request(server).get(
         `/api/v1/job_runs?query=${jobRun.runId}`,
       )
       expect(response.status).toEqual(200)
 
-      const chainlinkNode = response.body.included[0]
-      expect(chainlinkNode.attributes.name).toBeDefined()
-      expect(chainlinkNode.attributes.accessKey).not.toBeDefined()
-      expect(chainlinkNode.attributes.salt).not.toBeDefined()
-      expect(chainlinkNode.attributes.hashedSecret).not.toBeDefined()
+      const nulinkNode = response.body.included[0]
+      expect(nulinkNode.attributes.name).toBeDefined()
+      expect(nulinkNode.attributes.accessKey).not.toBeDefined()
+      expect(nulinkNode.attributes.salt).not.toBeDefined()
+      expect(nulinkNode.attributes.hashedSecret).not.toBeDefined()
     })
   })
 })
 
 describe('#show', () => {
-  let node: ChainlinkNode
+  let node: NuLinkNode
 
   beforeEach(async () => {
-    ;[node] = await createChainlinkNode(db, 'jobRunsShowTestChainlinkNode')
+    ;[node] = await createNuLinkNode(db, 'jobRunsShowTestNuLinkNode')
   })
 
   it('returns the job run with task runs', async () => {
@@ -70,12 +70,12 @@ describe('#show', () => {
   describe('with out of order task runs', () => {
     let jobRunId: string
     beforeEach(async () => {
-      const [chainlinkNode] = await createChainlinkNode(
+      const [nulinkNode] = await createNuLinkNode(
         db,
         'testOutOfOrderTaskRuns',
       )
       const jobRun = new JobRun()
-      jobRun.chainlinkNodeId = chainlinkNode.id
+      jobRun.nulinkNodeId = nulinkNode.id
       jobRun.runId = 'OutOfOrderTaskRuns'
       jobRun.jobId = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
       jobRun.status = 'in_progress'
@@ -114,7 +114,7 @@ describe('#show', () => {
     })
   })
 
-  it('returns the job run with only public chainlink node information', async () => {
+  it('returns the job run with only public nulink node information', async () => {
     const jobRun = await createJobRun(db, node)
 
     const response = await request(server).get(`/api/v1/job_runs/${jobRun.id}`)
@@ -123,7 +123,7 @@ describe('#show', () => {
     const clnode = response.body.included[0]
     expect(clnode).toBeDefined()
     expect(clnode.id).toBeDefined()
-    expect(clnode.attributes.name).toEqual('jobRunsShowTestChainlinkNode')
+    expect(clnode.attributes.name).toEqual('jobRunsShowTestNuLinkNode')
     expect(clnode.attributes.accessKey).not.toBeDefined()
     expect(clnode.attributes.hashedSecret).not.toBeDefined()
     expect(clnode.attributes.salt).not.toBeDefined()

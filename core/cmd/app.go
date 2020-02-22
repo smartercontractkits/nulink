@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"chainlink/core/store"
+	"nulink/core/store"
 
 	"github.com/urfave/cli"
 )
@@ -23,7 +23,7 @@ func removeHidden(cmds ...cli.Command) []cli.Command {
 // NewApp returns the command-line parser/function-router for the given client
 func NewApp(client *Client) *cli.App {
 	app := cli.NewApp()
-	app.Usage = "CLI for Chainlink"
+	app.Usage = "CLI for NuLink"
 	app.Version = fmt.Sprintf("%v@%v", store.Version, store.Sha)
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
@@ -66,7 +66,7 @@ func NewApp(client *Client) *cli.App {
 				{
 					Name:        "withdraw",
 					Usage:       "Withdraw to <address>, <amount> units of LINK from the configured Oracle Contract",
-					Description: "Only works if the Chainlink node is the owner of the contract being withdrawn from",
+					Description: "Only works if the NuLink node is the owner of the contract being withdrawn from",
 					Flags: []cli.Flag{
 						cli.StringFlag{
 							Name:  "from",
@@ -212,7 +212,7 @@ func NewApp(client *Client) *cli.App {
 			Name:        "node",
 			Aliases:     []string{"local"},
 			Usage:       "Commands for admin actions that must be run locally",
-			Description: "Commands can only be run from on the same machine as the Chainlink node.",
+			Description: "Commands can only be run from on the same machine as the NuLink node.",
 			Subcommands: []cli.Command{
 				{
 					Name:        "deleteuser",
@@ -248,7 +248,7 @@ func NewApp(client *Client) *cli.App {
 							Value: -1,
 						},
 					},
-					Usage:  "Run the chainlink node",
+					Usage:  "Run the nulink node",
 					Action: client.RunNode,
 				},
 			},

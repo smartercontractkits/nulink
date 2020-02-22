@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/internal/mocks"
-	"chainlink/core/services"
+	"nulink/core/internal/cltest"
+	"nulink/core/internal/mocks"
+	"nulink/core/services"
 
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"

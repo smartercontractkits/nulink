@@ -5,7 +5,7 @@ import {
 import { JobRun } from '../entity/JobRun'
 
 export const BASE_ATTRIBUTES = [
-  'chainlinkNode',
+  'nulinkNode',
   'runId',
   'jobId',
   'status',
@@ -18,7 +18,7 @@ export const BASE_ATTRIBUTES = [
   'finishedAt',
 ]
 
-export const chainlinkNode = {
+export const nulinkNode = {
   ref: 'id',
   attributes: ['name', 'url'],
 }
@@ -43,7 +43,7 @@ const ETHERSCAN_HOST = process.env.ETHERSCAN_HOST || 'ropsten.etherscan.io'
 const jobRunSerializer = (run: JobRun) => {
   const opts = {
     attributes: BASE_ATTRIBUTES.concat(['taskRuns']),
-    chainlinkNode,
+    nulinkNode,
     keyForAttribute: 'camelCase',
     taskRuns,
     meta: {

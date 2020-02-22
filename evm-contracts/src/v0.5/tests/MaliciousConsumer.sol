@@ -1,22 +1,22 @@
 pragma solidity 0.5.0;
 
-import "../ChainlinkClient.sol";
+import "../NuLinkClient.sol";
 
-contract MaliciousConsumer is ChainlinkClient {
+contract MaliciousConsumer is NuLinkClient {
   uint256 constant private ORACLE_PAYMENT = 1 * LINK;
   uint256 private expiration;
 
   constructor(address _link, address _oracle) public payable {
-    setChainlinkToken(_link);
-    setChainlinkOracle(_oracle);
+    setNuLinkToken(_link);
+    setNuLinkOracle(_oracle);
   }
 
   function () external payable {} // solhint-disable-line no-empty-blocks
 
   function requestData(bytes32 _id, bytes memory _callbackFunc) public {
-    Chainlink.Request memory req = buildChainlinkRequest(_id, address(this), bytes4(keccak256(_callbackFunc)));
+    NuLink.Request memory req = buildNuLinkRequest(_id, address(this), bytes4(keccak256(_callbackFunc)));
     expiration = now.add(5 minutes); // solhint-disable-line not-rely-on-time
-    sendChainlinkRequest(req, ORACLE_PAYMENT);
+    sendNuLinkRequest(req, ORACLE_PAYMENT);
   }
 
   function assertFail(bytes32, bytes32) public pure {
@@ -24,7 +24,7 @@ contract MaliciousConsumer is ChainlinkClient {
   }
 
   function cancelRequestOnFulfill(bytes32 _requestId, bytes32) public {
-    cancelChainlinkRequest(
+    cancelNuLinkRequest(
       _requestId,
       ORACLE_PAYMENT,
       this.cancelRequestOnFulfill.selector,
@@ -35,18 +35,18 @@ contract MaliciousConsumer is ChainlinkClient {
     selfdestruct(address(0));
   }
 
-  function stealEthCall(bytes32 _requestId, bytes32) public recordChainlinkFulfillment(_requestId) {
+  function stealEthCall(bytes32 _requestId, bytes32) public recordNuLinkFulfillment(_requestId) {
     (bool success,) = address(this).call.value(100)(""); // solhint-disable-line avoid-call-value
     require(success, "Call failed");
   }
 
-  function stealEthSend(bytes32 _requestId, bytes32) public recordChainlinkFulfillment(_requestId) {
+  function stealEthSend(bytes32 _requestId, bytes32) public recordNuLinkFulfillment(_requestId) {
     // solhint-disable-next-line check-send-result
     bool success = address(this).send(100); // solhint-disable-line multiple-sends
     require(success, "Send failed");
   }
 
-  function stealEthTransfer(bytes32 _requestId, bytes32) public recordChainlinkFulfillment(_requestId) {
+  function stealEthTransfer(bytes32 _requestId, bytes32) public recordNuLinkFulfillment(_requestId) {
     address(this).transfer(100);
   }
 

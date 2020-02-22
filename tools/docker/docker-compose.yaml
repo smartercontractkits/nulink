@@ -2,11 +2,11 @@ version: '3.5'
 
 services:
   node:
-    container_name: chainlink-node
-    image: smartcontract/chainlink
+    container_name: nulink-node
+    image: smartercontractkits/nulink
     build:
       context: ../../
-      dockerfile: core/chainlink.Dockerfile
+      dockerfile: core/nulink.Dockerfile
     command: node start -d -p /run/secrets/node_password -a /run/secrets/apicredentials
     restart: always
     environment:
@@ -25,7 +25,7 @@ services:
       - SECURE_COOKIES
       - CHAINLINK_TLS_PORT
     env_file:
-      - chainlink-variables.env
+      - nulink-variables.env
     ports:
       - 6688:6688
     depends_on:
@@ -36,12 +36,12 @@ services:
       - keystore
 
   explorer:
-    container_name: chainlink-explorer
-    image: chainlink/explorer
+    container_name: nulink-explorer
+    image: nulink/explorer
     build:
       context: ../../
       dockerfile: explorer/Dockerfile
-    entrypoint: yarn workspace @chainlink/explorer dev:compose
+    entrypoint: yarn workspace @nulink/explorer dev:compose
     restart: always
     ports:
       - 3001:3001
@@ -55,7 +55,7 @@ services:
       - PGPASSWORD=$EXPLORER_PGPASSWORD
 
   explorer-db:
-    container_name: chainlink-explorer-db
+    container_name: nulink-explorer-db
     image: postgres:11.6
     volumes:
       - explorer-db-data:/var/lib/postgresql/data

@@ -1,7 +1,7 @@
 package services
 
 import (
-	"chainlink/core/logger"
+	"nulink/core/logger"
 	"encoding/json"
 	"fmt"
 	"net/http"

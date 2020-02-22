@@ -6,12 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/adapters"
-	"chainlink/core/assets"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/services"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/adapters"
+	"nulink/core/assets"
+	"nulink/core/internal/cltest"
+	"nulink/core/services"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -145,7 +145,7 @@ func TestValidateBridgeType(t *testing.T) {
 			"valid docker url",
 			models.BridgeTypeRequest{
 				Name: "adapterwithdockerurl",
-				URL:  cltest.WebURL(t, "http://chainlink_cmc-adapter_1:8080"),
+				URL:  cltest.WebURL(t, "http://nulink_cmc-adapter_1:8080"),
 			},
 			nil,
 		},
@@ -153,7 +153,7 @@ func TestValidateBridgeType(t *testing.T) {
 			"valid MinimumContractPayment positive",
 			models.BridgeTypeRequest{
 				Name:                   "adapterwithdockerurl",
-				URL:                    cltest.WebURL(t, "http://chainlink_cmc-adapter_1:8080"),
+				URL:                    cltest.WebURL(t, "http://nulink_cmc-adapter_1:8080"),
 				MinimumContractPayment: assets.NewLink(1),
 			},
 			nil,
@@ -162,7 +162,7 @@ func TestValidateBridgeType(t *testing.T) {
 			"invalid MinimumContractPayment negative",
 			models.BridgeTypeRequest{
 				Name:                   "adapterwithdockerurl",
-				URL:                    cltest.WebURL(t, "http://chainlink_cmc-adapter_1:8080"),
+				URL:                    cltest.WebURL(t, "http://nulink_cmc-adapter_1:8080"),
 				MinimumContractPayment: assets.NewLink(-1),
 			},
 			models.NewJSONAPIErrorsWith("MinimumContractPayment must be positive"),
@@ -248,7 +248,7 @@ func TestValidateExternalInitiator(t *testing.T) {
 	}{
 		{"basic", `{"name":"bitcoin","url":"https://test.url"}`, false},
 		{"basic w/ underscore", `{"name":"bit_coin","url":"https://test.url"}`, false},
-		{"basic w/ underscore in url", `{"name":"bitcoin","url":"https://chainlink_bit-coin_1.url"}`, false},
+		{"basic w/ underscore in url", `{"name":"bitcoin","url":"https://nulink_bit-coin_1.url"}`, false},
 		{"missing url", `{"name":"missing_url"}`, false},
 		{"duplicate name", `{"name":"duplicate","url":"https://test.url"}`, true},
 		{"invalid name characters", `{"name":"<invalid>","url":"https://test.url"}`, true},

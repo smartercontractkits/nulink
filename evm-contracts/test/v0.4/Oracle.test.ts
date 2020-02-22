@@ -4,7 +4,7 @@ import {
   matchers,
   oracle,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
 import { BasicConsumerFactory } from '../../ethers/v0.4/BasicConsumerFactory'

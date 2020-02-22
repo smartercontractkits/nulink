@@ -1,4 +1,4 @@
-import { KeyValueList } from '@chainlink/styleguide'
+import { KeyValueList } from '@nulink/styleguide'
 import { fetchTransaction } from 'actions'
 import Content from 'components/Content'
 import PropTypes from 'prop-types'

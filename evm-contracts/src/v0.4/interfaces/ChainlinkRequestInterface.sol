@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-interface ChainlinkRequestInterface {
+interface NuLinkRequestInterface {
   function oracleRequest(
     address sender,
     uint256 payment,

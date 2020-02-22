@@ -1,4 +1,4 @@
-# Build Chainlink with SGX
+# Build NuLink with SGX
 FROM smartcontract/builder:1.0.25 as builder
 
 # Have to reintroduce ENV vars from builder image
@@ -6,7 +6,7 @@ ENV PATH /root/.cargo/bin:/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/b
 ENV LD_LIBRARY_PATH /opt/sgxsdk/sdk_libs
 ENV SGX_SDK /opt/sgxsdk
 
-WORKDIR /chainlink
+WORKDIR /nulink
 COPY GNUmakefile VERSION ./
 COPY tools/bin/ldflags ./tools/bin/
 
@@ -28,13 +28,13 @@ RUN make yarndep
 ADD go.mod go.sum ./
 RUN go mod download
 
-# Env vars needed for chainlink sgx build
+# Env vars needed for nulink sgx build
 ARG COMMIT_SHA
 ARG ENVIRONMENT
 ENV SGX_ENABLED yes
 ARG SGX_SIMULATION
 
-# Install chainlink
+# Install nulink
 COPY tsconfig.cjs.json tsconfig.es6.json ./
 COPY operator_ui ./operator_ui
 COPY styleguide ./styleguide
@@ -49,9 +49,9 @@ COPY evm-contracts ./evm-contracts
 COPY core core
 COPY packr packr
 
-RUN make install-chainlink
+RUN make install-nulink
 
-# Final layer: ubuntu with aesm and chainlink binaries (executable + enclave)
+# Final layer: ubuntu with aesm and nulink binaries (executable + enclave)
 FROM ubuntu:18.04
 
 # Install AESM
@@ -76,23 +76,23 @@ RUN mkdir -p /var/run/aesmd && chown aesmd.aesmd /var/run/aesmd
 COPY --from=builder /opt/sgxsdk/lib64/libsgx*.so /usr/lib/
 COPY --from=builder /opt/intel/ /opt/intel/
 
-# Copy chainlink enclave+stub from build image
+# Copy nulink enclave+stub from build image
 ARG ENVIRONMENT
-COPY --from=builder /go/bin/chainlink /usr/local/bin/
+COPY --from=builder /go/bin/nulink /usr/local/bin/
 COPY --from=builder \
-  /chainlink/core/sgx/target/$ENVIRONMENT/libadapters.so \
+  /nulink/core/sgx/target/$ENVIRONMENT/libadapters.so \
   /usr/lib/
 COPY --from=builder \
-  /chainlink/core/sgx/target/$ENVIRONMENT/enclave.signed.so \
+  /nulink/core/sgx/target/$ENVIRONMENT/enclave.signed.so \
   /root/
 
-# Launch chainlink via a small script that watches AESM + Chainlink
+# Launch nulink via a small script that watches AESM + NuLink
 ARG SGX_SIMULATION
 ENV SGX_SIMULATION $SGX_SIMULATION
 WORKDIR /root
-COPY core/chainlink-launcher-sgx.sh .
-RUN chmod +x ./chainlink-launcher-sgx.sh
+COPY core/nulink-launcher-sgx.sh .
+RUN chmod +x ./nulink-launcher-sgx.sh
 
 EXPOSE 6688
-ENTRYPOINT ["./chainlink-launcher-sgx.sh"]
+ENTRYPOINT ["./nulink-launcher-sgx.sh"]
 CMD ["local", "node"]

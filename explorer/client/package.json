@@ -1,5 +1,5 @@
 {
-  "name": "@chainlink/explorer-client",
+  "name": "@nulink/explorer-client",
   "private": true,
   "version": "0.0.1",
   "keywords": [],
@@ -26,14 +26,14 @@
     "clean": "rimraf -rf build",
     "test": "jest",
     "test:ci": "jest --silent --maxWorkers=50%",
-    "depcheck": "echo \"@chainlink/explorer-client\" && depcheck --ignore-dirs=public || true"
+    "depcheck": "echo \"@nulink/explorer-client\" && depcheck --ignore-dirs=public || true"
   },
   "main": "app.js",
   "proxy": "http://localhost:8080",
   "dependencies": {
-    "@chainlink/json-api-client": "0.0.1",
-    "@chainlink/redux": "0.0.1",
-    "@chainlink/styleguide": "0.0.1",
+    "@nulink/json-api-client": "0.0.1",
+    "@nulink/redux": "0.0.1",
+    "@nulink/styleguide": "0.0.1",
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^4.5.1",
     "@reach/router": "^1.2.1",
@@ -54,7 +54,7 @@
     "title-case": "^3.0.2"
   },
   "devDependencies": {
-    "@chainlink/ts-test-helpers": "0.0.1",
+    "@nulink/ts-test-helpers": "0.0.1",
     "@craco/craco": "^5.5.0",
     "@types/classnames": "^2.2.7",
     "@types/enzyme": "^3.9.1",

@@ -1,26 +1,26 @@
 pragma solidity ^0.5.0;
 
-import { CBOR as CBOR_Chainlink, Buffer as Buffer_Chainlink } from "./vendor/CBOR.sol";
+import { CBOR as CBOR_NuLink, Buffer as Buffer_NuLink } from "./vendor/CBOR.sol";
 
 /**
- * @title Library for common Chainlink functions
+ * @title Library for common NuLink functions
  * @dev Uses imported CBOR library for encoding to buffer
  */
-library Chainlink {
+library NuLink {
   uint256 internal constant defaultBufferSize = 256; // solhint-disable-line const-name-snakecase
 
-  using CBOR_Chainlink for Buffer_Chainlink.buffer;
+  using CBOR_NuLink for Buffer_NuLink.buffer;
 
   struct Request {
     bytes32 id;
     address callbackAddress;
     bytes4 callbackFunctionId;
     uint256 nonce;
-    Buffer_Chainlink.buffer buf;
+    Buffer_NuLink.buffer buf;
   }
 
   /**
-   * @notice Initializes a Chainlink request
+   * @notice Initializes a NuLink request
    * @dev Sets the ID, callback address, and callback function signature on the request
    * @param self The uninitialized request
    * @param _id The Job Specification ID
@@ -33,8 +33,8 @@ library Chainlink {
     bytes32 _id,
     address _callbackAddress,
     bytes4 _callbackFunction
-  ) internal pure returns (Chainlink.Request memory) {
-    Buffer_Chainlink.init(self.buf, defaultBufferSize);
+  ) internal pure returns (NuLink.Request memory) {
+    Buffer_NuLink.init(self.buf, defaultBufferSize);
     self.id = _id;
     self.callbackAddress = _callbackAddress;
     self.callbackFunctionId = _callbackFunction;
@@ -50,8 +50,8 @@ library Chainlink {
   function setBuffer(Request memory self, bytes memory _data)
     internal pure
   {
-    Buffer_Chainlink.init(self.buf, _data.length);
-    Buffer_Chainlink.append(self.buf, _data);
+    Buffer_NuLink.init(self.buf, _data.length);
+    Buffer_NuLink.append(self.buf, _data);
   }
 
   /**

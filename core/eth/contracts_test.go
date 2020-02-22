@@ -40,7 +40,7 @@ var address common.Address = common.HexToAddress(
 )
 
 // NB: This test needs a compiled oracle contract, which can be built with
-// `yarn workspace chainlink run setup` in the base project directory.
+// `yarn workspace nulink run setup` in the base project directory.
 func TestContract_EncodeMessageCall(t *testing.T) {
 	t.Parallel()
 
@@ -55,7 +55,7 @@ func TestContract_EncodeMessageCall(t *testing.T) {
 }
 
 // NB: This test needs a compiled oracle contract, which can be built with
-// `yarn workspace chainlink run setup` in the base project directory.
+// `yarn workspace nulink run setup` in the base project directory.
 func TestContract_EncodeMessageCall_errors(t *testing.T) {
 	t.Parallel()
 

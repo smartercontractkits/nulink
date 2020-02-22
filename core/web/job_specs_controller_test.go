@@ -8,13 +8,13 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/adapters"
-	"chainlink/core/auth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
-	"chainlink/core/web"
+	"nulink/core/adapters"
+	"nulink/core/auth"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
+	"nulink/core/web"
 
 	"github.com/manyminds/api2go/jsonapi"
 	"github.com/stretchr/testify/assert"
@@ -556,5 +556,5 @@ func TestJobSpecsController_Destroy(t *testing.T) {
 	defer cleanup()
 	assert.Equal(t, http.StatusNoContent, resp.StatusCode)
 	assert.Error(t, utils.JustError(app.Store.FindJob(job.ID)))
-	assert.Equal(t, 0, len(app.ChainlinkApplication.JobSubscriber.Jobs()))
+	assert.Equal(t, 0, len(app.NuLinkApplication.JobSubscriber.Jobs()))
 }

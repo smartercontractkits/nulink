@@ -1,4 +1,4 @@
-import { OracleFactory } from '@chainlink/contracts/ethers/v0.4/OracleFactory'
+import { OracleFactory } from '@nulink/contracts/ethers/v0.4/OracleFactory'
 import {
   createProvider,
   deployContract,
@@ -14,14 +14,14 @@ async function main() {
   registerPromiseHandler()
   const args = getArgs(['CHAINLINK_NODE_ADDRESS'])
 
-  await deployContracts({ chainlinkNodeAddress: args.CHAINLINK_NODE_ADDRESS })
+  await deployContracts({ nulinkNodeAddress: args.CHAINLINK_NODE_ADDRESS })
 }
 main()
 
 interface Args {
-  chainlinkNodeAddress: string
+  nulinkNodeAddress: string
 }
-async function deployContracts({ chainlinkNodeAddress }: Args) {
+async function deployContracts({ nulinkNodeAddress }: Args) {
   const provider = createProvider()
   const signer = provider.getSigner(DEVNET_ADDRESS)
 
@@ -31,7 +31,7 @@ async function deployContracts({ chainlinkNodeAddress }: Args) {
     { Factory: OracleFactory, name: 'Oracle', signer },
     linkToken.address,
   )
-  await oracle.setFulfillmentPermission(chainlinkNodeAddress, true)
+  await oracle.setFulfillmentPermission(nulinkNodeAddress, true)
 
   await deployContract({ Factory: EthLogFactory, name: 'EthLog', signer })
 

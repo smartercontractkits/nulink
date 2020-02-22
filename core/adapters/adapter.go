@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"chainlink/core/assets"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/assets"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 )
 
 var (

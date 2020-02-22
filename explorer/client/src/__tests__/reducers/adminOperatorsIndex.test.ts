@@ -22,7 +22,7 @@ describe('reducers/adminOperatorsIndex', () => {
       const action: FetchAdminOperatorsSucceededAction = {
         type: 'FETCH_ADMIN_OPERATORS_SUCCEEDED',
         data: {
-          chainlinkNodes: [],
+          nulinkNodes: [],
           meta: {
             currentPageOperators: {
               data: [{ id: '9b7d791a-9a1f-4c55-a6be-b4231cf9fd4e' }],

@@ -1,11 +1,11 @@
-// Package services contain the key components of the Chainlink
+// Package services contain the key components of the NuLink
 // node. This includes the Application, JobRunner, LogListener,
 // and Scheduler.
 //
 // Application
 //
 // The Application is the main component used for starting and
-// stopping the Chainlink node.
+// stopping the NuLink node.
 //
 // JobRunner
 //

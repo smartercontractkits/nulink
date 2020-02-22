@@ -1,7 +1,7 @@
 import { bindActionCreators, Middleware } from 'redux'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { partialAsFull } from '@chainlink/ts-test-helpers'
+import { partialAsFull } from '@nulink/ts-test-helpers'
 import * as models from 'core/store/models'
 import * as actionCreators from '../src/actions'
 import { ResourceActionType } from '../src/reducers/actions'

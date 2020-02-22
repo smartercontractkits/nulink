@@ -84,7 +84,7 @@
       { "name": "_clRequestId", "type": "bytes32" },
       { "name": "_response", "type": "int256" }
     ],
-    "name": "chainlinkCallback",
+    "name": "nulinkCallback",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -237,19 +237,19 @@
   {
     "anonymous": false,
     "inputs": [{ "indexed": true, "name": "id", "type": "bytes32" }],
-    "name": "ChainlinkRequested",
+    "name": "NuLinkRequested",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [{ "indexed": true, "name": "id", "type": "bytes32" }],
-    "name": "ChainlinkFulfilled",
+    "name": "NuLinkFulfilled",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [{ "indexed": true, "name": "id", "type": "bytes32" }],
-    "name": "ChainlinkCancelled",
+    "name": "NuLinkCancelled",
     "type": "event"
   },
   {

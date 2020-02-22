@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@chainlink/integration",
+  "name": "@nulink/integration",
   "version": "0.6.0",
   "license": "MIT",
   "engines": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "cypressJobServer": "cross-env ts-node cypress/support/cypressJobServer.ts",
-    "depcheck": "echo '@chainlink/integration' && depcheck || true",
+    "depcheck": "echo '@nulink/integration' && depcheck || true",
     "test": "yarn test:cypress && yarn test:forks",
     "test:cypress": "cross-env NODE_ENV=test cypress run --browser=chrome",
     "test:forks": "./forks/test"

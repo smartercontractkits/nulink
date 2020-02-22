@@ -3,8 +3,8 @@ package web
 import (
 	"net/http"
 
-	"chainlink/core/services"
-	"chainlink/core/store/models"
+	"nulink/core/services"
+	"nulink/core/store/models"
 
 	"github.com/gin-gonic/gin"
 )

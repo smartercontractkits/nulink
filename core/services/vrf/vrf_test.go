@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"chainlink/core/services/signatures/secp256k1"
-	"chainlink/core/utils"
+	"nulink/core/services/signatures/secp256k1"
+	"nulink/core/utils"
 )
 
 func TestVRF_IsSquare(t *testing.T) {

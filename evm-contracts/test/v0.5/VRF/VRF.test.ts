@@ -4,7 +4,7 @@ import {
   helpers as h,
   matchers,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
 import { VRFFactory } from '../../../ethers/v0.5/VRFFactory'

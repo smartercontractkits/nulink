@@ -1,9 +1,9 @@
 pragma solidity 0.4.24;
 
-import "https://github.com/smartcontractkit/chainlink/evm/contracts/ChainlinkClient.sol";
-import "https://github.com/smartcontractkit/chainlink/evm/contracts/vendor/Ownable.sol";
+import "https://github.com/smartercontractkit/nulink/evm/contracts/NuLinkClient.sol";
+import "https://github.com/smartercontractkit/nulink/evm/contracts/vendor/Ownable.sol";
 
-contract ATestnetConsumer is ChainlinkClient, Ownable {
+contract ATestnetConsumer is NuLinkClient, Ownable {
   uint256 constant private ORACLE_PAYMENT = 1 * LINK;
 
   uint256 public currentPrice;
@@ -26,36 +26,36 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
   );
 
   constructor() public Ownable() {
-    setPublicChainlinkToken();
+    setPublicNuLinkToken();
   }
 
   function requestEthereumPrice(address _oracle, string _jobId)
     public
     onlyOwner
   {
-    Chainlink.Request memory req = buildChainlinkRequest(stringToBytes32(_jobId), this, this.fulfillEthereumPrice.selector);
+    NuLink.Request memory req = buildNuLinkRequest(stringToBytes32(_jobId), this, this.fulfillEthereumPrice.selector);
     req.add("get", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD");
     req.add("path", "USD");
     req.addInt("times", 100);
-    sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
+    sendNuLinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
 
   function requestEthereumChange(address _oracle, string _jobId)
     public
     onlyOwner
   {
-    Chainlink.Request memory req = buildChainlinkRequest(stringToBytes32(_jobId), this, this.fulfillEthereumChange.selector);
+    NuLink.Request memory req = buildNuLinkRequest(stringToBytes32(_jobId), this, this.fulfillEthereumChange.selector);
     req.add("get", "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD");
     req.add("path", "RAW.ETH.USD.CHANGEPCTDAY");
     req.addInt("times", 1000000000);
-    sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
+    sendNuLinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
 
   function requestEthereumLastMarket(address _oracle, string _jobId)
     public
     onlyOwner
   {
-    Chainlink.Request memory req = buildChainlinkRequest(stringToBytes32(_jobId), this, this.fulfillEthereumLastMarket.selector);
+    NuLink.Request memory req = buildNuLinkRequest(stringToBytes32(_jobId), this, this.fulfillEthereumLastMarket.selector);
     req.add("get", "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD");
     string[] memory path = new string[](4);
     path[0] = "RAW";
@@ -63,12 +63,12 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
     path[2] = "USD";
     path[3] = "LASTMARKET";
     req.addStringArray("path", path);
-    sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
+    sendNuLinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
 
   function fulfillEthereumPrice(bytes32 _requestId, uint256 _price)
     public
-    recordChainlinkFulfillment(_requestId)
+    recordNuLinkFulfillment(_requestId)
   {
     emit RequestEthereumPriceFulfilled(_requestId, _price);
     currentPrice = _price;
@@ -76,7 +76,7 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
 
   function fulfillEthereumChange(bytes32 _requestId, int256 _change)
     public
-    recordChainlinkFulfillment(_requestId)
+    recordNuLinkFulfillment(_requestId)
   {
     emit RequestEthereumChangeFulfilled(_requestId, _change);
     changeDay = _change;
@@ -84,18 +84,18 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
 
   function fulfillEthereumLastMarket(bytes32 _requestId, bytes32 _market)
     public
-    recordChainlinkFulfillment(_requestId)
+    recordNuLinkFulfillment(_requestId)
   {
     emit RequestEthereumLastMarket(_requestId, _market);
     lastMarket = _market;
   }
 
-  function getChainlinkToken() public view returns (address) {
-    return chainlinkTokenAddress();
+  function getNuLinkToken() public view returns (address) {
+    return nulinkTokenAddress();
   }
 
   function withdrawLink() public onlyOwner {
-    LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
+    LinkTokenInterface link = LinkTokenInterface(nulinkTokenAddress());
     require(link.transfer(msg.sender, link.balanceOf(address(this))), "Unable to transfer");
   }
 
@@ -108,7 +108,7 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
     public
     onlyOwner
   {
-    cancelChainlinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
+    cancelNuLinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
   }
 
   function stringToBytes32(string memory source) private pure returns (bytes32 result) {

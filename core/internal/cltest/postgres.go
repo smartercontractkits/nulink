@@ -6,9 +6,9 @@ import (
 	"net/url"
 	"testing"
 
-	"chainlink/core/store/dbutil"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/store/dbutil"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 )
 
 // PrepareTestDB prepares the database to run tests, functionality varies

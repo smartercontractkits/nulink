@@ -28,7 +28,7 @@ declare module 'core/store/presenters' {
     bridgeResponseURL?: string
     ethChainId: number
     clientNodeUrl: string
-    chainlinkDev: boolean
+    nulinkDev: boolean
     databaseTimeout: time.Duration
     ethUrl: string
     /**
@@ -50,12 +50,12 @@ declare module 'core/store/presenters' {
     minIncomingConfirmations: number
     minOutgoingConfirmations: number
     oracleContractAddress: Pointer<common.Address>
-    chainlinkPort: number
+    nulinkPort: number
     reaperExpiration: time.Duration
     root: string
     sessionTimeout: time.Duration
-    chainlinkTLSHost: string
-    chainlinkTLSPort: number
+    nulinkTLSHost: string
+    nulinkTLSPort: number
     txAttemptLimit: number
   }
 

@@ -1,4 +1,4 @@
-import { contract, matchers, setup } from '@chainlink/test-helpers'
+import { contract, matchers, setup } from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { PointerFactory } from '../../ethers/v0.4/PointerFactory'
 

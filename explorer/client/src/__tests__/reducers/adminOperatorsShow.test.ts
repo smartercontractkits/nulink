@@ -27,7 +27,7 @@ const MOCK_PAYLOAD: OperatorShowData = {
 const MOCK_ACTION: FetchAdminOperatorSucceededAction = {
   type: 'FETCH_ADMIN_OPERATOR_SUCCEEDED',
   data: {
-    chainlinkNodes: {
+    nulinkNodes: {
       '1': MOCK_PAYLOAD,
     },
     meta: {

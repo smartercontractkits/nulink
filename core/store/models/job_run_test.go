@@ -6,11 +6,11 @@ import (
 	"math/big"
 	"testing"
 
-	"chainlink/core/assets"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/services/synchronization"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/internal/cltest"
+	"nulink/core/services/synchronization"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

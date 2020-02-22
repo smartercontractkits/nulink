@@ -1,6 +1,6 @@
-# Chainlink Core
+# NuLink Core
 
-This directory contains the majority of the code for the backend of Chainlink.
+This directory contains the majority of the code for the backend of NuLink.
 
 Outside of the code contained in this repo, some static assets are pulled in using
 [packr](https://github.com/gobuffalo/packr), in the sibling directory `packr/`.
@@ -10,16 +10,16 @@ sibling directroy `operator-ui/` are built by packr and included in the final
 binary.
 
 See the [root README](../README.md#install)
-for instructions on how to build the full Chainlink node.
+for instructions on how to build the full NuLink node.
 
 ## Common Commands
 
 **Install:**
 
 By default `go install` will install this directory under the name `core`.
-You can instead, build it, and place it in your path as `chainlink`:
+You can instead, build it, and place it in your path as `nulink`:
 ```
-go build -o $GOPATH/bin/chainlink .
+go build -o $GOPATH/bin/nulink .
 ```
 
 **Test:**

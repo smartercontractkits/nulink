@@ -1,4 +1,4 @@
-module chainlink
+module nulink
 
 go 1.12
 

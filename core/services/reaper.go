@@ -3,9 +3,9 @@ package services
 import (
 	"time"
 
-	"chainlink/core/logger"
-	"chainlink/core/store"
-	"chainlink/core/store/orm"
+	"nulink/core/logger"
+	"nulink/core/store"
+	"nulink/core/store/orm"
 )
 
 type storeReaper struct {

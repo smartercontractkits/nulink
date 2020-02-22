@@ -157,7 +157,7 @@ func TestHTTPFetcher_NoResultNorErrorMessage(t *testing.T) {
 }
 
 // Sample input taken from
-// https://github.com/smartcontractkit/price-adapters#chainlink-price-request-adapters
+// https://github.com/smartcontractkit/price-adapters#nulink-price-request-adapters
 func TestAdapterResponse_UnmarshalJSON_Happy(t *testing.T) {
 	tests := []struct {
 		name, content string

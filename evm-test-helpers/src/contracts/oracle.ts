@@ -17,7 +17,7 @@ type TxOptions = Omit<ethers.providers.TransactionRequest, 'to' | 'from'>
 
 /**
  * A run request is an event emitted by `Oracle.sol` which triggers a job run
- * on a receiving chainlink node watching for RunRequests coming from that
+ * on a receiving nulink node watching for RunRequests coming from that
  * specId + optionally requester.
  */
 export interface RunRequest {
@@ -289,7 +289,7 @@ export function decodeRunRequest(log?: ethers.providers.Log): RunRequest {
 }
 
 /**
- * Extract a javascript representation of a ConcreteChainlinked#Request event
+ * Extract a javascript representation of a ConcreteNuLinked#Request event
  * from an EVM log.
  * ```solidity
  *  event Request(
@@ -299,7 +299,7 @@ export function decodeRunRequest(log?: ethers.providers.Log): RunRequest {
  *    bytes data
  *  );
  * ```
- * The request event is emitted from the `ConcreteChainlinked.sol` testing contract.
+ * The request event is emitted from the `ConcreteNuLinked.sol` testing contract.
  *
  * @param log The log to decode
  */

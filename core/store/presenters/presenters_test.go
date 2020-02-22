@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"chainlink/core/store/models"
+	"nulink/core/store/models"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/assert"

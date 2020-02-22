@@ -1,4 +1,4 @@
-import { contract } from '@chainlink/test-helpers'
+import { contract } from '@nulink/test-helpers'
 import { ethers } from 'ethers'
 import url from 'url'
 import {
@@ -22,7 +22,7 @@ async function main() {
   ])
 
   await sendRunlogTransaction({
-    chainlinkUrl: args.CHAINLINK_URL,
+    nulinkUrl: args.CHAINLINK_URL,
     echoServerUrl: args.ECHO_SERVER_URL,
     linkTokenAddress: args.LINK_TOKEN_ADDRESS,
     runLogAddress: args.RUN_LOG_ADDRESS,
@@ -33,13 +33,13 @@ main()
 interface Args {
   runLogAddress: string
   linkTokenAddress: string
-  chainlinkUrl: string
+  nulinkUrl: string
   echoServerUrl: string
 }
 async function sendRunlogTransaction({
   runLogAddress,
   linkTokenAddress,
-  chainlinkUrl,
+  nulinkUrl,
   echoServerUrl,
 }: Args) {
   const provider = createProvider()
@@ -63,17 +63,17 @@ async function sendRunlogTransaction({
 
   console.log(`Transferred ${linkAmount} to RunLog at: ${runLog.address}`)
 
-  await signIn(chainlinkUrl)
-  const job = await createJob(chainlinkUrl, runLog.address, echoServerUrl)
+  await signIn(nulinkUrl)
+  const job = await createJob(nulinkUrl, runLog.address, echoServerUrl)
   await makeRunlogRequest(runLog, job)
 }
 
 /**
- * Sign into a chainlink node by creating a session
- * @param chainlinkUrl The chainlink node to send the signin request to
+ * Sign into a nulink node by creating a session
+ * @param nulinkUrl The nulink node to send the signin request to
  */
-async function signIn(chainlinkUrl: string) {
-  const sessionsUrl = url.resolve(chainlinkUrl, '/sessions')
+async function signIn(nulinkUrl: string) {
+  const sessionsUrl = url.resolve(nulinkUrl, '/sessions')
   await request.post(sessionsUrl, { json: credentials })
 }
 
@@ -89,12 +89,12 @@ function futureOffsetSeconds(seconds: number): number {
 }
 
 /**
- * Create a chainlink job
+ * Create a nulink job
  *
  * @param requesterAddress The requester of the job to be created
  */
 async function createJob(
-  chainlinkUrl: string,
+  nulinkUrl: string,
   requesterAddress: string,
   echoServerUrl: string,
 ) {
@@ -110,7 +110,7 @@ async function createJob(
     ],
   }
 
-  const specsUrl = url.resolve(chainlinkUrl, '/v2/specs')
+  const specsUrl = url.resolve(nulinkUrl, '/v2/specs')
   const Job = await request.post(specsUrl, { json: job }).catch((e: any) => {
     throw Error(`Error creating Job ${e}`)
   })

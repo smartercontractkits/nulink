@@ -13,9 +13,9 @@ import (
 	"strconv"
 	"time"
 
-	"chainlink/core/assets"
-	"chainlink/core/logger"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/logger"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gin-gonic/contrib/sessions"
@@ -66,7 +66,7 @@ func newConfigWithViper(v *viper.Viper) *Config {
 		logger.Fatalf(`Error creating root directory "%s": %+v`, config.RootDir(), err)
 	}
 
-	v.SetConfigName("chainlink")
+	v.SetConfigName("nulink")
 	v.AddConfigPath(config.RootDir())
 	err := v.ReadInConfig()
 	if err != nil && reflect.TypeOf(err) != configFileNotFoundError {
@@ -111,7 +111,7 @@ func (c Config) ChainID() *big.Int {
 	return c.getWithFallback("ChainID", parseBigInt).(*big.Int)
 }
 
-// ClientNodeURL is the URL of the Ethereum node this Chainlink node should connect to.
+// ClientNodeURL is the URL of the Ethereum node this NuLink node should connect to.
 func (c Config) ClientNodeURL() string {
 	return c.viper.GetString(EnvVarName("ClientNodeURL"))
 }
@@ -121,9 +121,9 @@ func (c Config) DatabaseTimeout() time.Duration {
 	return c.viper.GetDuration(EnvVarName("DatabaseTimeout"))
 }
 
-// DatabaseURL configures the URL for chainlink to connect to. This must be
+// DatabaseURL configures the URL for nulink to connect to. This must be
 // a properly formatted URL, with a valid scheme (postgres://, file://), or
-// an empty string, so the application defaults to .chainlink/db.sqlite.
+// an empty string, so the application defaults to .nulink/db.sqlite.
 func (c Config) DatabaseURL() string {
 	return c.viper.GetString(EnvVarName("DatabaseURL"))
 }
@@ -133,7 +133,7 @@ func (c Config) DefaultHTTPLimit() int64 {
 	return c.viper.GetInt64(EnvVarName("DefaultHTTPLimit"))
 }
 
-// Dev configures "development" mode for chainlink.
+// Dev configures "development" mode for nulink.
 func (c Config) Dev() bool {
 	return c.viper.GetBool(EnvVarName("Dev"))
 }
@@ -198,7 +198,7 @@ func (c Config) SetEthGasPriceDefault(value *big.Int) error {
 	return c.runtimeStore.SetConfigValue("EthGasPriceDefault", value)
 }
 
-// EthereumURL represents the URL of the Ethereum node to connect Chainlink to.
+// EthereumURL represents the URL of the Ethereum node to connect NuLink to.
 func (c Config) EthereumURL() string {
 	return c.viper.GetString(EnvVarName("EthereumURL"))
 }
@@ -255,12 +255,12 @@ func (c Config) LogToDisk() bool {
 	return c.viper.GetBool(EnvVarName("LogToDisk"))
 }
 
-// LogSQLStatements tells chainlink to log all SQL statements made using the default logger
+// LogSQLStatements tells nulink to log all SQL statements made using the default logger
 func (c Config) LogSQLStatements() bool {
 	return c.viper.GetBool(EnvVarName("LogSQLStatements"))
 }
 
-// LogSQLMigrations tells chainlink to log all SQL migrations made using the default logger
+// LogSQLMigrations tells nulink to log all SQL migrations made using the default logger
 func (c Config) LogSQLMigrations() bool {
 	return c.viper.GetBool(EnvVarName("LogSQLMigrations"))
 }
@@ -290,7 +290,7 @@ func (c Config) MinimumRequestExpiration() uint64 {
 	return c.viper.GetUint64(EnvVarName("MinimumRequestExpiration"))
 }
 
-// Port represents the port Chainlink should listen on for client requests.
+// Port represents the port NuLink should listen on for client requests.
 func (c Config) Port() uint16 {
 	return c.getWithFallback("Port", parsePort).(uint16)
 }
@@ -304,7 +304,7 @@ func (c Config) ReplayFromBlock() int64 {
 	return c.viper.GetInt64(EnvVarName("ReplayFromBlock"))
 }
 
-// RootDir represents the location on the file system where Chainlink should
+// RootDir represents the location on the file system where NuLink should
 // keep its files.
 func (c Config) RootDir() string {
 	return c.getWithFallback("RootDir", parseHomeDir).(string)
@@ -321,7 +321,7 @@ func (c Config) SessionTimeout() time.Duration {
 }
 
 // TLSCertPath represents the file system location of the TLS certificate
-// Chainlink should use for HTTPS.
+// NuLink should use for HTTPS.
 func (c Config) TLSCertPath() string {
 	return c.viper.GetString(EnvVarName("TLSCertPath"))
 }
@@ -332,13 +332,13 @@ func (c Config) TLSHost() string {
 	return c.viper.GetString(EnvVarName("TLSHost"))
 }
 
-// TLSKeyPath represents the file system location of the TLS key Chainlink
+// TLSKeyPath represents the file system location of the TLS key NuLink
 // should use for HTTPS.
 func (c Config) TLSKeyPath() string {
 	return c.viper.GetString(EnvVarName("TLSKeyPath"))
 }
 
-// TLSPort represents the port Chainlink should listen on for encrypted client requests.
+// TLSPort represents the port NuLink should listen on for encrypted client requests.
 func (c Config) TLSPort() uint16 {
 	return c.getWithFallback("TLSPort", parsePort).(uint16)
 }

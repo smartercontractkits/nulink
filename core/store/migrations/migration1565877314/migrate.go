@@ -3,9 +3,9 @@ package migration1565877314
 import (
 	"net/url"
 
-	"chainlink/core/store/migrations/migration0"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/store/migrations/migration0"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"

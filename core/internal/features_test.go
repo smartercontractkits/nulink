@@ -12,12 +12,12 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/auth"
-	ethpkg "chainlink/core/eth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
-	"chainlink/core/web"
+	"nulink/core/auth"
+	ethpkg "nulink/core/eth"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/utils"
+	"nulink/core/web"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/assert"

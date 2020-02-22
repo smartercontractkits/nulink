@@ -4,13 +4,13 @@ import Hidden from '@material-ui/core/Hidden'
 import { join } from 'path'
 import Table, { ChangePageEvent } from '../../Table'
 import { LinkColumn, TextColumn, TimeAgoColumn } from '../../Table/TableCell'
-import { ChainlinkNode } from 'explorer/models'
+import { NuLinkNode } from 'explorer/models'
 
 const HEADERS = ['Name', 'URL', 'Created At']
 const LOADING_MSG = 'Loading operators...'
 const EMPTY_MSG = 'There are no operators added to the Explorer yet.'
 
-function buildNameCol(operator: ChainlinkNode): UrlColumn {
+function buildNameCol(operator: NuLinkNode): UrlColumn {
   return {
     type: 'link',
     text: operator.name,
@@ -20,7 +20,7 @@ function buildNameCol(operator: ChainlinkNode): UrlColumn {
 
 type UrlColumn = LinkColumn | TextColumn
 
-function buildUrlCol(operator: ChainlinkNode): UrlColumn {
+function buildUrlCol(operator: NuLinkNode): UrlColumn {
   if (operator.url) {
     return {
       type: 'link',
@@ -32,7 +32,7 @@ function buildUrlCol(operator: ChainlinkNode): UrlColumn {
   return { type: 'text', text: '-' }
 }
 
-function buildCreatedAtCol(operator: ChainlinkNode): TimeAgoColumn {
+function buildCreatedAtCol(operator: NuLinkNode): TimeAgoColumn {
   return {
     type: 'time_ago',
     text: operator.createdAt,
@@ -40,7 +40,7 @@ function buildCreatedAtCol(operator: ChainlinkNode): TimeAgoColumn {
 }
 
 function rows(
-  operators?: ChainlinkNode[],
+  operators?: NuLinkNode[],
 ): [UrlColumn, UrlColumn, TimeAgoColumn][] | undefined {
   return operators?.map(o => {
     return [buildNameCol(o), buildUrlCol(o), buildCreatedAtCol(o)]
@@ -50,7 +50,7 @@ function rows(
 interface Props {
   currentPage: number
   onChangePage: (event: ChangePageEvent, page: number) => void
-  operators?: ChainlinkNode[]
+  operators?: NuLinkNode[]
   count?: number
   className?: string
 }

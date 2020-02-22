@@ -13,9 +13,9 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	strpkg "nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 )
 
 const evmWordSize = 32

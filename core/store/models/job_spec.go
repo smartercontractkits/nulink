@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"chainlink/core/assets"
-	"chainlink/core/logger"
-	clnull "chainlink/core/null"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/logger"
+	clnull "nulink/core/null"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/imdario/mergo"

@@ -12,14 +12,14 @@ import {
 import { JobRun } from './JobRun'
 import { Session } from './Session'
 
-export interface ChainlinkNodePresenter {
+export interface NuLinkNodePresenter {
   id: number
   name: string
 }
 
 @Entity()
 @Unique(['name'])
-export class ChainlinkNode {
+export class NuLinkNode {
   public static build({
     name,
     url,
@@ -28,8 +28,8 @@ export class ChainlinkNode {
     name: string
     url?: string
     secret: string
-  }): ChainlinkNode {
-    const cl = new ChainlinkNode()
+  }): NuLinkNode {
+    const cl = new NuLinkNode()
     cl.name = name
     cl.url = url
     cl.accessKey = generateRandomString(16)
@@ -62,14 +62,14 @@ export class ChainlinkNode {
 
   @OneToMany(
     () => JobRun,
-    jobRun => jobRun.chainlinkNode,
+    jobRun => jobRun.nulinkNode,
     {
       onDelete: 'CASCADE',
     },
   )
   jobRuns: JobRun[]
 
-  public present(): ChainlinkNodePresenter {
+  public present(): NuLinkNodePresenter {
     return {
       id: this.id,
       name: this.name,
@@ -84,31 +84,31 @@ function generateRandomString(size: number): string {
     .substring(0, size)
 }
 
-export const buildChainlinkNode = (
+export const buildNuLinkNode = (
   name: string,
   url?: string,
-): [ChainlinkNode, string] => {
+): [NuLinkNode, string] => {
   const secret = generateRandomString(64)
-  const node = ChainlinkNode.build({ name, url, secret })
+  const node = NuLinkNode.build({ name, url, secret })
 
   return [node, secret]
 }
 
-export const createChainlinkNode = async (
+export const createNuLinkNode = async (
   db: Connection,
   name: string,
   url?: string,
-): Promise<[ChainlinkNode, string]> => {
+): Promise<[NuLinkNode, string]> => {
   const secret = generateRandomString(64)
-  const chainlinkNode = ChainlinkNode.build({ name, url, secret })
-  return [await db.manager.save(chainlinkNode), secret]
+  const nulinkNode = NuLinkNode.build({ name, url, secret })
+  return [await db.manager.save(nulinkNode), secret]
 }
 
-export const deleteChainlinkNode = async (db: Connection, name: string) => {
+export const deleteNuLinkNode = async (db: Connection, name: string) => {
   return db.manager
     .createQueryBuilder()
     .delete()
-    .from(ChainlinkNode)
+    .from(NuLinkNode)
     .where('name = :name', {
       name,
     })
@@ -123,8 +123,8 @@ export function hashCredentials(
   return sha256(`v0-${accessKey}-${secret}-${salt}`)
 }
 
-export async function find(db: Connection, id: number): Promise<ChainlinkNode> {
-  return db.getRepository(ChainlinkNode).findOne({ id })
+export async function find(db: Connection, id: number): Promise<NuLinkNode> {
+  return db.getRepository(NuLinkNode).findOne({ id })
 }
 
 export interface JobCountReport {
@@ -136,9 +136,9 @@ export interface JobCountReport {
 
 export async function jobCountReport(
   db: Connection,
-  node: ChainlinkNode | number,
+  node: NuLinkNode | number,
 ): Promise<JobCountReport> {
-  const id = node instanceof ChainlinkNode ? node.id : node
+  const id = node instanceof NuLinkNode ? node.id : node
 
   const initialReport: JobCountReport = {
     completed: 0,
@@ -151,7 +151,7 @@ export async function jobCountReport(
     .getRepository(JobRun)
     .createQueryBuilder()
     .select('COUNT(*), status')
-    .where({ chainlinkNodeId: id })
+    .where({ nulinkNodeId: id })
     .groupBy('status')
     .getRawMany()
 
@@ -168,8 +168,8 @@ export async function jobCountReport(
 // using strategy described here: http://www.sqlines.com/postgresql/how-to/datediff
 // typeORM missing UNION function, so must do in two separate queries or write entire
 // query in raw SQL
-export async function uptime(db: Connection, node: ChainlinkNode | number) {
-  const id = node instanceof ChainlinkNode ? node.id : node
+export async function uptime(db: Connection, node: NuLinkNode | number) {
+  const id = node instanceof NuLinkNode ? node.id : node
   return (await historicUptime(db, id)) + (await currentUptime(db, id))
 }
 
@@ -187,7 +187,7 @@ async function historicUptime(db: Connection, id: number): Promise<number> {
       )) as seconds`,
     )
     .from(Session, 'session')
-    .where({ chainlinkNodeId: id })
+    .where({ nulinkNodeId: id })
     .andWhere('session.finishedAt is not null')
     .getRawOne()
   return parseInt(seconds) || 0
@@ -207,7 +207,7 @@ async function currentUptime(db: Connection, id: number): Promise<number> {
       )) as seconds`,
     )
     .from(Session, 'session')
-    .where({ chainlinkNodeId: id })
+    .where({ nulinkNodeId: id })
     .andWhere('session.finishedAt is null')
     .getRawOne()
   return parseInt(seconds) || 0

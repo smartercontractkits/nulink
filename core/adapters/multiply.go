@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"chainlink/core/utils"
+	"nulink/core/utils"
 )
 
 // Multiply holds the a number to multiply the given value by.

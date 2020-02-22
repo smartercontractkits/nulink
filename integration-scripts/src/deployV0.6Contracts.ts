@@ -1,4 +1,4 @@
-import { PrepaidAggregatorFactory } from '@chainlink/contracts/ethers/v0.6/PrepaidAggregatorFactory'
+import { PrepaidAggregatorFactory } from '@nulink/contracts/ethers/v0.6/PrepaidAggregatorFactory'
 import { ethers } from 'ethers'
 import {
   createProvider,

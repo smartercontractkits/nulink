@@ -44,7 +44,7 @@ type FileLockingStrategy struct {
 // at the passed path.
 func NewFileLockingStrategy(dbpath string) (LockingStrategy, error) {
 	directory := filepath.Dir(dbpath)
-	lockPath := filepath.Join(directory, "chainlink.lock")
+	lockPath := filepath.Join(directory, "nulink.lock")
 	return &FileLockingStrategy{
 		path:     lockPath,
 		fileLock: flock.New(lockPath),

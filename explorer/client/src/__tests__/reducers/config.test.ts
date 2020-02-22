@@ -6,7 +6,7 @@ describe('reducers/config', () => {
     const action: FetchJobRunSucceededAction = {
       type: 'FETCH_JOB_RUN_SUCCEEDED',
       data: {
-        chainlinkNodes: [],
+        nulinkNodes: [],
         jobRuns: [],
         taskRuns: [],
         meta: {

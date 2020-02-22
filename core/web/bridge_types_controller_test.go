@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"testing"
 
-	"chainlink/core/assets"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/web"
+	"nulink/core/assets"
+	"nulink/core/internal/cltest"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/web"
 
 	"github.com/manyminds/api2go/jsonapi"
 	"github.com/stretchr/testify/assert"

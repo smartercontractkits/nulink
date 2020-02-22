@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"testing"
 
-	"chainlink/core/internal/cltest"
+	"nulink/core/internal/cltest"
 
 	"github.com/stretchr/testify/require"
 )
@@ -47,9 +47,9 @@ func TestCors_OverrideOrigins(t *testing.T) {
 		origin     string
 		statusCode int
 	}{
-		{"http://chainlink.com", "http://chainlink.com", http.StatusOK},
-		{"http://chainlink.com", "http://localhost:3000", http.StatusForbidden},
-		{"*", "http://chainlink.com", http.StatusOK},
+		{"http://nulink.com", "http://nulink.com", http.StatusOK},
+		{"http://nulink.com", "http://localhost:3000", http.StatusForbidden},
+		{"*", "http://nulink.com", http.StatusOK},
 		{"*", "http://localhost:3000", http.StatusOK},
 	}
 

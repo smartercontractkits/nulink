@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => (
   <footer className="footer">
     <div className="footer__container">
-      <span>Chainlink © 2020</span>
+      <span>NuLink © 2020</span>
       <span>
         <a
           target="_blank"

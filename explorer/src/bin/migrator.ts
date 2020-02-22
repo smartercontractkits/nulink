@@ -1,7 +1,7 @@
 import yargs from 'yargs'
 import { Connection } from 'typeorm'
 import { closeDbConnection, getDb } from '../database'
-import { ChainlinkNode } from '../entity/ChainlinkNode'
+import { NuLinkNode } from '../entity/NuLinkNode'
 
 const migrate = async () => {
   return bootstrap(async (db: Connection) => {
@@ -13,9 +13,9 @@ const migrate = async () => {
     }
 
     if (process.env.COMPOSE_MODE) {
-      const repo = db.getRepository(ChainlinkNode)
+      const repo = db.getRepository(NuLinkNode)
 
-      const node = new ChainlinkNode()
+      const node = new NuLinkNode()
       node.id = 1
       node.name = 'NodeyMcNodeFace'
       node.accessKey = 'u4HULe0pj5xPyuvv'

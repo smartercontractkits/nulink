@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { ChainlinkNode } from './ChainlinkNode'
+import { NuLinkNode } from './NuLinkNode'
 import { TaskRun } from './TaskRun'
 
 @Entity()
@@ -15,7 +15,7 @@ export class JobRun {
   id: string
 
   @Column()
-  chainlinkNodeId: number
+  nulinkNodeId: number
 
   @Column()
   runId: string
@@ -58,13 +58,13 @@ export class JobRun {
   taskRuns: Array<TaskRun>
 
   @ManyToOne(
-    () => ChainlinkNode,
-    ChainlinkNode => ChainlinkNode.jobRuns,
+    () => NuLinkNode,
+    NuLinkNode => NuLinkNode.jobRuns,
     {
       eager: true,
     },
   )
-  chainlinkNode: ChainlinkNode
+  nulinkNode: NuLinkNode
 }
 
 export const fromJSONObject = (json: any): JobRun => {
@@ -119,7 +119,7 @@ export const saveJobRunTree = async (db: Connection, jobRun: JobRun) => {
       .into(JobRun)
       .values(jobRun)
       .onConflict(
-        `("runId", "chainlinkNodeId") DO UPDATE SET
+        `("runId", "nulinkNodeId") DO UPDATE SET
         "status" = :status
         ,"error" = :error
         ,"finishedAt" = :finishedAt

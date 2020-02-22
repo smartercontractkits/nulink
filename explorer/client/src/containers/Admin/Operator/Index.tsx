@@ -6,7 +6,7 @@ import {
   WithStyles,
 } from '@material-ui/core/styles'
 import { RouteComponentProps } from '@reach/router'
-import { ChainlinkNode } from 'explorer/models'
+import { NuLinkNode } from 'explorer/models'
 import React, { useEffect, useState } from 'react'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 import build from 'redux-object'
@@ -33,7 +33,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-  adminOperators?: ChainlinkNode[]
+  adminOperators?: NuLinkNode[]
   count: AppState['adminOperatorsIndex']['count']
 }
 
@@ -88,7 +88,7 @@ export const Index: React.FC<Props> = ({
 const adminOperatorsSelector = ({
   adminOperatorsIndex,
   adminOperators,
-}: AppState): ChainlinkNode[] | undefined => {
+}: AppState): NuLinkNode[] | undefined => {
   if (adminOperatorsIndex.items) {
     return adminOperatorsIndex.items.map(id =>
       build({ adminOperators: adminOperators.items }, 'adminOperators', id),

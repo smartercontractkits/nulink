@@ -1,4 +1,4 @@
-# Configuration for development mode chainlink
+# Configuration for development mode nulink
 
 LOG_LEVEL="debug"
 

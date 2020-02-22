@@ -44,7 +44,7 @@ dropdb explorer_dev
 `ormconfig.<env>.json`. Therefore, if in development, it loads `ormconfig.development.json`,
 if production, `ormconfig.production.json`.
 
-##### Running alongside Chainlink Node (dev)
+##### Running alongside NuLink Node (dev)
 
 ```
 $ EXPLORER_URL=ws://localhost:8080 cldev node

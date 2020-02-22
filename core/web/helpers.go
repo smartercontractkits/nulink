@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/manyminds/api2go/jsonapi"

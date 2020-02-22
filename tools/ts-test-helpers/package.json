@@ -1,5 +1,5 @@
 {
-  "name": "@chainlink/ts-test-helpers",
+  "name": "@nulink/ts-test-helpers",
   "private": true,
   "version": "0.0.1",
   "main": "./dist/src",

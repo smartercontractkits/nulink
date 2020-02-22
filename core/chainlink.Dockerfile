@@ -1,10 +1,10 @@
-# Build Chainlink
+# Build NuLink
 FROM smartcontract/builder:1.0.25 as builder
 
 # Have to reintroduce ENV vars from builder image
 ENV PATH /go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-WORKDIR /chainlink
+WORKDIR /nulink
 COPY GNUmakefile VERSION ./
 COPY tools/bin/ldflags ./tools/bin/
 
@@ -26,11 +26,11 @@ RUN make yarndep
 ADD go.mod go.sum ./
 RUN go mod download
 
-# Env vars needed for chainlink build
+# Env vars needed for nulink build
 ARG COMMIT_SHA
 ARG ENVIRONMENT
 
-# Install chainlink
+# Install nulink
 COPY tsconfig.cjs.json tsconfig.es6.json ./
 COPY operator_ui ./operator_ui
 COPY styleguide ./styleguide
@@ -45,9 +45,9 @@ COPY evm-contracts ./evm-contracts
 COPY core core
 COPY packr packr
 
-RUN make install-chainlink
+RUN make install-nulink
 
-# Final layer: ubuntu with chainlink binary
+# Final layer: ubuntu with nulink binary
 FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -55,8 +55,8 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 WORKDIR /root
 
-COPY --from=builder /go/bin/chainlink /usr/local/bin/
+COPY --from=builder /go/bin/nulink /usr/local/bin/
 
 EXPOSE 6688
-ENTRYPOINT ["chainlink"]
+ENTRYPOINT ["nulink"]
 CMD ["local", "node"]

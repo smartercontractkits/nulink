@@ -1,4 +1,4 @@
-import { contract } from '@chainlink/test-helpers'
+import { contract } from '@nulink/test-helpers'
 import { createProvider, deployContract, DEVNET_ADDRESS } from './common'
 
 export async function deployLinkTokenContract(): Promise<

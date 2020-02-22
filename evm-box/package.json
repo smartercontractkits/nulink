@@ -1,12 +1,12 @@
 {
-  "name": "@chainlink/box",
+  "name": "@nulink/box",
   "version": "0.6.0",
-  "description": "A Chainlink example in a Truffle box",
+  "description": "A NuLink example in a Truffle box",
   "scripts": {
     "compile": "npx truffle compile",
     "console:dev": "npx truffle console --network cldev",
     "console:live": "npx truffle console --network live",
-    "depcheck": "echo '@chainlink/box' && depcheck --ignore-dirs=build/contracts || true",
+    "depcheck": "echo '@nulink/box' && depcheck --ignore-dirs=build/contracts || true",
     "solhint": "solhint ./contracts/**/*.sol",
     "lint": "yarn solhint",
     "migrate:dev": "npx truffle migrate --reset --network cldev",
@@ -15,12 +15,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@chainlink/contracts": "^0.0.2",
-    "@chainlink/test-helpers": "0.0.2",
+    "@nulink/contracts": "^0.0.2",
+    "@nulink/test-helpers": "0.0.2",
     "openzeppelin-solidity": "1.12.0"
   },
   "devDependencies": {
-    "@chainlink/belt": "^0.0.1",
+    "@nulink/belt": "^0.0.1",
     "@truffle/hdwallet-provider": "^1.0.30",
     "chai": "^4.2.0",
     "depcheck": "^0.9.1",

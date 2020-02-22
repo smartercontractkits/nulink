@@ -20,7 +20,7 @@ export class JobRunRepository {
    */
   public findById(id: string): Promise<JobRun> {
     return this.withTaskRunQuery()
-      .leftJoinAndSelect('jobRun.chainlinkNode', 'chainlinkNode')
+      .leftJoinAndSelect('jobRun.nulinkNode', 'nulinkNode')
       .orderBy('jobRun.createdAt, taskRun.index', 'ASC')
       .where('jobRun.id = :id', { id })
       .getOne()

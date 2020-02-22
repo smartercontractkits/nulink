@@ -15,7 +15,7 @@ export default {
     host: '127.0.0.1',
   },
   getSiteData: () => ({
-    title: 'Chainlink',
+    title: 'NuLink',
   }),
   getRoutes: async () => {
     return [{ path: '404', component: 'src/containers/NotFound.js' }]

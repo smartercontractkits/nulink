@@ -1,12 +1,12 @@
 package services
 
 import (
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/utils"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/utils"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -602,7 +602,7 @@ func (p *PollingDeviationChecker) createJobRun(nextPrice decimal.Decimal, nextRo
 
 	runData, err := models.ParseJSON([]byte(payload))
 	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("unable to start chainlink run with payload %s", payload))
+		return errors.Wrap(err, fmt.Sprintf("unable to start nulink run with payload %s", payload))
 	}
 	runRequest := models.NewRunRequest(runData)
 

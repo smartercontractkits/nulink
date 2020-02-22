@@ -3,8 +3,8 @@
 package adapters
 
 import (
-	"chainlink/core/store"
-	"chainlink/core/store/models"
+	"nulink/core/store"
+	"nulink/core/store/models"
 	"fmt"
 	"math/big"
 )

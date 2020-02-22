@@ -3,7 +3,7 @@ import {
   helpers as h,
   matchers,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { WhitelistedAggregatorFactory } from '../../ethers/v0.6/WhitelistedAggregatorFactory'
 

@@ -3,11 +3,11 @@ package synchronization
 import (
 	"encoding/json"
 
-	"chainlink/core/assets"
-	"chainlink/core/eth"
-	clnull "chainlink/core/null"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/eth"
+	clnull "nulink/core/null"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common"
 	null "gopkg.in/guregu/null.v3"
@@ -118,10 +118,10 @@ type syncReceiptPresenter struct {
 type TxStatus string
 
 const (
-	// StatusFulfilledRunLog indicates that a ChainlinkFulfilled event was
+	// StatusFulfilledRunLog indicates that a NuLinkFulfilled event was
 	// detected in the transaction receipt.
 	StatusFulfilledRunLog TxStatus = "fulfilledRunLog"
-	// StatusNoFulfilledRunLog indicates that no ChainlinkFulfilled events were
+	// StatusNoFulfilledRunLog indicates that no NuLinkFulfilled events were
 	// detected in the transaction receipt.
 	StatusNoFulfilledRunLog = "noFulfilledRunLog"
 )

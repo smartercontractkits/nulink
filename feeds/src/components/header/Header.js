@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 import { withRouter } from 'react-router'
-import ChainlinkLogo from 'components/shared/ChainlinkLogo'
+import NuLinkLogo from 'components/shared/NuLinkLogo'
 import ReactGA from 'react-ga'
 
 const Header = ({ location }) => {
@@ -11,8 +11,8 @@ const Header = ({ location }) => {
       <div className="header__main-nav">
         <Link to="/">
           <div className="header__logotype">
-            <ChainlinkLogo />
-            <h1>Chainlink</h1>
+            <NuLinkLogo />
+            <h1>NuLink</h1>
           </div>
         </Link>
         {location.pathname !== '/' && (
@@ -30,15 +30,15 @@ const Header = ({ location }) => {
               ReactGA.event({
                 category: 'Form Conversion',
                 action: 'Click on Button',
-                label: 'Integrate with Chainlink',
+                label: 'Integrate with NuLink',
               })
             }
-            href="https://chainlinkcommunity.typeform.com/to/XcgLVP"
+            href="https://nulinkcommunity.typeform.com/to/XcgLVP"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Button type="primary" shape="round">
-              Integrate with Chainlink
+              Integrate with NuLink
             </Button>
           </a>
         )}

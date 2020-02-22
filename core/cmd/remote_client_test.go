@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/auth"
-	"chainlink/core/cmd"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
+	"nulink/core/auth"
+	"nulink/core/cmd"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/assert"
@@ -664,7 +664,7 @@ func TestClient_WithdrawFromSpecifiedContractAddress(t *testing.T) {
 		ethMock.Register("eth_sendRawTransaction", cltest.NewHash())
 	})
 	assert.Nil(t, cliParserRouter.Run([]string{
-		"chainlink", "admin", "withdraw",
+		"nulink", "admin", "withdraw",
 		"0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF", "1234",
 		"--from=" +
 			"0x3141592653589793238462643383279502884197"}))

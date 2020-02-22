@@ -35,13 +35,13 @@ contract LinkTokenReceiver {
     require(success, "Unable to create request");
   }
 
-  function getChainlinkToken() public view returns (address);
+  function getNuLinkToken() public view returns (address);
 
   /**
    * @dev Reverts if not sent from the LINK token
    */
   modifier onlyLINK() {
-    require(msg.sender == getChainlinkToken(), "Must use LINK token");
+    require(msg.sender == getNuLinkToken(), "Must use LINK token");
     _;
   }
 

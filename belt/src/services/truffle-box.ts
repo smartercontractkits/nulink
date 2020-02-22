@@ -55,13 +55,13 @@ export function getSolidityVersionBy(versionAliasOrVersion: string) {
 }
 
 /**
- * Get a list of available solidity versions based on what's published in @chainlink/contracts
+ * Get a list of available solidity versions based on what's published in @nulink/contracts
  *
  * The returned format is [alias, version] where alias can be "v0.6" | "0.6" and full version can be "0.6.2"
  */
 export function getSolidityVersions(): [string, string][] {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const config: App = require('@chainlink/contracts/app.config.json')
+  const config: App = require('@nulink/contracts/app.config.json')
 
   return Object.entries(config.compilerSettings.versions).filter(([, v]) =>
     config.publicVersions.find(pv => pv === v),
@@ -159,8 +159,8 @@ function convertSolidityFiles(
     )
   }
   replaceInFile(
-    '@chainlink/contracts/src/v0.4',
-    `@chainlink/contracts/src/${solcVersionAlias}`,
+    '@nulink/contracts/src/v0.4',
+    `@nulink/contracts/src/${solcVersionAlias}`,
     solFiles,
     dryRun,
   )
@@ -179,15 +179,15 @@ function convertJavascriptFiles(
 ) {
   const jsFiles = getJavascriptFiles(path)
   replaceInFile(
-    '@chainlink/contracts/truffle/v0.4',
-    `@chainlink/contracts/truffle/${solcVersionAlias}`,
+    '@nulink/contracts/truffle/v0.4',
+    `@nulink/contracts/truffle/${solcVersionAlias}`,
     jsFiles,
     dryRun,
   )
   // replace linktoken back to v0.4
   replaceInFile(
-    `@chainlink/contracts/truffle/${solcVersionAlias}/LinkToken`,
-    '@chainlink/contracts/truffle/v0.4/LinkToken',
+    `@nulink/contracts/truffle/${solcVersionAlias}/LinkToken`,
+    '@nulink/contracts/truffle/v0.4/LinkToken',
     jsFiles,
     dryRun,
   )

@@ -115,14 +115,14 @@ const Show = withStyles(styles)(
 )
 
 const jobRunSelector = (
-  { jobRuns, taskRuns, chainlinkNodes }: AppState,
+  { jobRuns, taskRuns, nulinkNodes }: AppState,
   jobRunId?: string,
 ): JobRun | undefined => {
   if (jobRuns.items) {
     const document = {
       jobRuns: jobRuns.items,
       taskRuns: taskRuns.items,
-      chainlinkNodes: chainlinkNodes.items,
+      nulinkNodes: nulinkNodes.items,
     }
     return build(document, 'jobRuns', jobRunId)
   }

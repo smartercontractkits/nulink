@@ -1,8 +1,8 @@
 package migration1568280052
 
 import (
-	"chainlink/core/store/migrations/migration1565877314"
-	"chainlink/core/store/models"
+	"nulink/core/store/migrations/migration1565877314"
+	"nulink/core/store/models"
 
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"

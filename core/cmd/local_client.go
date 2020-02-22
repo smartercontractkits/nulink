@@ -8,23 +8,23 @@ import (
 	"os"
 	"strings"
 
-	"chainlink/core/logger"
-	"chainlink/core/services"
-	strpkg "chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/store/presenters"
-	"chainlink/core/utils"
+	"nulink/core/logger"
+	"nulink/core/services"
+	strpkg "nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/store/presenters"
+	"nulink/core/utils"
 
 	clipkg "github.com/urfave/cli"
 	"go.uber.org/zap/zapcore"
 )
 
-// RunNode starts the Chainlink core.
+// RunNode starts the NuLink core.
 func (cli *Client) RunNode(c *clipkg.Context) error {
 	updateConfig(cli.Config, c.Bool("debug"), c.Int64("replay-from-block"))
 	logger.SetLogger(cli.Config.CreateProductionLogger())
-	logger.Infow("Starting Chainlink Node " + strpkg.Version + " at commit " + strpkg.Sha)
+	logger.Infow("Starting NuLink Node " + strpkg.Version + " at commit " + strpkg.Sha)
 
 	err := InitEnclave()
 	if err != nil {
@@ -93,7 +93,7 @@ func logIfNonceOutOfSync(store *strpkg.Store) {
 	}
 
 	if localNonceIsNotCurrent(lastNonce, account.Nonce()) {
-		logger.Warn("The account is being used by another wallet and is not safe to use with chainlink")
+		logger.Warn("The account is being used by another wallet and is not safe to use with nulink")
 	}
 }
 
@@ -151,7 +151,7 @@ func (cli *Client) DeleteUser(c *clipkg.Context) error {
 	return err
 }
 
-// ImportKey imports a key to be used with the chainlink node
+// ImportKey imports a key to be used with the nulink node
 func (cli *Client) ImportKey(c *clipkg.Context) error {
 	logger.SetLogger(cli.Config.CreateProductionLogger())
 	app := cli.AppFactory.NewApplication(cli.Config)

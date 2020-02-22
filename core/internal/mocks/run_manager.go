@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	models "chainlink/core/store/models"
+	models "nulink/core/store/models"
 	big "math/big"
 
 	mock "github.com/stretchr/testify/mock"

@@ -6,10 +6,10 @@ import (
 
 	"math/big"
 
-	"chainlink/core/eth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/internal/mocks"
-	strpkg "chainlink/core/store"
+	"nulink/core/eth"
+	"nulink/core/internal/cltest"
+	"nulink/core/internal/mocks"
+	strpkg "nulink/core/store"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/shopspring/decimal"
@@ -171,7 +171,7 @@ func TestCallerSubscriberClient_GetAggregatorPrice(t *testing.T) {
 	address := cltest.NewAddress()
 
 	// aggregatorLatestAnswerID is the first 4 bytes of the keccak256 of
-	// Chainlink's aggregator latestAnswer function.
+	// NuLink's aggregator latestAnswer function.
 	const aggregatorLatestAnswerID = "50d25bcd"
 	aggregatorLatestAnswerSelector := eth.HexToFunctionSelector(aggregatorLatestAnswerID)
 

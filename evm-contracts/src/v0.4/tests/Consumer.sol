@@ -1,8 +1,8 @@
 pragma solidity 0.4.24;
 
-import "../ChainlinkClient.sol";
+import "../NuLinkClient.sol";
 
-contract Consumer is ChainlinkClient {
+contract Consumer is NuLinkClient {
   bytes32 internal specId;
   bytes32 public currentPrice;
 
@@ -14,12 +14,12 @@ contract Consumer is ChainlinkClient {
   );
 
   function requestEthereumPrice(string _currency) public {
-    Chainlink.Request memory req = buildChainlinkRequest(specId, this, this.fulfill.selector);
+    NuLink.Request memory req = buildNuLinkRequest(specId, this, this.fulfill.selector);
     req.add("get", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,JPY");
     string[] memory path = new string[](1);
     path[0] = _currency;
     req.addStringArray("path", path);
-    sendChainlinkRequest(req, ORACLE_PAYMENT);
+    sendNuLinkRequest(req, ORACLE_PAYMENT);
   }
 
   function cancelRequest(
@@ -28,17 +28,17 @@ contract Consumer is ChainlinkClient {
     bytes4 _callbackFunctionId,
     uint256 _expiration
   ) public {
-    cancelChainlinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
+    cancelNuLinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
   }
 
   function withdrawLink() public {
-    LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
+    LinkTokenInterface link = LinkTokenInterface(nulinkTokenAddress());
     require(link.transfer(msg.sender, link.balanceOf(address(this))), "Unable to transfer");
   }
 
   function fulfill(bytes32 _requestId, bytes32 _price)
     public
-    recordChainlinkFulfillment(_requestId)
+    recordNuLinkFulfillment(_requestId)
   {
     emit RequestFulfilled(_requestId, _price);
     currentPrice = _price;

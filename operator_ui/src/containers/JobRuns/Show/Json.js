@@ -1,4 +1,4 @@
-import { PaddedCard } from '@chainlink/styleguide'
+import { PaddedCard } from '@nulink/styleguide'
 import Grid from '@material-ui/core/Grid'
 import { fetchJobRun } from 'actions'
 import Content from 'components/Content'

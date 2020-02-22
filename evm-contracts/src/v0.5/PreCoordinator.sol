@@ -1,6 +1,6 @@
 pragma solidity 0.5.0;
 
-import "./ChainlinkClient.sol";
+import "./NuLinkClient.sol";
 import "./LinkTokenReceiver.sol";
 import "./Median.sol";
 import "./vendor/Ownable.sol";
@@ -12,7 +12,7 @@ import "./vendor/SafeMath.sol";
  * @dev This contract accepts requests as service agreement IDs and loops over
  * the corresponding list of oracles to create distinct requests to each one.
  */
-contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, LinkTokenReceiver {
+contract PreCoordinator is NuLinkClient, Ownable, NuLinkRequestInterface, LinkTokenReceiver {
   using SafeMath for uint256;
 
   uint256 constant private MAX_ORACLE_COUNT = 45;
@@ -58,9 +58,9 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
    */
   constructor(address _link) public {
     if(_link == address(0)) {
-      setPublicChainlinkToken();
+      setPublicNuLinkToken();
     } else {
-      setChainlinkToken(_link);
+      setNuLinkToken(_link);
     }
   }
 
@@ -145,17 +145,17 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
 
   /**
    * @notice Returns the address of the LINK token
-   * @dev This is the public implementation for chainlinkTokenAddress, which is
-   * an internal method of the ChainlinkClient contract
+   * @dev This is the public implementation for nulinkTokenAddress, which is
+   * an internal method of the NuLinkClient contract
    */
-  function getChainlinkToken() public view returns (address) {
-    return chainlinkTokenAddress();
+  function getNuLinkToken() public view returns (address) {
+    return nulinkTokenAddress();
   }
 
   /**
-   * @notice Creates the Chainlink request
+   * @notice Creates the NuLink request
    * @dev Stores the hash of the params as the on-chain commitment for the request.
-   * Emits OracleRequest event for the Chainlink node to detect.
+   * Emits OracleRequest event for the NuLink node to detect.
    * @param _sender The sender of the request
    * @param _payment The amount of payment given (specified in wei)
    * @param _saId The Job Specification ID
@@ -189,13 +189,13 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
     createRequests(_saId, callbackRequestId, _data);
     if (_payment > totalPayment) {
       uint256 overage = _payment.sub(totalPayment);
-      LinkTokenInterface _link = LinkTokenInterface(chainlinkTokenAddress());
+      LinkTokenInterface _link = LinkTokenInterface(nulinkTokenAddress());
       assert(_link.transfer(_sender, overage));
     }
   }
 
   /**
-   * @dev Creates Chainlink requests to each oracle in the service agreement with the
+   * @dev Creates NuLink requests to each oracle in the service agreement with the
    * same data payload supplied by the requester
    * @param _saId The service agreement ID
    * @param _incomingRequestId The requester-supplied request ID
@@ -204,14 +204,14 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
   function createRequests(bytes32 _saId, bytes32 _incomingRequestId, bytes memory _data) private {
     ServiceAgreement memory sa = serviceAgreements[_saId];
     require(sa.minResponses > 0, "Invalid service agreement");
-    Chainlink.Request memory request;
+    NuLink.Request memory request;
     bytes32 outgoingRequestId;
     serviceAgreements[_saId].activeRequests = serviceAgreements[_saId].activeRequests.add(1);
     emit ServiceAgreementRequested(_saId, _incomingRequestId, sa.totalPayment);
     for (uint i = 0; i < sa.oracles.length; i++) {
-      request = buildChainlinkRequest(sa.jobIds[i], address(this), this.chainlinkCallback.selector);
+      request = buildNuLinkRequest(sa.jobIds[i], address(this), this.nulinkCallback.selector);
       request.setBuffer(_data);
-      outgoingRequestId = sendChainlinkRequestTo(sa.oracles[i], request, sa.payments[i]);
+      outgoingRequestId = sendNuLinkRequestTo(sa.oracles[i], request, sa.payments[i]);
       requests[outgoingRequestId] = _incomingRequestId;
       serviceAgreementRequests[outgoingRequestId] = _saId;
     }
@@ -219,14 +219,14 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
 
   /**
    * @notice The fulfill method from requests created by this contract
-   * @dev The recordChainlinkFulfillment protects this function from being called
+   * @dev The recordNuLinkFulfillment protects this function from being called
    * by anyone other than the oracle address that the request was sent to
    * @param _requestId The ID that was generated for the request
    * @param _data The answer provided by the oracle
    */
-  function chainlinkCallback(bytes32 _requestId, int256 _data)
+  function nulinkCallback(bytes32 _requestId, int256 _data)
     external
-    recordChainlinkFulfillment(_requestId)
+    recordNuLinkFulfillment(_requestId)
     returns (bool)
   {
     uint256 minResponses = serviceAgreements[serviceAgreementRequests[_requestId]].minResponses;
@@ -254,7 +254,7 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
    * is if a user accidentally sent LINK directly to this contract's address.
    */
   function withdrawLink() external onlyOwner {
-    LinkTokenInterface _link = LinkTokenInterface(chainlinkTokenAddress());
+    LinkTokenInterface _link = LinkTokenInterface(nulinkTokenAddress());
     require(_link.transfer(msg.sender, _link.balanceOf(address(this))), "Unable to transfer");
   }
 
@@ -280,8 +280,8 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
     Requester memory req = requesters[cbRequestId];
     require(req.sender == msg.sender, "Only requester can cancel");
     delete requesters[cbRequestId];
-    cancelChainlinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
-    LinkTokenInterface _link = LinkTokenInterface(chainlinkTokenAddress());
+    cancelNuLinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
+    LinkTokenInterface _link = LinkTokenInterface(nulinkTokenAddress());
     require(_link.transfer(req.sender, _payment), "Unable to transfer");
   }
 
@@ -299,7 +299,7 @@ contract PreCoordinator is ChainlinkClient, Ownable, ChainlinkRequestInterface, 
    * @param _to The callback address
    */
   modifier checkCallbackAddress(address _to) {
-    require(_to != chainlinkTokenAddress(), "Cannot callback to LINK");
+    require(_to != nulinkTokenAddress(), "Cannot callback to LINK");
     _;
   }
 }

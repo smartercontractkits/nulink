@@ -1,4 +1,4 @@
-import { contract, matchers, setup } from '@chainlink/test-helpers'
+import { contract, matchers, setup } from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
 import { MedianTestHelperFactory } from '../../ethers/v0.6/MedianTestHelperFactory'

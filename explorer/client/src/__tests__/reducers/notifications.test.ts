@@ -1,5 +1,5 @@
-import * as jsonapi from '@chainlink/json-api-client'
-import { partialAsFull } from '@chainlink/ts-test-helpers'
+import * as jsonapi from '@nulink/json-api-client'
+import { partialAsFull } from '@nulink/ts-test-helpers'
 import reducer, { INITIAL_STATE } from '../../reducers'
 import { FetchAdminSigninErrorAction } from '../../reducers/actions'
 

@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"chainlink/core/auth"
-	"chainlink/core/utils"
+	"nulink/core/auth"
+	"nulink/core/utils"
 
 	"github.com/pkg/errors"
 )

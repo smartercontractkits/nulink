@@ -91,7 +91,7 @@ jobs:
     machine:
       image: ubuntu-1604:201903-01
       docker_layer_caching: true
-    working_directory: ~/chainlink
+    working_directory: ~/nulink
     steps:
       - checkout
       - run: cd ./tools/docker && timeout --foreground 1200s ./compose test
@@ -100,7 +100,7 @@ jobs:
     machine:
       image: ubuntu-1604:201903-01
       docker_layer_caching: true
-    working_directory: ~/chainlink
+    working_directory: ~/nulink
     steps:
       - checkout
       - run: cd ./tools/docker && timeout --foreground 1200s ./compose test
@@ -139,7 +139,7 @@ jobs:
           key: v{{ checksum "cache.version" }}-yarn-vendor-{{ checksum "yarn.lock" }}
           paths:
             - /usr/local/share/.cache/yarn
-      - run: yarn workspace @chainlink/styleguide run test
+      - run: yarn workspace @nulink/styleguide run test
   json-api-client:
     docker:
       - image: smartcontract/builder:1.0.25
@@ -155,7 +155,7 @@ jobs:
           key: v{{ checksum "cache.version" }}-yarn-vendor-{{ checksum "yarn.lock" }}
           paths:
             - /usr/local/share/.cache/yarn
-      - run: yarn workspace @chainlink/json-api-client run test
+      - run: yarn workspace @nulink/json-api-client run test
   operator-ui:
     resource_class: xlarge
     docker:
@@ -178,7 +178,7 @@ jobs:
           path: ./integration/logs
   explorer:
     resource_class: xlarge
-    working_directory: ~/chainlink
+    working_directory: ~/nulink
     docker:
       - image: circleci/node:10.16.3-browsers
         environment:
@@ -189,7 +189,7 @@ jobs:
           POSTGRES_DB: explorer_test
     steps:
       - checkout:
-          path: ~/chainlink
+          path: ~/nulink
       - run: echo $CACHE_VERSION > cache.version
       - restore_cache:
           name: Restore Yarn Package Cache
@@ -203,16 +203,16 @@ jobs:
           paths:
             - ~/.cache/yarn
             - /usr/local/share/.cache/yarn
-      - run: yarn workspace @chainlink/explorer run test:migration:run
+      - run: yarn workspace @nulink/explorer run test:migration:run
       - run:
           name: Run Server Tests
-          command: yarn workspace @chainlink/explorer run test:ci
+          command: yarn workspace @nulink/explorer run test:ci
       - run:
           name: Run Client dependency setup
-          command: yarn workspace @chainlink/explorer-client run setup
+          command: yarn workspace @nulink/explorer-client run setup
       - run:
           name: Run Client Tests
-          command: yarn workspace @chainlink/explorer-client run test:ci
+          command: yarn workspace @nulink/explorer-client run test:ci
       - store_artifacts:
           path: ./integration/logs
   feeds:
@@ -232,12 +232,12 @@ jobs:
             - /usr/local/share/.cache/yarn
       - run:
           name: Run Tests
-          command: yarn workspace @chainlink/feeds run test
+          command: yarn workspace @nulink/feeds run test
   forks:
     machine:
       image: ubuntu-1604:201903-01
       docker_layer_caching: true
-    working_directory: ~/chainlink
+    working_directory: ~/nulink
     steps:
       - checkout
       - run:
@@ -279,7 +279,7 @@ jobs:
       - run:
           name: Docker build
           command: docker build -f explorer/Dockerfile -t smartcontract/explorer:circleci .
-  build-publish-chainlink:
+  build-publish-nulink:
     resource_class: large
     machine:
         image: circleci/classic:201808-01
@@ -297,8 +297,8 @@ jobs:
       - run:
           name: Docker push, if applicable
           command: |
-            tools/ci/push_chainlink "${CIRCLE_BRANCH}" "${CIRCLE_TAG}"
-  build-chainlink:
+            tools/ci/push_nulink "${CIRCLE_BRANCH}" "${CIRCLE_TAG}"
+  build-nulink:
     resource_class: xlarge
     machine:
         image: circleci/classic:201808-01
@@ -313,7 +313,7 @@ jobs:
           name: Docker build
           command: |
             DOCKER_TAG=circleci make docker
-  build-chainlink-sgx:
+  build-nulink-sgx:
     resource_class: xlarge
     machine:
         image: circleci/classic:201808-01
@@ -337,7 +337,7 @@ jobs:
       - run: ./tools/ci/report_coverage
   check_if_rebase_needed:
     resource_class: small
-    working_directory: ~/chainlink
+    working_directory: ~/nulink
     docker:
       - image: alpine/git
     steps:
@@ -345,7 +345,7 @@ jobs:
       - run: tools/bin/check_if_rebase_needed
   lint:
     resource_class: large
-    working_directory: ~/chainlink
+    working_directory: ~/nulink
     docker:
       - image: smartcontract/builder:1.0.25
     steps:
@@ -463,18 +463,18 @@ workflows:
                 - /^release\/.*/
             tags:
               only: /^explorer-v.*/ # handles final versioned releases
-      - build-chainlink:
+      - build-nulink:
           filters:
             branches:
               ignore:
                 - develop
                 - /^release\/.*/
                 - master
-      - build-chainlink-sgx:
+      - build-nulink-sgx:
           filters:
             tags:
               only: /^v.*/
-      - build-publish-chainlink:
+      - build-publish-nulink:
           requires:
             - go-sqlite
             - go-postgres

@@ -49,7 +49,7 @@ export interface AdminOperatorsNormalizedMeta {
 }
 
 export interface AdminOperatorsNormalizedData {
-  chainlinkNodes: any
+  nulinkNodes: any
   meta: AdminOperatorsNormalizedMeta
 }
 
@@ -68,7 +68,7 @@ export interface AdminOperatorNormalizedMeta {
 }
 
 export interface AdminOperatorNormalizedData {
-  chainlinkNodes: any
+  nulinkNodes: any
   meta: AdminOperatorNormalizedMeta
 }
 
@@ -91,7 +91,7 @@ export interface JobRunsNormalizedMeta {
 }
 
 export interface JobRunsNormalizedData {
-  chainlinkNodes: any[]
+  nulinkNodes: any[]
   jobRuns: any
   meta: JobRunsNormalizedMeta
 }
@@ -110,7 +110,7 @@ export interface JobRunNormalizedMeta {
 }
 
 export interface JobRunNormalizedData {
-  chainlinkNodes: any[]
+  nulinkNodes: any[]
   taskRuns: any[]
   jobRuns: any
   meta: JobRunNormalizedMeta

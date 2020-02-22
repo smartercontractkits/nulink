@@ -1,7 +1,7 @@
 package assets
 
 import (
-	"chainlink/core/utils"
+	"nulink/core/utils"
 	"database/sql/driver"
 	"errors"
 	"fmt"

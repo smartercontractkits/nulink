@@ -5,8 +5,8 @@ import "./Consumer.sol";
 contract BasicConsumer is Consumer {
 
   constructor(address _link, address _oracle, bytes32 _specId) public {
-    setChainlinkToken(_link);
-    setChainlinkOracle(_oracle);
+    setNuLinkToken(_link);
+    setNuLinkOracle(_oracle);
     specId = _specId;
   }
 

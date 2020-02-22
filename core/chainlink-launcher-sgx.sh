@@ -8,7 +8,7 @@ fi
 
 command=`echo $1 | tr A-Z a-z`
 if [ "$command" != "n" ] && [ "$command" != "node" ]; then
-  chainlink "$@"
+  nulink "$@"
   exit
 fi
 
@@ -18,16 +18,16 @@ if [ "$SGX_SIMULATION" != "yes" ]; then
   trap "kill $aesm_pid 2>/dev/null || true" SIGINT SIGTERM EXIT
 fi
 
-# XXX: Since chainlink has to run in the background in SGX mode, prevent it
+# XXX: Since nulink has to run in the background in SGX mode, prevent it
 # from detecting a TTY so that it does not prompt for a password
-chainlink "$@" | cat &
-chainlink_pid=$!
+nulink "$@" | cat &
+nulink_pid=$!
 
 if [ "$SGX_SIMULATION" != "yes" ]; then
   while sleep 10; do
     kill -0 $aesm_pid 2>/dev/null
-    kill -0 $chainlink_pid 2>/dev/null
+    kill -0 $nulink_pid 2>/dev/null
   done
 fi
-wait $chainlink_pid
+wait $nulink_pid
 exit $?

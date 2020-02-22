@@ -9,12 +9,12 @@ import (
 	"sync"
 	"time"
 
-	"chainlink/core/eth"
-	"chainlink/core/logger"
-	"chainlink/core/store/migrations"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/utils"
+	"nulink/core/eth"
+	"nulink/core/logger"
+	"nulink/core/store/migrations"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/jinzhu/gorm"

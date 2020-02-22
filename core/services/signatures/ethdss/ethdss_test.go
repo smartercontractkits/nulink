@@ -9,9 +9,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"chainlink/core/services/signatures/cryptotest"
-	"chainlink/core/services/signatures/ethschnorr"
-	"chainlink/core/services/signatures/secp256k1"
+	"nulink/core/services/signatures/cryptotest"
+	"nulink/core/services/signatures/ethschnorr"
+	"nulink/core/services/signatures/secp256k1"
 
 	"go.dedis.ch/kyber/v3"
 	dkg "go.dedis.ch/kyber/v3/share/dkg/rabin"

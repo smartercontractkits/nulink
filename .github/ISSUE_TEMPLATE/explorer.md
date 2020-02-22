@@ -1,6 +1,6 @@
 ---
 name: Explorer Issue
-about: Report an issue with the Chainlink Explorer.
+about: Report an issue with the NuLink Explorer.
 title: "[EXPLR] <replace with issue title>"
 labels: 'Explorer'
 assignees: ''
@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Description**
-[replace this line with a clear and concise description of the Chainlink Explorer issue you are experiencing]
+[replace this line with a clear and concise description of the NuLink Explorer issue you are experiencing]
 
 **Basic Information**
 [replace this line with basic information about the issue you are experiencing, including but not limited to the name and version of your web browser and the value you are searching for]

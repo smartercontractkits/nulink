@@ -1,9 +1,9 @@
 {
-  "name": "@chainlink/belt",
+  "name": "@nulink/belt",
   "private": false,
-  "description": "A toolbelt for performing various commands on chainlink smart contracts.",
+  "description": "A toolbelt for performing various commands on nulink smart contracts.",
   "version": "0.0.1",
-  "author": "Chainlink Devs",
+  "author": "NuLink Devs",
   "bin": {
     "belt": "./bin/run"
   },
@@ -16,7 +16,7 @@
     "prepublishOnly": "yarn clean && yarn setup",
     "version": "oclif-dev readme && git add README.md"
   },
-  "bugs": "https://github.com/smartcontractkit/chainlink/issues",
+  "bugs": "https://github.com/smartercontractkit/nulink/issues",
   "dependencies": {
     "@0x/sol-compiler": "^4.0.4",
     "@oclif/command": "^1",
@@ -58,7 +58,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/smartcontractkit/chainlink",
+  "homepage": "https://github.com/smartercontractkit/nulink",
   "keywords": [
     "oclif"
   ],
@@ -72,6 +72,6 @@
       "@oclif/plugin-not-found"
     ]
   },
-  "repository": "smartcontractkit/chainlink",
+  "repository": "smartercontractkit/nulink",
   "types": "lib/src/index.d.ts"
 }

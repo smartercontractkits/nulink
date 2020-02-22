@@ -2,13 +2,13 @@
 
 ENVIRONMENT ?= release
 
-REPO := smartcontract/chainlink
+REPO := smartercontractkits/nulink
 COMMIT_SHA ?= $(shell git rev-parse HEAD)
 VERSION = $(shell cat VERSION)
 GOBIN ?= $(GOPATH)/bin
 GO_LDFLAGS := $(shell tools/bin/ldflags)
 GOFLAGS = -ldflags "$(GO_LDFLAGS)"
-DOCKERFILE := core/chainlink.Dockerfile
+DOCKERFILE := core/nulink.Dockerfile
 DOCKER_TAG ?= latest
 
 # SGX is disabled by default, but turned on when building from Docker
@@ -20,7 +20,7 @@ SGX_TARGET := ./core/sgx/target/$(ENVIRONMENT)/
 ifneq (,$(filter yes true,$(SGX_ENABLED)))
 	GOFLAGS += -tags=sgx_enclave
 	SGX_BUILD_ENCLAVE := $(SGX_ENCLAVE)
-	DOCKERFILE := core/chainlink-sgx.Dockerfile
+	DOCKERFILE := core/nulink-sgx.Dockerfile
 	REPO := $(REPO)-sgx
 else
 	SGX_BUILD_ENCLAVE :=
@@ -29,19 +29,19 @@ endif
 TAGGED_REPO := $(REPO):$(DOCKER_TAG)
 
 .PHONY: install
-install: operator-ui-autoinstall install-chainlink-autoinstall ## Install chainlink and all its dependencies.
+install: operator-ui-autoinstall install-nulink-autoinstall ## Install nulink and all its dependencies.
 
 .PHONY: install-git-hooks
 install-git-hooks:
 	git config core.hooksPath .githooks
 
-.PHONY: install-chainlink-autoinstall
-install-chainlink-autoinstall: | gomod install-chainlink
+.PHONY: install-nulink-autoinstall
+install-nulink-autoinstall: | gomod install-nulink
 .PHONY: operator-ui-autoinstall
 operator-ui-autoinstall: | yarndep operator-ui
 
 .PHONY: gomod
-gomod: ## Ensure chainlink's go dependencies are installed.
+gomod: ## Ensure nulink's go dependencies are installed.
 	@if [ -z "`which gencodec`" ]; then \
 		go get github.com/smartcontractkit/gencodec; \
 	fi || true
@@ -51,21 +51,21 @@ gomod: ## Ensure chainlink's go dependencies are installed.
 yarndep: ## Ensure all yarn dependencies are installed
 	yarn install --frozen-lockfile
 
-.PHONY: install-chainlink
-install-chainlink: chainlink ## Install the chainlink binary.
-	cp $< $(GOBIN)/chainlink
+.PHONY: install-nulink
+install-nulink: nulink ## Install the nulink binary.
+	cp $< $(GOBIN)/nulink
 
-chainlink: $(SGX_BUILD_ENCLAVE) ws-setup operator-ui ## Build the chainlink binary.
+nulink: $(SGX_BUILD_ENCLAVE) ws-setup operator-ui ## Build the nulink binary.
 	CGO_ENABLED=0 go run packr/main.go "${CURDIR}/core/eth" ## embed contracts in .go file
 	go build $(GOFLAGS) -o $@ ./core/
 
 .PHONY: ws-setup
 ws-setup:
-	yarn setup:chainlink
+	yarn setup:nulink
 
 .PHONY: operator-ui
 operator-ui: ## Build the static frontend UI.
-	CHAINLINK_VERSION="$(VERSION)@$(COMMIT_SHA)" yarn workspace @chainlink/operator-ui build
+	nulink_VERSION="$(VERSION)@$(COMMIT_SHA)" yarn workspace @nulink/operator-ui build
 	CGO_ENABLED=0 go run packr/main.go "${CURDIR}/core/services"
 
 .PHONY: docker

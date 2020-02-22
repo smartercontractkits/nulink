@@ -1,8 +1,8 @@
 package eth_test
 
 import (
-	"chainlink/core/eth"
-	"chainlink/core/internal/cltest"
+	"nulink/core/eth"
+	"nulink/core/internal/cltest"
 	"encoding/json"
 	"testing"
 

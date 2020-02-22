@@ -1,4 +1,4 @@
-import * as jsonapi from '@chainlink/json-api-client'
+import * as jsonapi from '@nulink/json-api-client'
 import * as models from 'core/store/models'
 import * as sessionsController from 'core/web/sessions_controller'
 

@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/web"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/web"
 
 	"github.com/onsi/gomega"
 	"github.com/stretchr/testify/assert"

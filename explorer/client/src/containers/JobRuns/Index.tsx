@@ -90,13 +90,13 @@ const Index = withStyles(styles)(
 const jobRunsSelector = ({
   jobRunsIndex,
   jobRuns,
-  chainlinkNodes,
+  nulinkNodes,
 }: AppState): JobRun[] | undefined => {
   if (jobRunsIndex.items) {
     return jobRunsIndex.items.map((id: string) => {
       const document = {
         jobRuns: jobRuns.items,
-        chainlinkNodes: chainlinkNodes.items,
+        nulinkNodes: nulinkNodes.items,
       }
       return build(document, 'jobRuns', id)
     })

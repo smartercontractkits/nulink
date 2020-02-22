@@ -4,10 +4,10 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/adapters"
-	"chainlink/core/assets"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
+	"nulink/core/adapters"
+	"nulink/core/assets"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

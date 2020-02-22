@@ -1,7 +1,7 @@
 pragma solidity ^0.6.0;
 
 import "./LinkTokenReceiver.sol";
-import "./interfaces/ChainlinkRequestInterface.sol";
+import "./interfaces/NuLinkRequestInterface.sol";
 import "./interfaces/OracleInterface.sol";
 import "./interfaces/LinkTokenInterface.sol";
 import "./interfaces/WithdrawalInterface.sol";
@@ -9,10 +9,10 @@ import "./vendor/Ownable.sol";
 import "./vendor/SafeMath.sol";
 
 /**
- * @title The Chainlink Oracle contract
+ * @title The NuLink Oracle contract
  * @notice Node operators can deploy this contract to fulfill requests sent to them
  */
-contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkTokenReceiver, WithdrawalInterface {
+contract Oracle is NuLinkRequestInterface, OracleInterface, Ownable, LinkTokenReceiver, WithdrawalInterface {
   using SafeMath for uint256;
 
   uint256 constant public EXPIRY_TIME = 5 minutes;
@@ -52,9 +52,9 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
   }
 
   /**
-   * @notice Creates the Chainlink request
+   * @notice Creates the NuLink request
    * @dev Stores the hash of the params as the on-chain commitment for the request.
-   * Emits OracleRequest event for the Chainlink node to detect.
+   * Emits OracleRequest event for the NuLink node to detect.
    * @param _sender The sender of the request
    * @param _payment The amount of payment given (specified in wei)
    * @param _specId The Job Specification ID
@@ -106,7 +106,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
   }
 
   /**
-   * @notice Called by the Chainlink node to fulfill requests
+   * @notice Called by the NuLink node to fulfill requests
    * @dev Given params must hash back to the commitment stored from `oracleRequest`.
    * Will call the callback address' callback function without bubbling up error
    * checking in a `require` so that the node can get paid.
@@ -153,7 +153,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
 
   /**
    * @notice Use this to check if a node is authorized for fulfilling requests
-   * @param _node The address of the Chainlink node
+   * @param _node The address of the NuLink node
    * @return The authorization status of the node
    */
   function getAuthorizationStatus(address _node) external view override returns (bool) {
@@ -162,7 +162,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
 
   /**
    * @notice Sets the fulfillment permission for a given node. Use `true` to allow, `false` to disallow.
-   * @param _node The address of the Chainlink node
+   * @param _node The address of the NuLink node
    * @param _allowed Bool value to determine if the node can fulfill requests
    */
   function setFulfillmentPermission(address _node, bool _allowed) external override onlyOwner {
@@ -171,7 +171,7 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
 
   /**
    * @notice Allows the node operator to withdraw earned LINK to a given address
-   * @dev The owner of the contract can be another wallet and does not have to be a Chainlink node
+   * @dev The owner of the contract can be another wallet and does not have to be a NuLink node
    * @param _recipient The address to send the LINK token to
    * @param _amount The amount to send (specified in wei)
    */
@@ -229,10 +229,10 @@ contract Oracle is ChainlinkRequestInterface, OracleInterface, Ownable, LinkToke
 
   /**
    * @notice Returns the address of the LINK token
-   * @dev This is the public implementation for chainlinkTokenAddress, which is
-   * an internal method of the ChainlinkClient contract
+   * @dev This is the public implementation for nulinkTokenAddress, which is
+   * an internal method of the NuLinkClient contract
    */
-  function getChainlinkToken() public view override returns (address) {
+  function getNuLinkToken() public view override returns (address) {
     return address(LinkToken);
   }
 

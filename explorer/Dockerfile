@@ -8,7 +8,7 @@ ADD . .
 
 RUN yarn install
 RUN yarn setup:explorer
-RUN yarn workspace @chainlink/explorer-client build
+RUN yarn workspace @nulink/explorer-client build
 
 FROM node:10.16.3-alpine
 
@@ -30,4 +30,4 @@ COPY --from=builder /usr/src/app/tools/json-api-client tools/json-api-client
 COPY --from=builder /usr/src/app/tools/redux tools/redux
 
 ENV NODE_ENV production
-ENTRYPOINT [ "yarn", "workspace", "@chainlink/explorer", "run", "prod" ]
+ENTRYPOINT [ "yarn", "workspace", "@nulink/explorer", "run", "prod" ]

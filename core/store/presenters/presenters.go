@@ -13,14 +13,14 @@ import (
 	"strings"
 	"time"
 
-	"chainlink/core/assets"
-	"chainlink/core/auth"
-	"chainlink/core/logger"
-	"chainlink/core/services/synchronization"
-	"chainlink/core/store"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/auth"
+	"nulink/core/logger"
+	"nulink/core/services/synchronization"
+	"nulink/core/store"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/common"
@@ -76,7 +76,7 @@ func showBalanceForAccount(store *store.Store, account accounts.Account, balance
 	keysAndValues["balance"] = balance.String()
 	keysAndValues["address"] = address.String()
 	if balance.IsZero() && balanceType == ethRequest {
-		return nil, errors.New("0 ETH Balance. Chainlink node not fully functional, please deposit ETH into your address: " + address.Hex())
+		return nil, errors.New("0 ETH Balance. NuLink node not fully functional, please deposit ETH into your address: " + address.Hex())
 	}
 	return keysAndValues, nil
 }
@@ -131,7 +131,7 @@ type Whitelist struct {
 	ChainID                  *big.Int        `json:"ethChainId"`
 	ClientNodeURL            string          `json:"clientNodeUrl"`
 	DatabaseTimeout          time.Duration   `json:"databaseTimeout"`
-	Dev                      bool            `json:"chainlinkDev"`
+	Dev                      bool            `json:"nulinkDev"`
 	EthereumURL              string          `json:"ethUrl"`
 	EthGasBumpThreshold      uint64          `json:"ethGasBumpThreshold"`
 	EthGasBumpWei            *big.Int        `json:"ethGasBumpWei"`
@@ -149,14 +149,14 @@ type Whitelist struct {
 	MinIncomingConfirmations uint32          `json:"minIncomingConfirmations"`
 	MinOutgoingConfirmations uint64          `json:"minOutgoingConfirmations"`
 	OracleContractAddress    *common.Address `json:"oracleContractAddress"`
-	Port                     uint16          `json:"chainlinkPort"`
+	Port                     uint16          `json:"nulinkPort"`
 	ReaperExpiration         time.Duration   `json:"reaperExpiration"`
 	ReplayFromBlock          int64           `json:"replayFromBlock"`
 	RootDir                  string          `json:"root"`
 	SessionTimeout           time.Duration   `json:"sessionTimeout"`
-	TLSHost                  string          `json:"chainlinkTLSHost"`
-	TLSPort                  uint16          `json:"chainlinkTLSPort"`
-	TLSRedirect              bool            `json:"chainlinkTLSRedirect"`
+	TLSHost                  string          `json:"nulinkTLSHost"`
+	TLSPort                  uint16          `json:"nulinkTLSPort"`
+	TLSRedirect              bool            `json:"nulinkTLSRedirect"`
 	TxAttemptLimit           uint16          `json:"txAttemptLimit"`
 }
 

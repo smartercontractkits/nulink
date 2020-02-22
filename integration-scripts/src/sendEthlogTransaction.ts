@@ -15,7 +15,7 @@ async function main() {
 
   await sendEthlogTransaction({
     ethLogAddress: args.ETH_LOG_ADDRESS,
-    chainlinkUrl: args.CHAINLINK_URL,
+    nulinkUrl: args.CHAINLINK_URL,
     echoServerUrl: args.ECHO_SERVER_URL,
   })
 }
@@ -23,19 +23,19 @@ main()
 
 interface Options {
   ethLogAddress: string
-  chainlinkUrl: string
+  nulinkUrl: string
   echoServerUrl: string
 }
 async function sendEthlogTransaction({
   ethLogAddress,
-  chainlinkUrl,
+  nulinkUrl,
   echoServerUrl,
 }: Options) {
   const provider = createProvider()
   const signer = provider.getSigner(DEVNET_ADDRESS)
   const ethLog = new EthLogFactory(signer).attach(ethLogAddress)
 
-  const sessionsUrl = url.resolve(chainlinkUrl, '/sessions')
+  const sessionsUrl = url.resolve(nulinkUrl, '/sessions')
   await request.post(sessionsUrl, { json: credentials })
 
   const job = {
@@ -48,7 +48,7 @@ async function sendEthlogTransaction({
     ],
     tasks: [{ type: 'HttpPost', params: { url: echoServerUrl } }],
   }
-  const specsUrl = url.resolve(chainlinkUrl, '/v2/specs')
+  const specsUrl = url.resolve(nulinkUrl, '/v2/specs')
   const Job = await request.post(specsUrl, { json: job }).catch((e: any) => {
     console.error(e)
     throw Error(`Error creating Job ${e}`)

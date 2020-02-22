@@ -3,13 +3,13 @@ import {
   helpers as h,
   matchers,
   setup,
-} from '@chainlink/test-helpers'
+} from '@nulink/test-helpers'
 import { assert } from 'chai'
 import { ethers } from 'ethers'
 import { ContractReceipt } from 'ethers/contract'
-import { ChainlinkTestHelperFactory } from '../../ethers/v0.5/ChainlinkTestHelperFactory'
+import { NuLinkTestHelperFactory } from '../../ethers/v0.5/NuLinkTestHelperFactory'
 
-const chainlinkFactory = new ChainlinkTestHelperFactory()
+const nulinkFactory = new NuLinkTestHelperFactory()
 const provider = setup.provider()
 
 let defaultAccount: ethers.Wallet
@@ -17,14 +17,14 @@ beforeAll(async () => {
   defaultAccount = await setup.users(provider).then(x => x.roles.defaultAccount)
 })
 
-describe('Chainlink', () => {
-  let cl: contract.Instance<ChainlinkTestHelperFactory>
+describe('NuLink', () => {
+  let cl: contract.Instance<NuLinkTestHelperFactory>
   let clEvents: contract.Instance<
-    ChainlinkTestHelperFactory
+    NuLinkTestHelperFactory
   >['interface']['events']
 
   const deployment = setup.snapshot(provider, async () => {
-    cl = await chainlinkFactory.connect(defaultAccount).deploy()
+    cl = await nulinkFactory.connect(defaultAccount).deploy()
     clEvents = cl.interface.events
   })
 
@@ -33,7 +33,7 @@ describe('Chainlink', () => {
   })
 
   it('has a limited public interface', () => {
-    matchers.publicAbi(chainlinkFactory, [
+    matchers.publicAbi(nulinkFactory, [
       'add',
       'addBytes',
       'addInt',

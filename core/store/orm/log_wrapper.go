@@ -1,7 +1,7 @@
 package orm
 
 import (
-	"chainlink/core/logger"
+	"nulink/core/logger"
 
 	"go.uber.org/zap"
 )

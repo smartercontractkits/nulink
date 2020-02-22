@@ -3,8 +3,8 @@ package models_test
 import (
 	"testing"
 
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -14,8 +14,8 @@ import (
 	"fmt"
 	"unsafe"
 
-	"chainlink/core/store"
-	"chainlink/core/store/models"
+	"nulink/core/store"
+	"nulink/core/store/models"
 
 	"github.com/pkg/errors"
 )

@@ -3,13 +3,13 @@ import jayson from 'jayson'
 import { Connection, getCustomRepository } from 'typeorm'
 import WebSocket from 'ws'
 import { getDb } from '../../database'
-import { ChainlinkNode, createChainlinkNode } from '../../entity/ChainlinkNode'
+import { NuLinkNode, createNuLinkNode } from '../../entity/NuLinkNode'
 import { JobRun } from '../../entity/JobRun'
 import { TaskRun } from '../../entity/TaskRun'
 import { JobRunRepository } from '../../repositories/JobRunRepository'
 import {
   createRPCRequest,
-  newChainlinkNode,
+  newNuLinkNode,
   sendSingleMessage,
 } from '../../support/client'
 import { start, stop } from '../../support/server'
@@ -23,7 +23,7 @@ const { INVALID_PARAMS } = jayson.Server.errors
 describe('realtime', () => {
   let server: Server
   let db: Connection
-  let chainlinkNode: ChainlinkNode
+  let nulinkNode: NuLinkNode
   let secret: string
   let ws: WebSocket
 
@@ -34,11 +34,11 @@ describe('realtime', () => {
 
   beforeEach(async () => {
     clearDb()
-    ;[chainlinkNode, secret] = await createChainlinkNode(
+    ;[nulinkNode, secret] = await createNuLinkNode(
       db,
-      'upsertJobRun test chainlinkNode',
+      'upsertJobRun test nulinkNode',
     )
-    ws = await newChainlinkNode(chainlinkNode.accessKey, secret)
+    ws = await newNuLinkNode(nulinkNode.accessKey, secret)
   })
 
   afterEach(async () => {

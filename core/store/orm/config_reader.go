@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"time"
 
-	"chainlink/core/assets"
+	"nulink/core/assets"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gin-gonic/contrib/sessions"

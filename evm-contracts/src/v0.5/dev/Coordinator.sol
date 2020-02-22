@@ -1,7 +1,7 @@
 pragma solidity 0.5.0;
 
 import "./CoordinatorInterface.sol";
-import "../interfaces/ChainlinkRequestInterface.sol";
+import "../interfaces/NuLinkRequestInterface.sol";
 import "../interfaces/LinkTokenInterface.sol";
 import "../vendor/SafeMath.sol";
 import "./ServiceAgreementDecoder.sol";
@@ -9,9 +9,9 @@ import "./OracleSignaturesDecoder.sol";
 
 
 /**
- * @title The Chainlink Coordinator handles oracle service aggreements between one or more oracles
+ * @title The NuLink Coordinator handles oracle service aggreements between one or more oracles
  */
-contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, ServiceAgreementDecoder, OracleSignaturesDecoder {
+contract Coordinator is NuLinkRequestInterface, CoordinatorInterface, ServiceAgreementDecoder, OracleSignaturesDecoder {
   using SafeMath for uint256;
 
   uint256 constant public EXPIRY_TIME = 5 minutes;
@@ -63,9 +63,9 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
   );
 
   /**
-   * @notice Creates the Chainlink request
+   * @notice Creates the NuLink request
    * @dev Stores the params on-chain in a callback for the request.
-   * Emits OracleRequest event for Chainlink nodes to detect.
+   * Emits OracleRequest event for NuLink nodes to detect.
    * @param _sender The sender of the request
    * @param _amount The amount of payment given (specified in wei)
    * @param _sAId The Service Agreement ID
@@ -215,7 +215,7 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
   }
 
   /**
-   * @notice Called by the Chainlink node to fulfill requests
+   * @notice Called by the NuLink node to fulfill requests
    * @dev Response must have a valid callback, and will delete the associated callback storage
    * before calling the external contract.
    * @param _requestId The fulfillment request ID that must match the requester's
@@ -264,7 +264,7 @@ contract Coordinator is ChainlinkRequestInterface, CoordinatorInterface, Service
   }
 
   /**
-   * @dev Necessary to implement ChainlinkRequestInterface
+   * @dev Necessary to implement NuLinkRequestInterface
    */
   function cancelOracleRequest(bytes32, uint256, bytes4, uint256)
     external

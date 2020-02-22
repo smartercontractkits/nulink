@@ -32,8 +32,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/pkg/errors"
 
-	"chainlink/core/services/signatures/secp256k1"
-	"chainlink/core/utils"
+	"nulink/core/services/signatures/secp256k1"
+	"nulink/core/utils"
 
 	"go.dedis.ch/kyber/v3"
 )

@@ -5,11 +5,11 @@ import (
 	"strings"
 	"testing"
 
-	"chainlink/core/assets"
-	"chainlink/core/eth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/utils"
+	"nulink/core/assets"
+	"nulink/core/eth"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/utils"
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/stretchr/testify/assert"

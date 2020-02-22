@@ -4,8 +4,8 @@ tmp/
 .pnp
 .pnp.js
 
-/chainlink
-core/chainlink
+/nulink
+core/nulink
 
 # GUI
 operator_ui/dist

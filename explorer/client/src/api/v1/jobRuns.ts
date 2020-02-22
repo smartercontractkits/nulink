@@ -1,4 +1,4 @@
-import * as jsonapi from '@chainlink/json-api-client'
+import * as jsonapi from '@nulink/json-api-client'
 import * as models from 'explorer/models'
 
 /**
@@ -10,7 +10,7 @@ const INDEX_ENDPOINT = '/api/v1/job_runs'
 interface IndexRequestParams extends jsonapi.PaginatedRequestParams {
   query: string | undefined
 }
-const index = jsonapi.fetchResource<IndexRequestParams, models.ChainlinkNode[]>(
+const index = jsonapi.fetchResource<IndexRequestParams, models.NuLinkNode[]>(
   INDEX_ENDPOINT,
 )
 

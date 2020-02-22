@@ -6,16 +6,16 @@ describe('utils/storage', () => {
   })
 
   describe('getAuthentication', () => {
-    it('returns a JS object for JSON stored as "chainlink.authentication" in localStorage', () => {
-      localStorage.setItem('chainlink.authentication', '{"allowed":true}')
+    it('returns a JS object for JSON stored as "nulink.authentication" in localStorage', () => {
+      localStorage.setItem('nulink.authentication', '{"allowed":true}')
       expect(getAuthentication()).toEqual({ allowed: true })
     })
   })
 
   describe('setAuthentication', () => {
-    it('saves the JS object as JSON under the key "chainlink.authentication" in localStorage', () => {
+    it('saves the JS object as JSON under the key "nulink.authentication" in localStorage', () => {
       setAuthentication({ allowed: true })
-      expect(localStorage.getItem('chainlink.authentication')).toEqual(
+      expect(localStorage.getItem('nulink.authentication')).toEqual(
         '{"allowed":true}',
       )
     })

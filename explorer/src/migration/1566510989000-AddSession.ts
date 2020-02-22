@@ -5,7 +5,7 @@ export class AddSession1566510989000 implements MigrationInterface {
     await queryRunner.query(`
 CREATE TABLE session (
   "id" character varying DEFAULT uuid_generate_v4() PRIMARY KEY,
-  "chainlinkNodeId" bigint REFERENCES chainlink_node (id) NOT NULL,
+  "nulinkNodeId" bigint REFERENCES nulink_node (id) NOT NULL,
   "createdAt" timestamp without time zone DEFAULT now() NOT NULL,
   "updatedAt" timestamp without time zone DEFAULT now() NOT NULL,
   "finishedAt" timestamp without time zone

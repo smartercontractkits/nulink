@@ -3,10 +3,10 @@ import jayson from 'jayson'
 import { Connection } from 'typeorm'
 import WebSocket from 'ws'
 import { getDb } from '../../database'
-import { ChainlinkNode, createChainlinkNode } from '../../entity/ChainlinkNode'
+import { NuLinkNode, createNuLinkNode } from '../../entity/NuLinkNode'
 import {
   createRPCRequest,
-  newChainlinkNode,
+  newNuLinkNode,
   sendSingleMessage,
 } from '../../support/client'
 import { start, stop } from '../../support/server'
@@ -18,11 +18,11 @@ const { PARSE_ERROR, INVALID_REQUEST, METHOD_NOT_FOUND } = jayson.Server.errors
 describe('realtime', () => {
   let server: Server
   let db: Connection
-  let chainlinkNode: ChainlinkNode
+  let nulinkNode: NuLinkNode
   let secret: string
 
   const newAuthenticatedNode = async () =>
-    newChainlinkNode(chainlinkNode.accessKey, secret)
+    newNuLinkNode(nulinkNode.accessKey, secret)
 
   beforeAll(async () => {
     server = await start()
@@ -31,9 +31,9 @@ describe('realtime', () => {
 
   beforeEach(async () => {
     clearDb()
-    ;[chainlinkNode, secret] = await createChainlinkNode(
+    ;[nulinkNode, secret] = await createNuLinkNode(
       db,
-      'realtime test chainlinkNode',
+      'realtime test nulinkNode',
     )
   })
 
@@ -82,7 +82,7 @@ describe('realtime', () => {
 
   it('rejects invalid authentication', async done => {
     expect.assertions(1)
-    newChainlinkNode(chainlinkNode.accessKey, 'lol-no').catch(error => {
+    newNuLinkNode(nulinkNode.accessKey, 'lol-no').catch(error => {
       expect(error).toBeDefined()
       done()
     })

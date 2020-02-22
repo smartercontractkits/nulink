@@ -1,7 +1,7 @@
 package web
 
 import (
-	"chainlink/core/services"
+	"nulink/core/services"
 
 	"github.com/gin-gonic/gin"
 )

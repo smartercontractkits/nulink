@@ -1,12 +1,12 @@
 pragma solidity ^0.5.0;
 
-import "../Chainlink.sol";
+import "../NuLink.sol";
 
-contract ChainlinkTestHelper {
-  using Chainlink for Chainlink.Request;
-  using CBOR_Chainlink for Buffer_Chainlink.buffer;
+contract NuLinkTestHelper {
+  using NuLink for NuLink.Request;
+  using CBOR_NuLink for Buffer_NuLink.buffer;
 
-  Chainlink.Request private req;
+  NuLink.Request private req;
 
   event RequestData(bytes payload);
 
@@ -15,31 +15,31 @@ contract ChainlinkTestHelper {
   }
 
   function setBuffer(bytes memory data) public {
-    Chainlink.Request memory r2 = req;
+    NuLink.Request memory r2 = req;
     r2.setBuffer(data);
     req = r2;
   }
 
   function add(string memory _key, string memory _value) public {
-    Chainlink.Request memory r2 = req;
+    NuLink.Request memory r2 = req;
     r2.add(_key, _value);
     req = r2;
   }
 
   function addBytes(string memory _key, bytes memory _value) public {
-    Chainlink.Request memory r2 = req;
+    NuLink.Request memory r2 = req;
     r2.addBytes(_key, _value);
     req = r2;
   }
 
   function addInt(string memory _key, int256 _value) public {
-    Chainlink.Request memory r2 = req;
+    NuLink.Request memory r2 = req;
     r2.addInt(_key, _value);
     req = r2;
   }
 
   function addUint(string memory _key, uint256 _value) public {
-    Chainlink.Request memory r2 = req;
+    NuLink.Request memory r2 = req;
     r2.addUint(_key, _value);
     req = r2;
   }
@@ -51,7 +51,7 @@ contract ChainlinkTestHelper {
     for (uint256 i = 0; i < _values.length; i++) {
       strings[i] = bytes32ToString(_values[i]);
     }
-    Chainlink.Request memory r2 = req;
+    NuLink.Request memory r2 = req;
     r2.addStringArray(_key, strings);
     req = r2;
   }

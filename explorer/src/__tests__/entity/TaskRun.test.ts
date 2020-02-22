@@ -1,6 +1,6 @@
 import { Connection, getCustomRepository } from 'typeorm'
 import { closeDbConnection, getDb } from '../../database'
-import { createChainlinkNode } from '../../entity/ChainlinkNode'
+import { createNuLinkNode } from '../../entity/NuLinkNode'
 import { fromString, JobRun, saveJobRunTree } from '../../entity/JobRun'
 import fixture from '../fixtures/JobRun.fixture.json'
 import { JobRunRepository } from '../../repositories/JobRunRepository'
@@ -15,13 +15,13 @@ afterAll(async () => closeDbConnection())
 
 describe('entity/taskRun', () => {
   it('copies old confirmations to new column on INSERT', async () => {
-    const [chainlinkNode] = await createChainlinkNode(
+    const [nulinkNode] = await createNuLinkNode(
       db,
       'testOverwriteJobRunsErrorOnConflict',
     )
 
     const jr = fromString(JSON.stringify(fixture))
-    jr.chainlinkNodeId = chainlinkNode.id
+    jr.nulinkNodeId = nulinkNode.id
     await saveJobRunTree(db, jr)
     expect(jr.id).toBeDefined()
 
@@ -46,13 +46,13 @@ describe('entity/taskRun', () => {
   })
 
   it('copies old confirmations to new column on UPDATE', async () => {
-    const [chainlinkNode] = await createChainlinkNode(
+    const [nulinkNode] = await createNuLinkNode(
       db,
       'testOverwriteJobRunsErrorOnConflict',
     )
 
     const jr = fromString(JSON.stringify(fixture))
-    jr.chainlinkNodeId = chainlinkNode.id
+    jr.nulinkNodeId = nulinkNode.id
     await saveJobRunTree(db, jr)
     expect(jr.id).toBeDefined()
     const tr = jr.taskRuns[0]

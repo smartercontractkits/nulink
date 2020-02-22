@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	"chainlink/core/logger"
-	"chainlink/core/store/models"
-	"chainlink/core/store/orm"
-	"chainlink/core/utils"
+	"nulink/core/logger"
+	"nulink/core/store/models"
+	"nulink/core/store/orm"
+	"nulink/core/utils"
 
 	"github.com/jinzhu/gorm"
 	"github.com/jpillora/backoff"

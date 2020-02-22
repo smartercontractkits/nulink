@@ -1,4 +1,4 @@
-import * as jsonapi from '@chainlink/json-api-client'
+import * as jsonapi from '@nulink/json-api-client'
 
 const SIGN_IN_ENDPOINT = '/api/v1/admin/login'
 

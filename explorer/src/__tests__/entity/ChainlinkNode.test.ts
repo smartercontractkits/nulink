@@ -1,11 +1,11 @@
 import { Connection } from 'typeorm'
 import {
-  ChainlinkNode,
-  createChainlinkNode,
-  deleteChainlinkNode,
+  NuLinkNode,
+  createNuLinkNode,
+  deleteNuLinkNode,
   hashCredentials,
   uptime,
-} from '../../entity/ChainlinkNode'
+} from '../../entity/NuLinkNode'
 import { createSession, closeSession } from '../../entity/Session'
 import { closeDbConnection, getDb } from '../../database'
 
@@ -25,31 +25,31 @@ beforeAll(async () => {
 
 afterAll(async () => closeDbConnection())
 
-describe('createChainlinkNode', () => {
-  it('returns a valid ChainlinkNode record', async () => {
-    const [chainlinkNode, secret] = await createChainlinkNode(
+describe('createNuLinkNode', () => {
+  it('returns a valid NuLinkNode record', async () => {
+    const [nulinkNode, secret] = await createNuLinkNode(
       db,
-      'new-valid-chainlink-node-record',
+      'new-valid-nulink-node-record',
     )
-    expect(chainlinkNode.accessKey).toHaveLength(16)
-    expect(chainlinkNode.salt).toHaveLength(32)
-    expect(chainlinkNode.hashedSecret).toBeDefined()
+    expect(nulinkNode.accessKey).toHaveLength(16)
+    expect(nulinkNode.salt).toHaveLength(32)
+    expect(nulinkNode.hashedSecret).toBeDefined()
     expect(secret).toHaveLength(64)
   })
 
-  it('reject duplicate ChainlinkNode names', async () => {
-    await createChainlinkNode(db, 'identical')
-    await expect(createChainlinkNode(db, 'identical')).rejects.toThrow()
+  it('reject duplicate NuLinkNode names', async () => {
+    await createNuLinkNode(db, 'identical')
+    await expect(createNuLinkNode(db, 'identical')).rejects.toThrow()
   })
 })
 
-describe('deleteChainlinkNode', () => {
-  it('deletes a ChainlinkNode with the specified name', async () => {
-    await createChainlinkNode(db, 'chainlink-node-to-be-deleted')
-    let count = await db.manager.count(ChainlinkNode)
+describe('deleteNuLinkNode', () => {
+  it('deletes a NuLinkNode with the specified name', async () => {
+    await createNuLinkNode(db, 'nulink-node-to-be-deleted')
+    let count = await db.manager.count(NuLinkNode)
     expect(count).toBe(1)
-    await deleteChainlinkNode(db, 'chainlink-node-to-be-deleted')
-    count = await db.manager.count(ChainlinkNode)
+    await deleteNuLinkNode(db, 'nulink-node-to-be-deleted')
+    count = await db.manager.count(NuLinkNode)
     expect(count).toBe(0)
   })
 })
@@ -62,13 +62,13 @@ describe('hashCredentials', () => {
 
 describe('uptime', () => {
   it('returns 0 when no sessions exist', async () => {
-    const [node] = await createChainlinkNode(db, 'chainlink-node')
+    const [node] = await createNuLinkNode(db, 'nulink-node')
     const initialUptime = await uptime(db, node)
     expect(initialUptime).toEqual(0)
   })
 
   it('calculates uptime based on open and closed sessions', async () => {
-    const [node] = await createChainlinkNode(db, 'chainlink-node')
+    const [node] = await createNuLinkNode(db, 'nulink-node')
     const session = await createSession(db, node)
     await wait(1)
     await closeSession(db, session)

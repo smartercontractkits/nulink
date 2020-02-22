@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"chainlink/core/utils"
+	"nulink/core/utils"
 	"encoding/hex"
 	"fmt"
 

@@ -1,9 +1,9 @@
 pragma solidity 0.4.24;
 
-import "../Chainlinked.sol";
+import "../NuLinked.sol";
 
 
-contract ConcreteChainlinked is Chainlinked {
+contract ConcreteNuLinked is NuLinked {
 
   constructor(address _link, address _oracle) public {
     setLinkToken(_link);
@@ -24,7 +24,7 @@ contract ConcreteChainlinked is Chainlinked {
   )
     public
   {
-    Chainlink.Request memory req = newRequest(
+    NuLink.Request memory req = newRequest(
       _id, _address, bytes4(keccak256(_fulfillmentSignature)));
     emit Request(
       req.id,
@@ -42,9 +42,9 @@ contract ConcreteChainlinked is Chainlinked {
   )
     public
   {
-    Chainlink.Request memory req = newRequest(
+    NuLink.Request memory req = newRequest(
       _id, _address, bytes4(keccak256(_fulfillmentSignature)));
-    chainlinkRequest(req, _wei);
+    nulinkRequest(req, _wei);
   }
 
   function publicRequestRunTo(
@@ -56,8 +56,8 @@ contract ConcreteChainlinked is Chainlinked {
   )
     public
   {
-    Chainlink.Request memory run = newRequest(_id, _address, bytes4(keccak256(_fulfillmentSignature)));
-    chainlinkRequestTo(_oracle, run, _wei);
+    NuLink.Request memory run = newRequest(_id, _address, bytes4(keccak256(_fulfillmentSignature)));
+    nulinkRequestTo(_oracle, run, _wei);
   }
 
   function publicCancelRequest(
@@ -66,20 +66,20 @@ contract ConcreteChainlinked is Chainlinked {
     bytes4 _callbackFunctionId,
     uint256 _expiration
   ) public {
-    cancelChainlinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
+    cancelNuLinkRequest(_requestId, _payment, _callbackFunctionId, _expiration);
   }
 
-  function publicChainlinkToken() public view returns (address) {
-    return chainlinkToken();
+  function publicNuLinkToken() public view returns (address) {
+    return nulinkToken();
   }
 
   function fulfillRequest(bytes32 _requestId, bytes32)
     public
-    recordChainlinkFulfillment(_requestId)
+    recordNuLinkFulfillment(_requestId)
   {} // solhint-disable-line no-empty-blocks
 
-  function publicFulfillChainlinkRequest(bytes32 _requestId, bytes32) public {
-    fulfillChainlinkRequest(_requestId);
+  function publicFulfillNuLinkRequest(bytes32 _requestId, bytes32) public {
+    fulfillNuLinkRequest(_requestId);
   }
 
   event LinkAmount(uint256 amount);

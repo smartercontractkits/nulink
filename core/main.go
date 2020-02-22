@@ -4,9 +4,9 @@ import (
 	"os"
 	"time"
 
-	"chainlink/core/cmd"
-	"chainlink/core/logger"
-	"chainlink/core/store/orm"
+	"nulink/core/cmd"
+	"nulink/core/logger"
+	"nulink/core/store/orm"
 )
 
 func init() {
@@ -32,10 +32,10 @@ func NewProductionClient() *cmd.Client {
 	return &cmd.Client{
 		Renderer:                       cmd.RendererTable{Writer: os.Stdout},
 		Config:                         config,
-		AppFactory:                     cmd.ChainlinkAppFactory{},
+		AppFactory:                     cmd.NuLinkAppFactory{},
 		KeyStoreAuthenticator:          cmd.TerminalKeyStoreAuthenticator{Prompter: prompter},
 		FallbackAPIInitializer:         cmd.NewPromptingAPIInitializer(prompter),
-		Runner:                         cmd.ChainlinkRunner{},
+		Runner:                         cmd.NuLinkRunner{},
 		HTTP:                           cmd.NewAuthenticatedHTTPClient(config, cookieAuth),
 		CookieAuthenticator:            cookieAuth,
 		FileSessionRequestBuilder:      cmd.NewFileSessionRequestBuilder(),

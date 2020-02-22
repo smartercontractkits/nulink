@@ -1,4 +1,4 @@
-import { partialAsFull } from '@chainlink/ts-test-helpers'
+import { partialAsFull } from '@nulink/ts-test-helpers'
 import reducer, {
   INITIAL_STATE as initialRootState,
   AppState,
@@ -21,7 +21,7 @@ describe('reducers/jobRunsIndex', () => {
       const action: FetchJobRunsSucceededAction = {
         type: 'FETCH_JOB_RUNS_SUCCEEDED',
         data: {
-          chainlinkNodes: [],
+          nulinkNodes: [],
           jobRuns,
           meta: {
             currentPageJobRuns: {

@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"chainlink/core/auth"
-	"chainlink/core/internal/cltest"
-	"chainlink/core/store/models"
-	"chainlink/core/store/presenters"
-	"chainlink/core/web"
+	"nulink/core/auth"
+	"nulink/core/internal/cltest"
+	"nulink/core/store/models"
+	"nulink/core/store/presenters"
+	"nulink/core/web"
 
 	"github.com/manyminds/api2go/jsonapi"
 	"github.com/stretchr/testify/assert"

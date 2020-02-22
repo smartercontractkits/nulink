@@ -76,7 +76,7 @@ const NodeDetailsContent = ({ data = {}, jobId, options }) => {
                 rel="noopener noreferrer"
                 href={`https://explorer.chain.link/job-runs?search=${jobId}`}
               >
-                Chainlink Explorer
+                NuLink Explorer
               </a>
             </Button>
             <Button style={{ marginRight: 10 }} ghost type="primary">
@@ -149,7 +149,7 @@ const ContractDetailsContent = ({ data = {}, options }) => {
               rel="noopener noreferrer"
               href={`https://explorer.chain.link/job-runs?search=${options.contractAddress}`}
             >
-              Chainlink Explorer
+              NuLink Explorer
             </a>
           </Button>
         )}

@@ -1,15 +1,15 @@
 import storage from 'local-storage-fallback'
 
 export function get(key: string): string | null {
-  return storage.getItem(`chainlink.${key}`)
+  return storage.getItem(`nulink.${key}`)
 }
 
 export function set(key: string, val: string): void {
-  storage.setItem(`chainlink.${key}`, val)
+  storage.setItem(`nulink.${key}`, val)
 }
 
 export function remove(key: string): void {
-  storage.removeItem(`chainlink.${key}`)
+  storage.removeItem(`nulink.${key}`)
 }
 
 export function getJson(key: string): any {

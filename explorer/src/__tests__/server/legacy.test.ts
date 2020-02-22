@@ -2,11 +2,11 @@ import { Server } from 'http'
 import { Connection, getCustomRepository } from 'typeorm'
 import WebSocket from 'ws'
 import { getDb } from '../../database'
-import { ChainlinkNode, createChainlinkNode } from '../../entity/ChainlinkNode'
+import { NuLinkNode, createNuLinkNode } from '../../entity/NuLinkNode'
 import { JobRun } from '../../entity/JobRun'
 import { TaskRun } from '../../entity/TaskRun'
 import { JobRunRepository } from '../../repositories/JobRunRepository'
-import { newChainlinkNode, sendSingleMessage } from '../../support/client'
+import { newNuLinkNode, sendSingleMessage } from '../../support/client'
 import { start, stop } from '../../support/server'
 import ethtxFixture from '../fixtures/JobRun.ethtx.fixture.json'
 import createFixture from '../fixtures/JobRun.fixture.json'
@@ -16,7 +16,7 @@ import { clearDb } from '../testdatabase'
 describe('realtime', () => {
   let server: Server
   let db: Connection
-  let chainlinkNode: ChainlinkNode
+  let nulinkNode: NuLinkNode
   let secret: string
   let ws: WebSocket
 
@@ -27,11 +27,11 @@ describe('realtime', () => {
 
   beforeEach(async () => {
     clearDb()
-    ;[chainlinkNode, secret] = await createChainlinkNode(
+    ;[nulinkNode, secret] = await createNuLinkNode(
       db,
-      'legacy test chainlinkNode',
+      'legacy test nulinkNode',
     )
-    ws = await newChainlinkNode(chainlinkNode.accessKey, secret)
+    ws = await newNuLinkNode(nulinkNode.accessKey, secret)
   })
 
   afterEach(async () => {

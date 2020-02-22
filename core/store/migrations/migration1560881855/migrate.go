@@ -3,8 +3,8 @@ package migration1560881855
 import (
 	"time"
 
-	"chainlink/core/assets"
-	"chainlink/core/store/dbutil"
+	"nulink/core/assets"
+	"nulink/core/store/dbutil"
 
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"

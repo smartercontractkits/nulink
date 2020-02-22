@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	synchronization "chainlink/core/services/synchronization"
+	synchronization "nulink/core/services/synchronization"
 
 	mock "github.com/stretchr/testify/mock"
 

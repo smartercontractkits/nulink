@@ -5,7 +5,7 @@ import { fromString, saveJobRunTree } from '../entity/JobRun'
 import jayson from 'jayson'
 
 export interface ServerContext {
-  chainlinkNodeId: number
+  nulinkNodeId: number
 }
 
 // legacy server response synonymous with upsertJobRun RPC method
@@ -13,7 +13,7 @@ const handleLegacy = async (json: string, context: ServerContext) => {
   try {
     const db = await getDb()
     const jobRun = fromString(json)
-    jobRun.chainlinkNodeId = context.chainlinkNodeId
+    jobRun.nulinkNodeId = context.nulinkNodeId
     await saveJobRunTree(db, jobRun)
     return { status: 201 }
   } catch (e) {
