@@ -1,6 +1,6 @@
-# Contributing to ChainLink
+# Contributing to NuLink
 
-First, thank you for considering contributing to ChainLink.
+First, thank you for considering contributing to NuLink.
 The NuLink source code is [licensed under the MIT license](https://github.com/smartercontractkit/nulink/blob/master/LICENSE).
 We value contributions of any size or type from anyone!
 The smallest of fixes can make the biggest difference.

@@ -74,7 +74,6 @@ You can configure your node's behavior by setting environment variables which ca
 This project contains several sub-projects, some with their own documentation.
 
 - [evm](/evm) - smart contract-related resources
-  - [box](/evm/box) - [NuLink Truffle box](https://www.trufflesuite.com/blog/using-truffle-to-interact-with-nulink-smart-contracts)
 - [@nulink/contracts](/evm-contracts) - smart contract-related resources
 - [examples](/examples) - collection of example NuLink integrations
   - [testnet](/examples/testnet) - guide to creating, deploying and using NuLinked smart contracts
