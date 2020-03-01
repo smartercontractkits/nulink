@@ -27,7 +27,7 @@ func TestClient_RunNodeShowsEnv(t *testing.T) {
 	require.NoError(t, err)
 	require.NoError(t, store.KeyStore.Unlock(cltest.Password))
 
-	store.Config.Set("LINK_CONTRACT_ADDRESS", "0x514910771AF9Ca656af840dff83E8264EcF986CA")
+	store.Config.Set("LINK_CONTRACT_ADDRESS", "0xd97475241918c937bfdb7ce1382072952611aa14")
 	store.Config.Set("CHAINLINK_PORT", 6688)
 
 	app := new(mocks.Application)
@@ -78,7 +78,7 @@ func TestClient_RunNodeShowsEnv(t *testing.T) {
 	assert.Contains(t, logs, "ETH_GAS_BUMP_THRESHOLD: 3\\n")
 	assert.Contains(t, logs, "ETH_GAS_BUMP_WEI: 5000000000\\n")
 	assert.Contains(t, logs, "ETH_GAS_PRICE_DEFAULT: 20000000000\\n")
-	assert.Contains(t, logs, "LINK_CONTRACT_ADDRESS: 0x514910771AF9Ca656af840dff83E8264EcF986CA\\n")
+	assert.Contains(t, logs, "LINK_CONTRACT_ADDRESS: 0xd97475241918c937bfdb7ce1382072952611aa14\\n")
 	assert.Contains(t, logs, "MINIMUM_CONTRACT_PAYMENT: 0.000000000000000100\\n")
 	assert.Contains(t, logs, "ORACLE_CONTRACT_ADDRESS: \\n")
 	assert.Contains(t, logs, "ALLOW_ORIGINS: http://localhost:3000,http://localhost:6688\\n")
