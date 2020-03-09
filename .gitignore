@@ -31,6 +31,9 @@ tools/clroot/db.sqlite3-wal
 .envrc
 .env*
 
+# bins
+nulink
+
 # codeship
 *.aes
 dockercfg
