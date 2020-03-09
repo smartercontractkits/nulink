@@ -1,11 +1,6 @@
 # NuLink
 
-[![Join the chat at https://discordapp.com/invite/aSK4zew](https://img.shields.io/discord/592041321326182401.svg?logoColor=white)](https://discordapp.com/invite/aSK4zew)
-[![CircleCI](https://circleci.com/gh/smartercontractkit/nulink.svg?style=shield)](https://circleci.com/gh/smartercontractkit/nulink)
-[![Go Report Card](https://goreportcard.com/badge/github.com/smartercontractkit/nulink)](https://goreportcard.com/report/github.com/smartercontractkit/nulink)
-[![GoDoc](https://godoc.org/github.com/smartercontractkit/nulink?status.svg)](https://godoc.org/github.com/smartercontractkit/nulink)
-[![Maintainability](https://api.codeclimate.com/v1/badges/273722bb9f6f22d799bd/maintainability)](https://codeclimate.com/github/smartercontractkit/nulink/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/273722bb9f6f22d799bd/test_coverage)](https://codeclimate.com/github/smartercontractkit/nulink/test_coverage)
+[![Join the chat at https://discord.gg/pXBH9m7](https://img.shields.io/discord/592041321326182401.svg?logoColor=white)](https://discord.gg/pXBH9m7)
 
 NuLink is middleware to simplify communication with blockchains.
 Here you'll find the NuLink Golang node, currently in alpha.
@@ -79,7 +74,6 @@ You can configure your node's behavior by setting environment variables which ca
 This project contains several sub-projects, some with their own documentation.
 
 - [evm](/evm) - smart contract-related resources
-  - [box](/evm/box) - [NuLink Truffle box](https://www.trufflesuite.com/blog/using-truffle-to-interact-with-nulink-smart-contracts)
 - [@nulink/contracts](/evm-contracts) - smart contract-related resources
 - [examples](/examples) - collection of example NuLink integrations
   - [testnet](/examples/testnet) - guide to creating, deploying and using NuLinked smart contracts

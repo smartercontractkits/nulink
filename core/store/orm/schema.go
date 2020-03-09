@@ -31,7 +31,7 @@ type ConfigSchema struct {
 	EthGasPriceDefault        big.Int        `env:"ETH_GAS_PRICE_DEFAULT" default:"20000000000"`
 	EthereumURL               string         `env:"ETH_URL" default:"ws://localhost:8546"`
 	JSONConsole               bool           `env:"JSON_CONSOLE" default:"false"`
-	LinkContractAddress       string         `env:"LINK_CONTRACT_ADDRESS" default:"0x514910771AF9Ca656af840dff83E8264EcF986CA"`
+	LinkContractAddress       string         `env:"LINK_CONTRACT_ADDRESS" default:"0xd97475241918c937bfdb7ce1382072952611aa14"`
 	ExplorerURL               *url.URL       `env:"EXPLORER_URL"`
 	ExplorerAccessKey         string         `env:"EXPLORER_ACCESS_KEY"`
 	ExplorerSecret            string         `env:"EXPLORER_SECRET"`
